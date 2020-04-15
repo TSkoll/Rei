@@ -1,0 +1,25 @@
+{
+  "name": "rei-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TSkoll/rei-ts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TSkoll/rei-ts/issues"
+  },
+  "homepage": "https://github.com/TSkoll/rei-ts#readme",
+  "dependencies": {
+    "@types/mongodb": "^3.5.6",
+    "@types/ws": "^7.2.4",
+    "discord.js": "^12.1.1",
+    "mongodb": "^3.5.6"
+  }
+}
