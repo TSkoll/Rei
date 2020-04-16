@@ -1,47 +1,31 @@
-import Discord from "discord.js";
-import MongoDB from "mongodb";
+import mongoose from "mongoose";
 
-import CommandMessage from "./types/CommandMessage";
-import CommandLoader from "./core/CommandLoader";
+import ReiClient from "./types/ReiClient";
+import CommandHandler from "./core/CommandHandler";
+import PrefixHandler from "./core/PrefixHandler";
 import MessageHandler from "./core/MessageHandler";
 
-const client: Discord.Client = new Discord.Client({
-    disableMentions: "everyone"
-});
+import CommandMessage from "./extensions/Message";
 
-// TODO: To config
-const mongoClient: MongoDB.MongoClient = new MongoDB.MongoClient("mongodb://localhost:27017");
-
-process.on("exit", code => {
-    mongoClient.close();
-    client.destroy();
-    console.log(`Exiting with code ${code}`);
-});
-
-mongoClient.connect(async err => {
+mongoose.connect("mongodb://localhost:27017", async err => {
     if (err)
-        throw "Couldn't connect to MongoDB\n" + err;
+        throw err;
 
-    const commands = await CommandLoader.load();
-    const messageHandler = new MessageHandler(client, commands);
+    const db = mongoose.connection;
+
+    const commandHandler = new CommandHandler();
+    const prefixHandler = new PrefixHandler(db);
+
+    // Init ReiClient
+    const client = new ReiClient(commandHandler, prefixHandler, db);
+    await commandHandler.init(client);
+
+    const messageHandler = new MessageHandler(client, db);
+    messageHandler.initialize();
 
     client.on("ready", () => {
         console.log(`Logged in as ${client.user!.username} [${client.user!.id}]`);
     });
 
-    client.on("message", async message => {
-        try {
-            messageHandler.handleMessage(message);
-        } catch (err) {
-            console.error(err);
-        }
-    });
-
-    client.on("messageUpdate", async (oldMessage: Discord.Message | Discord.PartialMessage | CommandMessage, newMessage) => {
-        const message = oldMessage as CommandMessage
-        if (message.author.id == client.user!.id || message.isCommand)
-            return;
-    });
-
-    client.login("")
+    client.login("NDE5Nzk1NDY0OTg1MTE2Njcy.DoPvRA.vkulV0MCOqjTKIHKyNXWA-2LBXM");
 });

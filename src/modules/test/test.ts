@@ -1,8 +1,9 @@
 import Command from "../../types/Command";
 import Discord from "discord.js";
+import CommandMessage from "../../types/CommandMessage";
 
-export class Test extends Command {
-    public async run(client: Discord.Client, message: Discord.Message, args: string[]): Promise<void> {
-        await super.sendBasicSuccess(message, "Hello World!");
+export default class Test extends Command {
+    public async run(message: CommandMessage, args: string[]): Promise<void> {
+        message.replyBasicSuccess("Hello World!");
     }
 }

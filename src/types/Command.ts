@@ -1,22 +1,14 @@
-import Discord from "discord.js";
+import { Client } from "discord.js";
+import CommandMessage from "./CommandMessage";
+import CommandOptions from "./CommandOptions";
+import { MongoClient } from "mongodb";
 
-export default abstract class Command {
-    protected ownerOnly   : boolean                               = false;
-    protected argsCount   : number                                = 0;
-    protected ignoreMin   : number                                = 0;
-    protected botPerms?   : Discord.PermissionResolvable[]        = undefined;
-    protected userPerms?  : Discord.PermissionResolvable[]        = undefined;
-    protected disallowDM  : boolean                               = false;
-    protected nsfw        : boolean                               = false;
-    protected aliases?    : string[] | string                     = undefined;
-    protected ratelimit   : number                                = 0;
-
-    public async sendBasicSuccess(message : Discord.Message, content : string) : Promise<Discord.Message> {
-        return await message.channel.send(new Discord.MessageEmbed().setColor("GREEN").setDescription(content));
+export default abstract class Command extends CommandOptions {
+    constructor(options?: CommandOptions) {
+        super(options);
     }
 
-    public async sendBasicError(message : Discord.Message, content : string) : Promise<Discord.Message> {
-        return await message.channel.send(new Discord.MessageEmbed().setColor("RED").setDescription(content));
-    }
-    public abstract async run(client : Discord.Client, message : Discord.Message, args : string[]) : Promise<void>;
+    public abstract async run(message: CommandMessage, args : string[]) : Promise<void>;
+
+    public async afterInit?() : Promise<void>;
 }

@@ -1,9 +1,10 @@
 import Command from "../types/Command";
 import fs from "../utils/FilesystemHelper";
 import Path from "path";
+import { Client } from "discord.js";
 
 class CommandLoader {
-    static async load() : Promise<{[name: string]: Command }> {
+    static async load(client: Client) : Promise<{[name: string]: Command}> {
         let commandsRet: {[name: string]: Command} = { }
 
         const modules = await fs.getFolders("./bin/modules/");
@@ -12,9 +13,12 @@ class CommandLoader {
             const commands = await fs.getFiles(`./bin/modules/${module}`);
 
             for (let command of commands) {
+                if (command.indexOf(".js.map") > 0)
+                    continue;
+
                 const cmdObj = await import(`../modules/${module}/${command}`);
-                const cmd = new cmdObj[Object.keys(cmdObj)[0]]();
-                const name = "test";
+                const cmd = new cmdObj.default(client) as Command;
+                const name = cmd.constructor.name.toLowerCase();
 
                 commandsRet[name] = cmd;
             }
