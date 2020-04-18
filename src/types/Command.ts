@@ -1,5 +1,5 @@
 import { Client } from "discord.js";
-import CommandMessage from "./CommandMessage";
+import { CommandMessage } from "../extensions/Message";
 import CommandOptions from "./CommandOptions";
 import { MongoClient } from "mongodb";
 

@@ -1,11 +1,11 @@
 import { Document, Schema, model } from "mongoose";
 
-interface IGuild extends Document {
+export interface IGuild extends Document {
     guildId: string
     prefix: string
 }
 
-const guildSchema = new Schema({
+export const guildSchema = new Schema({
     guildId: {
         type: String,
         required: true

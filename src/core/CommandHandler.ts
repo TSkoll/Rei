@@ -1,8 +1,8 @@
 import { Client, Message, TextChannel, MessageEmbed, Permissions } from "discord.js";
 import Command from "../types/Command";
-import CommandMessage from "../types/CommandMessage";
 import ReiClient from "../types/ReiClient";
 import CommandLoader from "./CommandLoader";
+import { CommandMessage } from "../extensions/Message";
 
 export default class CommandHandler {
     private client?: ReiClient;

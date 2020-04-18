@@ -5,7 +5,7 @@ import CommandHandler from "./core/CommandHandler";
 import PrefixHandler from "./core/PrefixHandler";
 import MessageHandler from "./core/MessageHandler";
 
-import CommandMessage from "./extensions/Message";
+import "./extensions/Message";
 
 mongoose.connect("mongodb://localhost:27017", async err => {
     if (err)
