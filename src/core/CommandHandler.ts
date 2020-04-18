@@ -8,7 +8,7 @@ export default class CommandHandler {
     private client?: ReiClient;
     private commands? : {[name: string]: Command};
 
-    public async run(message: CommandMessage, name : string, args : string[]) {
+    public async run(message: CommandMessage, name: string, args : string[]) {
         try {
             const cmd = this.getCommand(name.toLowerCase());
             const parsedArgs = message.args;
@@ -34,7 +34,7 @@ export default class CommandHandler {
         this.client = client;
     }
 
-    private getCommand(name : string) : Command {
+    public getCommand(name : string) : Command {
         try {
             return this.commands![name];
         } catch (err) {
