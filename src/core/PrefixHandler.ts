@@ -1,16 +1,28 @@
 import { Connection } from "mongoose";
 import { Message } from "discord.js";
 
-import GuildDocument from "../models/Guild";
+import GuildDocument, { guildSchema } from "../models/Guild";
 
 export default class PrefixHandler {
     db: Connection;
+    defaultPrefix: string
 
-    constructor(db: Connection) {
+    constructor(db: Connection, defaultPrefix: string) {
         this.db = db;
+        this.defaultPrefix = defaultPrefix;
     }
-    
-    public getPrefix(message: Message) {
-        return "-";
+
+    public async setPrefix(message: Message, newPrefix: string | null) {
+        const guild = message.guild!.id;
+        const payload = { prefix: newPrefix };
+
+        await GuildDocument.findOneAndUpdate({ guild }, payload, { upsert: true });
+    }
+
+    public async getPrefix(message: Message) {
+        const guild = message.guild!.id;
+        const guildInfo = await GuildDocument.findOne({ guild });
+
+        return (guildInfo && guildInfo.prefix) || this.defaultPrefix;
     }
 }

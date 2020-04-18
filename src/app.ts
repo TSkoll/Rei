@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { ConnectionOptions } from "mongoose";
 
 import ReiClient from "./types/ReiClient";
 import CommandHandler from "./core/CommandHandler";
@@ -7,14 +7,24 @@ import MessageHandler from "./core/MessageHandler";
 
 import "./extensions/Message";
 
-mongoose.connect("mongodb://localhost:27017", async err => {
+import Config from "./types/Config";
+const config = require("../data/config.json") as Config;
+
+const mongooseConn = `mongodb://${(config.database.username ? `${config.database.username}:${config.database.password}@`: "")}${config.database.host}/${config.database.collection}`;
+const mongooseConnOpt: ConnectionOptions = {
+    useFindAndModify: false,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}
+
+mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
     if (err)
         throw err;
 
     const db = mongoose.connection;
 
     const commandHandler = new CommandHandler();
-    const prefixHandler = new PrefixHandler(db);
+    const prefixHandler = new PrefixHandler(db, config.defaultPrefix);
 
     // Init ReiClient
     const client = new ReiClient(commandHandler, prefixHandler, db);
@@ -27,5 +37,5 @@ mongoose.connect("mongodb://localhost:27017", async err => {
         console.log(`Logged in as ${client.user!.username} [${client.user!.id}]`);
     });
 
-    client.login("NDE5Nzk1NDY0OTg1MTE2Njcy.DoPvRA.vkulV0MCOqjTKIHKyNXWA-2LBXM");
+    client.login(config.token);
 });

@@ -16,7 +16,7 @@ export default class MessageHandler {
     public initialize() {
         this.client.on("message", async message => {
             try {
-                const prefix = this.client.prefixHandler.getPrefix(message);
+                const prefix = await this.client.prefixHandler.getPrefix(message);
 
                 if (message.content.startsWith(prefix)) {
                     const commandMessage = message as CommandMessage;

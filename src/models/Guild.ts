@@ -6,15 +6,15 @@ export interface IGuild extends Document {
 }
 
 export const guildSchema = new Schema({
-    guildId: {
+    guild: {
         type: String,
         required: true
     },
     prefix: {
         type: String,
-        required: true
+        required: false
     }
-});
+}, { collection: "prefixes" });
 const GuildModel = model<IGuild>("guild", guildSchema);
 
 export default GuildModel;
