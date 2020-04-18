@@ -13,20 +13,23 @@ const CMessage = Structures.extend("Message", C => {
             this.isCommand = true
             this.prefix = prefix;
 
-            // TODO this requires a bit of tidying
-            const split = this.content.split(" ");
-            const comName = split.splice(0, 1)[0].substring(this.prefix.length, this.content.length);
+            const parsed = this.parse(this.content, this.prefix);
             const client = this.client as ReiClient;
-
-            this.command = client.commandHandler.getCommand(comName);
-            this.args = split;
+            
+            this.command = client.commandHandler.getCommand(parsed.command);
+            this.args = parsed.args;
 
             await this.run();
         }
 
         public async run() {
-            if (this.command && this.args)
-                await this.command.run(this, this.args);
+            if (this.command && this.args) {
+                try {
+                    await this.command.run(this, this.args);
+                } catch (err) {
+                    await this.replyBasicError(err);
+                }
+            }
             else
                 throw "A commandMessage was not initialized properly!";
         }
@@ -37,6 +40,20 @@ const CMessage = Structures.extend("Message", C => {
 
         public async replyBasicError(content: string) {
             return await this.channel.send(new MessageEmbed().setColor("RED").setDescription(content));
+        }
+
+        private parse(content: string, prefix: string) {
+            const withoutPrefix = content.substring(prefix.length);
+            const commandName = withoutPrefix.split(" ", 1)[0];
+            const argString = withoutPrefix.substring(commandName.length + 1);
+
+            const argsMatches = argString.match(new RegExp('"[^"]+"|[\\S]+', 'g'));
+            const args = (argsMatches) ? argsMatches.map(el => el.replace(new RegExp('\"', 'g'), "")) : [];
+
+            return {
+                command: commandName,
+                args
+            };
         }
     }
     

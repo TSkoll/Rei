@@ -7,25 +7,6 @@ import { CommandMessage } from "../extensions/Message";
 export default class CommandHandler {
     private client?: ReiClient;
     private commands? : {[name: string]: Command};
-
-    public async run(message: CommandMessage, name: string, args : string[]) {
-        try {
-            const cmd = this.getCommand(name.toLowerCase());
-            const parsedArgs = message.args;
-
-            const textChannel = message.channel as TextChannel;
-            if (message.guild && !textChannel.permissionsFor(message.guild.me!)!.has("SEND_MESSAGES")) {
-                try {
-                    await cmd.run(message, parsedArgs!);
-                } catch (err) {
-                    await message.replyBasicError(err);
-                    return;
-                }
-            }
-        } catch (err) {
-            if (err != "Command doesn't exist!") throw err;
-        }
-    }
     
     public async init(client: ReiClient) {
         const commands = await CommandLoader.load(client);
@@ -34,7 +15,7 @@ export default class CommandHandler {
         this.client = client;
     }
 
-    public getCommand(name : string) : Command {
+    public getCommand(name: string) : Command {
         try {
             return this.commands![name];
         } catch (err) {

@@ -18,8 +18,10 @@ export default class MessageHandler {
             try {
                 const prefix = this.client.prefixHandler.getPrefix(message);
 
-                const commandMessage = message as CommandMessage;
-                await commandMessage.intialize(prefix);
+                if (message.content.startsWith(prefix)) {
+                    const commandMessage = message as CommandMessage;
+                    await commandMessage.intialize(prefix);
+                }
             } catch (err) {
                 console.error(`Error from root: ${err}`);
             }
