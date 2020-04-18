@@ -2,42 +2,41 @@ import Path from "path";
 
 import readDir from "./filesystemPromises/ReadDirPromise";
 import stats from "./filesystemPromises/StatsPromise";
-import readFile from "./filesystemPromises/ReadFilePromise"
+import readFile from "./filesystemPromises/ReadFilePromise";
 
 class FilesystemHelper {
-    static async getFolders(folderPath: string) : Promise<string[]> {
-        let retDirs: string[] = [];
+  static async getFolders(folderPath: string): Promise<string[]> {
+    let retDirs: string[] = [];
 
-        const files = await readDir(folderPath);
-        for (let file of files) {
-            const filePath = Path.join(process.cwd(), folderPath, file);
-            const stat = await stats(filePath);
+    const files = await readDir(folderPath);
+    for (let file of files) {
+      const filePath = Path.join(process.cwd(), folderPath, file);
+      const stat = await stats(filePath);
 
-            if (stat.isDirectory())
-                retDirs.push(file);
-        }
-
-        return retDirs;
+      if (stat.isDirectory()) retDirs.push(file);
     }
 
-    static async getFiles(folderPath: string) : Promise<string[]> {
-        let retFiles: string[] = [];
+    return retDirs;
+  }
 
-        const files = await readDir(folderPath);
-        for (let file of files) {
-            const filePath = Path.join(process.cwd(), folderPath, file);
-            const stat = await stats(filePath);
+  static async getFiles(folderPath: string): Promise<string[]> {
+    let retFiles: string[] = [];
 
-            if (!stat.isDirectory()) {
-                retFiles.push(file);
-            }
-        }
+    const files = await readDir(folderPath);
+    for (let file of files) {
+      const filePath = Path.join(process.cwd(), folderPath, file);
+      const stat = await stats(filePath);
 
-        return retFiles;
+      if (!stat.isDirectory()) {
+        retFiles.push(file);
+      }
     }
 
-    static async readFile(filePath : string) : Promise<Buffer> {
-        return await readFile(filePath);
-    }
+    return retFiles;
+  }
+
+  static async readFile(filePath: string): Promise<Buffer> {
+    return await readFile(filePath);
+  }
 }
 export default FilesystemHelper;

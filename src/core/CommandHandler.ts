@@ -5,21 +5,21 @@ import CommandLoader from "./CommandLoader";
 import { CommandMessage } from "../extensions/Message";
 
 export default class CommandHandler {
-    private client?: ReiClient;
-    private commands? : {[name: string]: Command};
-    
-    public async init(client: ReiClient) {
-        const commands = await CommandLoader.load(client);
+  private client?: ReiClient;
+  private commands?: { [name: string]: Command };
 
-        this.commands = commands;
-        this.client = client;
-    }
+  public async init(client: ReiClient) {
+    const commands = await CommandLoader.load(client);
 
-    public getCommand(name: string) : Command {
-        try {
-            return this.commands![name];
-        } catch (err) {
-            throw "This command doesn't exist!";
-        }
+    this.commands = commands;
+    this.client = client;
+  }
+
+  public getCommand(name: string): Command {
+    try {
+      return this.commands![name];
+    } catch (err) {
+      throw "This command doesn't exist!";
     }
+  }
 }
