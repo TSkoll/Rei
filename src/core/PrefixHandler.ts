@@ -1,7 +1,6 @@
 import { Connection } from "mongoose";
 import { Message } from "discord.js";
-
-import GuildDocument, { guildSchema } from "../models/Guild";
+import GuildDocument from "../models/Guild";
 
 export default class PrefixHandler {
   db: Connection;

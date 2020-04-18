@@ -1,5 +1,3 @@
-import Command from "../types/Command";
-
 import { Connection } from "mongoose";
 import ReiClient from "../types/ReiClient";
 import { CommandMessage } from "../extensions/Message";

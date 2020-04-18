@@ -1,5 +1,4 @@
 import Command from "../../types/Command";
-import Discord from "discord.js";
 import { CommandMessage } from "../../extensions/Message";
 import ReiClient from "../../types/ReiClient";
 
