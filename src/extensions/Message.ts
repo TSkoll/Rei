@@ -36,6 +36,7 @@ const CMessage = Structures.extend("Message", C => {
     public async run() {
       if (this.command && this.args) {
         try {
+          this.command.checkPermissions(this);
           await this.command.run(this, this.args);
         } catch (err) {
           await this.replyBasicError(err);

@@ -21,7 +21,7 @@ export default class MessageHandler {
           await commandMessage.intialize(prefix);
         }
       } catch (err) {
-        console.error(`Error from root: ${err}`);
+        this.client.logger.error(`Error from root: ${err}`);
       }
     });
   }
