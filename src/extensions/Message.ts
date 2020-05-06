@@ -16,10 +16,21 @@ const CMessage = Structures.extend("Message", C => {
       const parsed = this.parse(this.content, this.prefix);
       const client = this.client as ReiClient;
 
-      this.command = client.commandHandler.getCommand(parsed.command);
-      this.args = parsed.args;
+      try {
+        this.command = client.commandHandler.getCommand(parsed.command);
+        this.args = parsed.args;
 
-      await this.run();
+        await this.run();
+      } catch (ex) {
+        const exPayload = {
+          messageContent: this.content,
+          prefix,
+          parsed,
+        };
+        client.logger.error(ex, exPayload);
+
+        await this.replyBasicError(ex);
+      }
     }
 
     public async run() {

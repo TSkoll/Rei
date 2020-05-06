@@ -14,10 +14,9 @@ export default class CommandHandler {
   }
 
   public getCommand(name: string): Command {
-    try {
-      return this.commands![name];
-    } catch (err) {
-      throw "This command doesn't exist!";
-    }
+    const command = this.commands![name];
+
+    if (command) return command;
+    else throw "This command doesn't exist!";
   }
 }
