@@ -3,19 +3,8 @@ import LogDocument from "../models/Log";
 export default class Logger {
   constructor() {}
 
-  // TODO: Disable debug messages in prod
-  // Prod and dev envs lack env variable to make this possible
-  public async debug(content: string, additional?: Object) {
-    console.log(`[DEBUG] ${this.generateTimeStamp()} ${content}`, additional || null);
-    new LogDocument({
-      loglevel: "DEBUG",
-      content,
-      additional,
-    }).save();
-  }
-
   public async info(content: string, additional?: Object) {
-    console.log(`[INFO] ${this.generateTimeStamp()} ${content}`, additional || null);
+    this.log("INFO", content, additional);
     new LogDocument({
       loglevel: "INFO",
       content,
@@ -24,7 +13,7 @@ export default class Logger {
   }
 
   public async warning(content: string, additional?: Object) {
-    console.log(`[WARNING] ${this.generateTimeStamp()} ${content}`, additional || null);
+    this.log("WARNING", content, additional);
     new LogDocument({
       loglevel: "WARNING",
       content,
@@ -33,12 +22,17 @@ export default class Logger {
   }
 
   public async error(content: string, additional?: Object) {
-    console.log(`[ERROR] ${this.generateTimeStamp()} ${content}`, additional || null);
+    this.log("ERROR", content, additional);
     new LogDocument({
       loglevel: "ERROR",
       content,
       additional,
     }).save();
+  }
+
+  private log(level: string, message: string, additional?: Object) {
+    if (additional) console.log(`[${level}] ${this.generateTimeStamp()} ${message}`, additional);
+    else console.log(`[${level}] ${this.generateTimeStamp()} ${message}`);
   }
 
   // TODO: Improve to be an actual timestamp
