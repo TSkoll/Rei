@@ -19,6 +19,10 @@ class CommandLoader {
         const name = cmd.constructor.name.toLowerCase();
 
         commandsRet[name] = cmd;
+
+        if (cmd.aliases) {
+          for (let alias of cmd.aliases) commandsRet[alias.toLowerCase()] = cmd;
+        }
       }
     }
 

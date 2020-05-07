@@ -1,15 +1,15 @@
 import { PermissionResolvable } from "discord.js";
 
 export default abstract class CommandOptions {
-  protected ownerOnly: boolean = false;
-  protected argsCount: number = 0;
-  protected ignoreMin: number = 0;
-  protected botPerms?: PermissionResolvable[] = undefined;
-  protected userPerms?: PermissionResolvable[] = undefined;
-  protected disallowDM: boolean = false;
-  protected nsfw: boolean = false;
-  protected aliases?: string[] | string = undefined;
-  protected ratelimit: number = 0;
+  public ownerOnly?: boolean = false;
+  public argsCount?: number = 0;
+  public ignoreMin?: number = 0;
+  public botPerms?: PermissionResolvable[] = undefined;
+  public userPerms?: PermissionResolvable[] = undefined;
+  public disallowDM?: boolean = false;
+  public nsfw?: boolean = false;
+  public aliases?: string[] = undefined;
+  public ratelimit?: number = 0;
 
   constructor(options?: CommandOptions) {
     if (options) {
