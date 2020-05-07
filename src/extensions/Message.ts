@@ -52,6 +52,10 @@ const CMessage = Structures.extend("Message", C => {
       return await this.channel.send(new MessageEmbed().setColor("RED").setDescription(content));
     }
 
+    public async replyBasicEmbed(content: MessageEmbed) {
+      return await this.channel.send(content);
+    }
+
     private parse(content: string, prefix: string) {
       const withoutPrefix = content.substring(prefix.length);
       const commandName = withoutPrefix.split(" ", 1)[0];

@@ -1,5 +1,3 @@
-import { PermissionResolvable } from "discord.js";
-
 export default abstract class SubCommandOptions {
   public aliases?: string[] = undefined;
 

@@ -1,4 +1,4 @@
-import SubCommand, { constructSubCmd } from "./SubCommand";
+import SubCommand from "./SubCommand";
 import { CommandMessage } from "../extensions/Message";
 
 export default class SubCommandManager {
@@ -15,11 +15,11 @@ export default class SubCommandManager {
     }
   }
 
-  public async runSubCommand(name: string, args: string[], message: CommandMessage) {
-    const cmd = this.subCmdMap[name];
+  public async runSubCommand(message: CommandMessage, args: string[]) {
+    const cmd = this.subCmdMap[args[0]];
 
     if (!cmd) throw "Subcommand not found!";
 
-    await cmd.run(message, args);
+    await cmd.run(message, args.slice(1));
   }
 }
