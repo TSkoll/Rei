@@ -18,7 +18,7 @@ export default class Gains implements SubCommand {
 
     await previous!.updateOne({ sc: previous!.sc, pp: user.playerInfo.pp, rank: user.playerInfo.rank });
 
-    message.replyBasicEmbed(
+    message.replyEmbed(
       new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setDescription(

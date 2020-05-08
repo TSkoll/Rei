@@ -52,7 +52,11 @@ const CMessage = Structures.extend("Message", C => {
       return await this.channel.send(new MessageEmbed().setColor("RED").setDescription(content));
     }
 
-    public async replyBasicEmbed(content: MessageEmbed) {
+    public async replyBasicInfo(content: string) {
+      return await this.channel.send(new MessageEmbed().setColor("BLUE").setDescription(content));
+    }
+
+    public async replyEmbed(content: MessageEmbed) {
       return await this.channel.send(content);
     }
 

@@ -19,7 +19,7 @@ export default class Urban extends Command {
 
     const top = data.find((x: any) => x.word.toLowerCase() == combinedArgs.toLowerCase()) || data[0];
 
-    await message.replyBasicEmbed(
+    await message.replyEmbed(
       new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setAuthor(top.word, undefined, top.permalink)

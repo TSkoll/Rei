@@ -27,7 +27,7 @@ export default class User implements SubCommand {
 
     if (!userData[0].playerInfo) throw "This player could not be found!";
 
-    message.replyBasicEmbed(
+    message.replyEmbed(
       new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setAuthor(
