@@ -16,13 +16,20 @@ export default class SubCommandManager {
   }
 
   public async runSubCommand(message: CommandMessage, args: string[]) {
-    if (!args[0])
-      return await message.replyBasicInfo(`Available subcommands:\n\n${Object.keys(this.subCmdMap).join("\n")}`);
+    if (!args[0]) return await this.noArgs(message);
 
     const cmd = this.subCmdMap[args[0]];
 
-    if (!cmd) throw "Subcommand not found!";
+    if (!cmd) return await this.default(message, args);
 
     await cmd.run(message, args.slice(1));
+  }
+
+  public async noArgs(message: CommandMessage) {
+    return await message.replyBasicInfo(`Available subcommands:\n\n${Object.keys(this.subCmdMap).join("\n")}`);
+  }
+
+  public async default(message: CommandMessage, args: string[]) {
+    throw "Subcommand not found!";
   }
 }
