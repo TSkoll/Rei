@@ -26,7 +26,7 @@ export default class SubCommandManager {
   }
 
   public async noArgs(message: CommandMessage) {
-    return await message.replyBasicInfo(`Available subcommands:\n\n${Object.keys(this.subCmdMap).join("\n")}`);
+    await message.replyBasicInfo(`Available subcommands:\n\n${Object.keys(this.subCmdMap).join("\n")}`);
   }
 
   public async default(message: CommandMessage, args: string[]) {
