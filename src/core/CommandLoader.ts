@@ -6,10 +6,10 @@ class CommandLoader {
   static async load(client: Client): Promise<{ [name: string]: Command }> {
     let commandsRet: { [name: string]: Command } = {};
 
-    const modules = await fs.getFolders("./bin/modules/");
+    const modules = await fs.getFolders("./modules/");
 
     for (let module of modules) {
-      const commands = await fs.getFiles(`./bin/modules/${module}`);
+      const commands = await fs.getFiles(`./modules/${module}`);
 
       for (let command of commands) {
         if (command.indexOf(".js.map") > 0) continue;
