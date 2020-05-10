@@ -10,7 +10,7 @@ export default class FilesystemHelper {
 
     const files = await readDir(folderPath);
     for (let file of files) {
-      const filePath = Path.join(process.cwd(), folderPath, file);
+      const filePath = Path.join(folderPath, file);
       const stat = await stats(filePath);
 
       if (stat.isDirectory()) retDirs.push(file);
@@ -24,7 +24,7 @@ export default class FilesystemHelper {
 
     const files = await readDir(folderPath);
     for (let file of files) {
-      const filePath = Path.join(process.cwd(), folderPath, file);
+      const filePath = Path.join(folderPath, file);
       const stat = await stats(filePath);
 
       if (!stat.isDirectory()) {

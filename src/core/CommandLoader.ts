@@ -6,15 +6,15 @@ class CommandLoader {
   static async load(client: Client): Promise<{ [name: string]: Command }> {
     let commandsRet: { [name: string]: Command } = {};
 
-    const modules = await fs.getFolders("./modules/");
+    const modules = await fs.getFolders(`${process.cwd()}/bin/modules`);
 
     for (let module of modules) {
-      const commands = await fs.getFiles(`./modules/${module}`);
+      const commands = await fs.getFiles(`${process.cwd()}/bin/modules/${module}`);
 
       for (let command of commands) {
         if (command.indexOf(".js.map") > 0) continue;
 
-        const cmdObj = await import(`../modules/${module}/${command}`);
+        const cmdObj = await import(`${process.cwd()}/bin/modules/${module}/${command}`);
         const cmd = new cmdObj.default(client) as Command;
         const name = cmd.constructor.name.toLowerCase();
 
