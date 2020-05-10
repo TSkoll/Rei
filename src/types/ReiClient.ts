@@ -10,6 +10,9 @@ export default class ReiClient extends Client {
   public db: Connection;
   public logger: Logger;
 
+  public commandsRun: number = 0;
+  public messagesReceived: number = 0;
+
   constructor(
     commandHandler: CommandHandler,
     prefixHandler: PrefixHandler,

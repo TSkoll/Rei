@@ -1,5 +1,5 @@
 import Command from "../types/Command";
-import fs from "../utils/FilesystemHelper";
+import fs from "../utils/filesystemHelper";
 import { Client } from "discord.js";
 
 class CommandLoader {

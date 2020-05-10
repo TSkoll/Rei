@@ -8,16 +8,16 @@ const CMessage = Structures.extend("Message", C => {
     prefix?: string;
     command?: Command;
     args?: string[];
+    reiClient: ReiClient = this.client as ReiClient;
 
     public async intialize(prefix: string) {
       this.isCommand = true;
       this.prefix = prefix;
 
       const parsed = this.parse(this.content, this.prefix);
-      const client = this.client as ReiClient;
 
       try {
-        this.command = client.commandHandler.getCommand(parsed.command);
+        this.command = this.reiClient.commandHandler.getCommand(parsed.command);
         this.args = parsed.args;
 
         await this.run();
@@ -27,7 +27,7 @@ const CMessage = Structures.extend("Message", C => {
           prefix,
           parsed,
         };
-        client.logger.error(ex, exPayload);
+        this.reiClient.logger.error(ex, exPayload);
 
         await this.replyBasicError(ex);
       }
@@ -38,6 +38,8 @@ const CMessage = Structures.extend("Message", C => {
         try {
           this.command.checkPermissions(this);
           await this.command.run(this, this.args);
+
+          this.reiClient.commandsRun++;
         } catch (err) {
           await this.replyBasicError(err);
         }

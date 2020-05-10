@@ -13,6 +13,8 @@ export default class MessageHandler {
 
   public initialize() {
     this.client.on("message", async message => {
+      this.client.messagesReceived++;
+
       try {
         const prefix = await this.client.prefixHandler.getPrefix(message);
 
