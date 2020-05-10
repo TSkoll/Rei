@@ -45,5 +45,6 @@ jobs:
       run: | 
         echo "$ssh" > ./server.key
         chmod 400 ./server.key
+        cd ~
         pm2 deploy ecosystem.config.js production
       
