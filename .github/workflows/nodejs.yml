@@ -30,6 +30,6 @@ jobs:
       run: zip -r source.zip ./bin/
     - uses: actions/upload-artifact@v2
       with:
-        name: source.zip
+        name: source
         path: source.zip
       
