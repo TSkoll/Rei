@@ -37,7 +37,7 @@ export default class User implements SubCommand {
           "https://new.scoresaber.com" + userData[0].playerInfo.avatar,
           "https://scoresaber.com/u/" + userData[0].playerInfo.playerid
         )
-        .addField("this is my peepee", userData[0].playerInfo.pp + "pp", true)
+        .addField("Performance Points", userData[0].playerInfo.pp + "pp", true)
         .addField("Global Rank", "#" + userData[0].playerInfo.rank, true)
         .addField(`Country Rank [${userData[0].playerInfo.country}]`, "#" + userData[0].playerInfo.countryRank, true)
         .addField(
