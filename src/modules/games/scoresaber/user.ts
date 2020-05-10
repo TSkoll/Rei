@@ -16,6 +16,8 @@ interface mapDifficulty {
 }
 
 export default class User implements SubCommand {
+  aliases = ["stats"];
+
   public async run(message: CommandMessage, args: string[]) {
     let scid = await getUser(message.author.id, args[0]);
 
