@@ -28,11 +28,11 @@ export default class Stats extends Command {
     const diff = time.calcTimeDifference(epoch);
 
     const years = diff.years > 0 ? diff.years + "y" : "";
-    const months = diff.months > 0 ? diff.years + "m" : "";
-    const days = diff.days > 0 ? diff.years + "d" : "";
-    const hours = diff.hours > 0 ? diff.years + "h" : "";
-    const mins = diff.minutes > 0 ? diff.years + "min" : "";
-    const seconds = diff.seconds > 0 ? diff.years + "s" : "";
+    const months = diff.months > 0 ? diff.months + "m" : "";
+    const days = diff.days > 0 ? diff.days + "d" : "";
+    const hours = diff.hours > 0 ? diff.hours + "h" : "";
+    const mins = diff.minutes > 0 ? diff.minutes + "min" : "";
+    const seconds = diff.seconds > 0 ? diff.seconds + "s" : "";
 
     return `${years} ${months} ${days} ${hours} ${mins} ${seconds}`;
   }
