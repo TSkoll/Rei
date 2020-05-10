@@ -11,7 +11,7 @@ export default class Feedback extends Command {
     const feedbackChannel = (await client.channels.fetch(this.feedbackChannelId)) as TextChannel;
 
     await feedbackChannel.send(
-      `${message.author.username}#${message.author.discriminator} [${message.author.id}]\n\`\`\`${args}\`\`\``
+      `${message.author.username}#${message.author.discriminator} [${message.author.id}]\n\`\`\`${args.join(" ")}\`\`\``
     );
     await message.replyBasicSuccess("Feedback left!");
   }
