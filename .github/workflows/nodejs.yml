@@ -32,8 +32,8 @@ jobs:
         path: bin/
     - name: Ensure latest version of pm2 is installer
       run: npm install pm2@latest -g
-    - name: Disable strict host checking for GitHub
-      run: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - name: Add deployment server to known hosts
+      run: ssh-keyscan -H ${{secrets.host}} > ~/.ssh/known_hosts
     - name: Publish to production
       env:
         ssh: ${{ secrets.secret }}
