@@ -26,3 +26,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build --if-present
+    - name: Generate Artifact
+      run: zip -r source.zip ./bin/
+    - uses: actions/upload-artifact@v2
+      with:
+        name: source
+        path: source.zip
+      
