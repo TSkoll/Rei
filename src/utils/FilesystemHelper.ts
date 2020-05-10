@@ -4,7 +4,7 @@ import readDir from "./filesystemPromises/ReadDirPromise";
 import stats from "./filesystemPromises/StatsPromise";
 import readFile from "./filesystemPromises/ReadFilePromise";
 
-class FilesystemHelper {
+export default class FilesystemHelper {
   static async getFolders(folderPath: string): Promise<string[]> {
     let retDirs: string[] = [];
 
@@ -39,4 +39,3 @@ class FilesystemHelper {
     return await readFile(filePath);
   }
 }
-export default FilesystemHelper;
