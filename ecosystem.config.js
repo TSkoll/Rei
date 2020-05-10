@@ -9,8 +9,8 @@ module.exports = {
 
   deploy: {
     production: {
-      user: process.env.key_user,
-      host: process.env.key_host,
+      user: process.env.user,
+      host: process.env.host,
       key: "./server.key",
       ref: "origin/master",
       repo: "https://github.com/TSkoll/rei-ts.git",
