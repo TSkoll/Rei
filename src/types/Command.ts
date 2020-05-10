@@ -48,7 +48,7 @@ export default abstract class Command extends CommandOptions {
     return !channel.nsfw;
   }
 
-  public abstract async run(message: CommandMessage, args: string[]): Promise<void>;
+  public abstract async run(message: CommandMessage, args: string[] | string): Promise<void>;
 
   public async afterInit?(): Promise<void>;
 }

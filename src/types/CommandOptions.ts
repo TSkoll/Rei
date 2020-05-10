@@ -2,7 +2,7 @@ import { PermissionResolvable } from "discord.js";
 
 export default abstract class CommandOptions {
   public ownerOnly?: boolean = false;
-  public argsCount?: number = 0;
+  public singleArg?: boolean = false;
   public ignoreMin?: number = 0;
   public botPerms?: PermissionResolvable[] = undefined;
   public userPerms?: PermissionResolvable[] = undefined;
@@ -14,7 +14,7 @@ export default abstract class CommandOptions {
   constructor(options?: CommandOptions) {
     if (options) {
       this.ownerOnly = options.ownerOnly;
-      this.argsCount = options.argsCount;
+      this.singleArg = options.singleArg;
       this.ignoreMin = options.ignoreMin;
       this.botPerms = options.botPerms;
       this.userPerms = options.userPerms;

@@ -5,10 +5,11 @@ export default class Echo extends Command {
   constructor() {
     super({
       ownerOnly: true,
+      singleArg: true,
     });
   }
 
-  public async run(message: CommandMessage, args: string[]) {
-    await message.replyBasicSuccess(args.join(" "));
+  public async run(message: CommandMessage, args: string) {
+    await message.replyBasicSuccess(args);
   }
 }
