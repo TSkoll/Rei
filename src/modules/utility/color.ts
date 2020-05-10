@@ -3,10 +3,14 @@ import { CommandMessage } from "../../extensions/Message";
 import SubCommandManager from "../../types/SubCommandManager";
 import { constructSubCmd } from "../../types/SubCommand";
 
+import assign from "./color/utils/assign";
+
 import Avatar from "./color/avatar";
+import Remove from "./color/remove";
+import Random from "./color/random";
 
 export default class Color extends Command {
-  private scm = new SubCommandManager(constructSubCmd([Avatar]));
+  private scm = new SubCommandManager(constructSubCmd([Avatar, Remove, Random]));
 
   constructor() {
     super({
@@ -22,6 +26,14 @@ export default class Color extends Command {
   }
 
   private async default(message: CommandMessage, args: string[]) {
-    message.reply("owo");
+    let color = args[0];
+    const hexRegex = new RegExp("^#?(?:[0-9a-fA-F]{3}){1,2}$", "g");
+
+    if (hexRegex.test(color)) {
+      if (color[0] != "#") color = "#" + color;
+      color = color.toUpperCase();
+
+      await assign(message, color);
+    } else throw "That doesn't seem to be a valid hex color!";
   }
 }
