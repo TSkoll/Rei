@@ -24,6 +24,7 @@
     "@types/node-fetch": "^2.5.7",
     "@types/randomcolor": "^0.5.4",
     "@types/ws": "^7.2.4",
+    "brainfuck-node": "^1.0.2",
     "canvas": "^2.6.1",
     "discord.js": "^12.1.1",
     "mongodb": "^3.5.6",
