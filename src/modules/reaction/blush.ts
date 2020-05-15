@@ -1,4 +1,4 @@
-import ReactionCommand from "../../types/ReactionCommand";
+import ReactionCommand from "../../types/Command/ReactionCommand";
 
 export default class Blush extends ReactionCommand {
   reactionMessage = "Aww you shouldn't have **%target%**!";

@@ -1,5 +1,5 @@
 import { CommandMessage } from "../../../extensions/Message";
-import SubCommand from "../../../types/SubCommand";
+import SubCommand from "../../../types/Command/SubCommand";
 import getUser from "./utils/getUser";
 import fetch from "node-fetch";
 import ScModel, { ISc } from "../../../models/Sc";

@@ -1,4 +1,4 @@
-import { CommandMessage } from "../extensions/Message";
+import { CommandMessage } from "../../extensions/Message";
 import SubCommandOptions from "./SubCommandOptions";
 
 export default interface SubCommand extends SubCommandOptions {

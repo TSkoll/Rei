@@ -1,4 +1,4 @@
-import SubCommand from "../../../types/SubCommand";
+import SubCommand from "../../../types/Command/SubCommand";
 import { CommandMessage } from "../../../extensions/Message";
 
 export default class Remove implements SubCommand {

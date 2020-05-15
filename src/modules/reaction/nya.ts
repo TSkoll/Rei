@@ -1,4 +1,4 @@
-import ReactionCommand from "../../types/ReactionCommand";
+import ReactionCommand from "../../types/Command/ReactionCommand";
 
 export default class Nya extends ReactionCommand {
   reactionMessage = "**%user%** nyaas at **%target%**";

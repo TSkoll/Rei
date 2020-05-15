@@ -1,4 +1,4 @@
-import Command from "../types/Command";
+import Command from "../types/Command/Command";
 import fs from "../utils/filesystemHelper";
 import { Client } from "discord.js";
 

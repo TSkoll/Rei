@@ -1,4 +1,4 @@
-import ReactionCommand from "../../types/ReactionCommand";
+import ReactionCommand from "../../types/Command/ReactionCommand";
 
 export default class Pat extends ReactionCommand {
   reactionMessage = "**%user%** pats **%target%**!";

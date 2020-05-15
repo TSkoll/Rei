@@ -1,4 +1,4 @@
-import ReactionCommand from "../../types/ReactionCommand";
+import ReactionCommand from "../../types/Command/ReactionCommand";
 import { CommandMessage } from "../../extensions/Message";
 
 import Discord from "discord.js";

@@ -1,5 +1,5 @@
 import { Structures, MessageEmbed } from "discord.js";
-import Command from "../types/Command";
+import Command from "../types/Command/Command";
 import ReiClient from "../types/ReiClient";
 
 const CMessage = Structures.extend("Message", C => {

@@ -1,5 +1,5 @@
 import SubCommand from "./SubCommand";
-import { CommandMessage } from "../extensions/Message";
+import { CommandMessage } from "../../extensions/Message";
 
 export default class SubCommandManager {
   private subCmdMap: { [name: string]: SubCommand } = {};

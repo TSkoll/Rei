@@ -1,8 +1,8 @@
 import { PermissionResolvable, Guild, GuildMember, Channel, TextChannel } from "discord.js";
 
-import { CommandMessage } from "../extensions/Message";
+import { CommandMessage } from "../../extensions/Message";
 import CommandOptions from "./CommandOptions";
-import Config from "./Config";
+import Config from "../Config";
 
 const config = require("../../data/config.json") as Config;
 

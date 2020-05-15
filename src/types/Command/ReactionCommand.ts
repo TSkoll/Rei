@@ -1,6 +1,6 @@
 import Command from "./Command";
 import CommandOptions from "./CommandOptions";
-import { CommandMessage } from "../extensions/Message";
+import { CommandMessage } from "../../extensions/Message";
 
 import Discord from "discord.js";
 

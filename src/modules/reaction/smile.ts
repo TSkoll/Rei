@@ -1,4 +1,4 @@
-import ReactionCommand from "../../types/ReactionCommand";
+import ReactionCommand from "../../types/Command/ReactionCommand";
 
 export default class Smile extends ReactionCommand {
   reactionMessage = "**%user%** smiles at **%target%**";
