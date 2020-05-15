@@ -6,7 +6,7 @@ import { MessageEmbed } from "discord.js";
 import bf from "brainfuck-node";
 
 export default class Brainfuck extends Command {
-  private bf = new bf({ maxSteps: 1000000 });
+  private bf = new bf({ maxSteps: 10000000 });
 
   constructor() {
     super({
