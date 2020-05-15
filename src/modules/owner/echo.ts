@@ -1,4 +1,4 @@
-import Command from "../../types/Command";
+import Command from "../../types/Command/Command";
 import { CommandMessage } from "../../extensions/Message";
 
 export default class Echo extends Command {
