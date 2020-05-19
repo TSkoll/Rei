@@ -38,6 +38,13 @@ export default class Logger {
   // TODO: Improve to be an actual timestamp
   // Fine for now
   private generateTimeStamp() {
-    return Date.now();
+    const t = new Date();
+    return `[${this.normalize(t.getUTCDate())}/${this.normalize(t.getUTCMonth() + 1)}/${this.normalize(
+      t.getFullYear()
+    )}:${this.normalize(t.getUTCHours())}:${this.normalize(t.getUTCMinutes())}:${this.normalize(t.getUTCSeconds())}]`;
+  }
+
+  private normalize(num: number) {
+    return num.toString().padStart(2, "0");
   }
 }
