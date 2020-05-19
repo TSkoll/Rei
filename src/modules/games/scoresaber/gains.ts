@@ -14,7 +14,8 @@ export default class Gains implements SubCommand {
     if (!user.playerInfo) throw "This player could not be found!";
 
     const previous = await ScModel.findOne({ id: message.author.id });
-    const ranks = this.presentRank(user.playerInfo.rank, previous!.rank);
+    const ppGain = user.playerInfo.pp - previous!.pp;
+    const ranks = this.presentRank(user.playerInfo.rank, ppGain, previous!.rank);
 
     await previous!.updateOne({ sc: previous!.sc, pp: user.playerInfo.pp, rank: user.playerInfo.rank });
 
@@ -27,7 +28,7 @@ export default class Gains implements SubCommand {
         )
         .setColor(ranks.color)
         .setDescription(
-          `You gained ${parseFloat((user.playerInfo.pp - previous!.pp).toFixed(3))}pp since the last time${
+          `You ${ppGain >= 0 ? "gained" : "lost"} ${parseFloat(ppGain.toFixed(3))}pp since the last time${
             ranks.inMessage
           }`
         )
@@ -35,10 +36,14 @@ export default class Gains implements SubCommand {
     );
   }
 
-  private presentRank(userRank: number, scRank?: number) {
+  private presentRank(userRank: number, ppGain: number, scRank?: number) {
     if (scRank) {
       const rank = userRank - scRank;
-      const pretext = (rank < 0 && "and gained ") || (rank > 0 && "and lost ") || "and moved ";
+      const pretext =
+        (rank < 0 && "and gained ") ||
+        (rank > 0 && ppGain <= 0 && "and lost ") ||
+        (rank > 0 && ppGain > 0 && "but lost ") ||
+        "and moved ";
 
       return {
         inMessage: ` (${pretext}${Math.abs(rank)} rank${Math.abs(rank) == 1 ? "" : "s"})`,
