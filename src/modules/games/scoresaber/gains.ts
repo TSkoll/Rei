@@ -20,6 +20,11 @@ export default class Gains implements SubCommand {
 
     message.replyEmbed(
       new Discord.MessageEmbed()
+        .setAuthor(
+          user.playerInfo.name,
+          "https://new.scoresaber.com" + user.playerInfo.avatar,
+          "https://scoresaber.com/u/" + user.playerInfo.playerid
+        )
         .setColor("RANDOM")
         .setDescription(
           `You gained ${(user.playerInfo.pp - previous!.pp).toFixed(3)}pp since the last time${ranks.inMessage}`
