@@ -25,9 +25,11 @@ export default class Gains implements SubCommand {
           "https://new.scoresaber.com" + user.playerInfo.avatar,
           "https://scoresaber.com/u/" + user.playerInfo.playerid
         )
-        .setColor("RANDOM")
+        .setColor(ranks.color)
         .setDescription(
-          `You gained ${(user.playerInfo.pp - previous!.pp).toFixed(3)}pp since the last time${ranks.inMessage}`
+          `You gained ${parseFloat((user.playerInfo.pp - previous!.pp).toFixed(3))}pp since the last time${
+            ranks.inMessage
+          }`
         )
         .setFooter(`${previous!.pp}pp -> ${user.playerInfo.pp}pp${ranks.inFooter}`)
     );
@@ -39,13 +41,15 @@ export default class Gains implements SubCommand {
       const pretext = (rank < 0 && "and gained ") || (rank > 0 && "and lost ") || "and moved ";
 
       return {
-        inMessage: ` (${pretext}${Math.abs(rank)} ranks)`,
+        inMessage: ` (${pretext}${Math.abs(rank)} rank${Math.abs(rank) == 1 ? "" : "s"})`,
         inFooter: ` (#${scRank} -> #${userRank})`,
+        color: (rank < 0 && "GREEN") || (rank > 0 && "RED") || "BLUE",
       };
     } else {
       return {
         inMessage: "",
         inFooter: "",
+        color: "BLUE",
       };
     }
   }
