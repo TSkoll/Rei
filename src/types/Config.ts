@@ -8,4 +8,7 @@ export default interface Config {
     username?: string | null;
     password?: string | null;
   };
+  integrations: {
+    saucenaoKey?: string;
+  };
 }
