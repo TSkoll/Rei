@@ -27,6 +27,8 @@ export default class Source extends Command {
           const sauce = await this.getSauce(img.url);
           const sorted = this.sortSauce(sauce);
 
+          if (sorted.length == 0) throw "No matches were found for the image!";
+
           await message.replyEmbed(this.embedify(sorted));
           return;
         } else if (message.embeds.length > 0) {
@@ -36,6 +38,8 @@ export default class Source extends Command {
           if (imageURL) {
             const rawSauce = await this.getSauce(imageURL);
             const sortedSauce = this.sortSauce(rawSauce);
+
+            if (sortedSauce.length == 0) throw "No matches were found for the image!";
 
             await message.replyEmbed(this.embedify(sortedSauce));
             return;
@@ -118,7 +122,7 @@ export default class Source extends Command {
       });
     }
 
-    finds = finds.filter(r => r.sim > 85);
+    finds = finds.filter(r => r.sim > 60);
     finds.sort((a, b) => b.sim - a.sim);
 
     return finds;
