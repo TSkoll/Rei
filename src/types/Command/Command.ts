@@ -14,17 +14,17 @@ export default abstract class Command extends CommandOptions {
   public checkPermissions(message: CommandMessage) {
     if (this.ownerOnly && !this.checkOwner(message.author.id)) throw "You're not my master!";
 
-    if (this.disallowDM && this.checkIfInDMChannel(message.channel)) "I can't perform this command in DMs!";
+    if (this.disallowDM && this.checkIfInDMChannel(message.channel)) throw "I can't perform this command in DMs!";
 
     if (message.guild && message.member) {
       if (this.userPerms && !this.checkUserPerms(message.member))
-        "You don't have the permissions to perform this command!";
+        throw "You don't have the permissions to perform this command!";
 
       if (this.botPerms && message.guild.me && !this.checkBotPerms(message.guild.me))
-        "I don't have enough permissions to perform this command!";
+        throw "I don't have enough permissions to perform this command!";
 
       if (this.nsfw && message.channel.type == "text" && !this.checkIfChannelIsNSFW(message.channel))
-        "This command can't be performed outside of NSFW channels!";
+        throw "This command can't be performed outside of NSFW channels!";
     }
   }
 
