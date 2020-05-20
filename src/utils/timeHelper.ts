@@ -1,5 +1,14 @@
 export default class TimeHelper {
-  public static calcTimeDifference(epoch: number) {
+  private static singleTimeUnits: { [multi: string]: string } = {
+    years: "year",
+    months: "month",
+    days: "day",
+    hours: "hour",
+    minutes: "minute",
+    seconds: "second",
+  };
+
+  public static calcTimeDifference(epoch: number): { [key: string]: number } {
     const years = Math.floor(epoch / 31556926000);
     const totalMonths = epoch % 31556926000;
 
@@ -18,5 +27,9 @@ export default class TimeHelper {
     const seconds = Math.floor(totalSeconds / 1000);
 
     return { years, months, days, hours, minutes, seconds };
+  }
+
+  public static timeunitToSingleString(timeUnitString: string) {
+    return this.singleTimeUnits[timeUnitString];
   }
 }

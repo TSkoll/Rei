@@ -5,6 +5,7 @@ export interface ISc extends Document {
   sc: string;
   pp: number;
   rank: number;
+  gainsLastChecked: number;
 }
 
 export const scSchema = new Schema(
@@ -22,6 +23,10 @@ export const scSchema = new Schema(
       required: true,
     },
     rank: {
+      type: Number,
+      required: false,
+    },
+    gainsLastChecked: {
       type: Number,
       required: false,
     },

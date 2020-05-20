@@ -4,6 +4,7 @@ import getUser from "./utils/getUser";
 import fetch from "node-fetch";
 import ScModel, { ISc } from "../../../models/Sc";
 import Discord from "discord.js";
+import TimeHelper from "../../../utils/timeHelper";
 
 export default class Gains implements SubCommand {
   public async run(message: CommandMessage, args: string[]) {
@@ -16,8 +17,14 @@ export default class Gains implements SubCommand {
     const previous = await ScModel.findOne({ id: message.author.id });
     const ppGain = user.playerInfo.pp - previous!.pp;
     const ranks = this.presentRank(user.playerInfo.rank, ppGain, previous!.rank);
+    const timeStamp = Date.now();
 
-    await previous!.updateOne({ sc: previous!.sc, pp: user.playerInfo.pp, rank: user.playerInfo.rank });
+    await previous!.updateOne({
+      sc: previous!.sc,
+      pp: user.playerInfo.pp,
+      rank: user.playerInfo.rank,
+      gainsLastChecked: timeStamp,
+    });
 
     message.replyEmbed(
       new Discord.MessageEmbed()
@@ -28,12 +35,36 @@ export default class Gains implements SubCommand {
         )
         .setColor(ranks.color)
         .setDescription(
-          `You ${ppGain >= 0 ? "gained" : "lost"} ${parseFloat(ppGain.toFixed(3))}pp since the last time${
-            ranks.inMessage
-          }`
+          `You ${ppGain >= 0 ? "gained" : "lost"} ${parseFloat(ppGain.toFixed(3))}pp ${this.durationSinceString(
+            timeStamp,
+            previous!.gainsLastChecked
+          )}${ranks.inMessage}`
         )
         .setFooter(`${previous!.pp}pp -> ${user.playerInfo.pp}pp${ranks.inFooter}`)
     );
+  }
+
+  private durationSinceString(now: number, last?: number) {
+    if (!last) return "";
+    else {
+      const delta = now - last;
+
+      const timeDiff = TimeHelper.calcTimeDifference(delta);
+      const biggestUnit = Object.keys(timeDiff)
+        .filter(v => timeDiff[v] != 0)
+        .map(v => {
+          return { name: v, value: timeDiff[v] };
+        })[0];
+      return `in the last ${this.determineDurationOutput(biggestUnit)}`;
+    }
+  }
+
+  private determineDurationOutput(timeDiff?: { name: string; value: number }) {
+    if (timeDiff)
+      return timeDiff.value == 1
+        ? TimeHelper.timeunitToSingleString(timeDiff.name)
+        : `${timeDiff.value} ${timeDiff.name}`;
+    else return "instant";
   }
 
   private presentRank(userRank: number, ppGain: number, scRank?: number) {
