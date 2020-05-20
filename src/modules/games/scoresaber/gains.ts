@@ -35,7 +35,7 @@ export default class Gains implements SubCommand {
         )
         .setColor(ranks.color)
         .setDescription(
-          `You ${ppGain >= 0 ? "gained" : "lost"} ${parseFloat(ppGain.toFixed(3))}pp ${this.durationSinceString(
+          `You **${ppGain >= 0 ? "gained" : "lost"} ${parseFloat(ppGain.toFixed(3))}pp** ${this.durationSinceString(
             timeStamp,
             previous!.gainsLastChecked
           )}${ranks.inMessage}`
@@ -71,13 +71,13 @@ export default class Gains implements SubCommand {
     if (scRank) {
       const rank = userRank - scRank;
       const pretext =
-        (rank < 0 && "and gained ") ||
-        (rank > 0 && ppGain <= 0 && "and lost ") ||
-        (rank > 0 && ppGain > 0 && "but lost ") ||
-        "and moved ";
+        (rank < 0 && "and **gained ") ||
+        (rank > 0 && ppGain <= 0 && "and **lost ") ||
+        (rank > 0 && ppGain > 0 && "but **lost ") ||
+        "and **moved ";
 
       return {
-        inMessage: ` (${pretext}${Math.abs(rank)} rank${Math.abs(rank) == 1 ? "" : "s"})`,
+        inMessage: ` (${pretext}${Math.abs(rank)} rank${Math.abs(rank) == 1 ? "**" : "s**"})`,
         inFooter: ` (#${scRank} -> #${userRank})`,
         color: (rank < 0 && "GREEN") || (rank > 0 && "RED") || "BLUE",
       };
