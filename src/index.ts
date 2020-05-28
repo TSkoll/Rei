@@ -39,6 +39,7 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
 
     client.on("ready", () => {
       logger.info(`Logged in as ${client.user!.username} [${client.user!.id}]`);
+      process.send!("ready");
     });
 
     client.login(config.token);
