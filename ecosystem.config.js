@@ -5,6 +5,7 @@ module.exports = {
       script: "./bin/index.js",
       watch: "./src/",
       listen_timeout: 5000,
+      exp_backoff_restart_delay: 500,
     },
   ],
 
