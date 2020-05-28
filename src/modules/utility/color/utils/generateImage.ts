@@ -1,6 +1,8 @@
 import { CommandMessage } from "../../../../extensions/Message";
 import { createCanvas, registerFont } from "canvas";
 
+registerFont(__dirname + "/../../../../../data/font/Montserrat-Light.ttf", { family: "Montserrat" });
+
 export default async function (swatches: string[], message: CommandMessage) {
   const uName = message.member!.nickname || message.author.username;
 
