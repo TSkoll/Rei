@@ -4,7 +4,7 @@ import getUser from "./utils/getUser";
 import fetch from "node-fetch";
 import ScModel, { ISc } from "../../../models/Sc";
 import Discord from "discord.js";
-import TimeHelper from "../../../utils/timeHelper";
+import DeltaTime, { DeltaTimeResult } from "../../../utils/DeltaTime";
 
 export default class Gains implements SubCommand {
   public async run(message: CommandMessage, args: string[]) {
@@ -49,21 +49,16 @@ export default class Gains implements SubCommand {
     else {
       const delta = now - last;
 
-      const timeDiff = TimeHelper.calcTimeDifference(delta);
-      const biggestUnit = Object.keys(timeDiff)
-        .filter(v => timeDiff[v] != 0)
-        .map(v => {
-          return { name: v, value: timeDiff[v] };
-        })[0];
-      return `in the last ${this.determineDurationOutput(biggestUnit)}`;
+      const time = new DeltaTime(delta).toHighestRounded();
+      return `in the last ${this.determineDurationOutput(time)}`;
     }
   }
 
-  private determineDurationOutput(timeDiff?: { name: string; value: number }) {
-    if (timeDiff)
-      return timeDiff.value == 1
-        ? TimeHelper.timeunitToSingleString(timeDiff.name)
-        : `${timeDiff.value} ${timeDiff.name}`;
+  private determineDurationOutput(delta: DeltaTimeResult) {
+    if (delta.scale != 0)
+      return delta.value == 1
+        ? DeltaTime.timescaleToSingleString(delta.scale)
+        : `${delta.value} ${DeltaTime.timescaleToLabel(delta.scale)}`;
     else return "instant";
   }
 

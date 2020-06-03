@@ -3,7 +3,7 @@ import { CommandMessage } from "../../extensions/Message";
 
 import Discord, { MessageEmbed } from "discord.js";
 
-import time from "../../utils/timeHelper";
+import DeltaTime from "../../utils/DeltaTime";
 
 export default class Stats extends Command {
   private startTime = Date.now();
@@ -25,7 +25,7 @@ export default class Stats extends Command {
   }
 
   private epochToTimeDifferenceString(epoch: number) {
-    const diff = time.calcTimeDifference(epoch);
+    const diff = new DeltaTime(epoch);
 
     const years = diff.years > 0 ? diff.years + "y" : "";
     const months = diff.months > 0 ? diff.months + "m" : "";
