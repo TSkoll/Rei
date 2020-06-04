@@ -3,7 +3,7 @@ import { CommandMessage } from "../../extensions/Message";
 
 import Discord, { MessageEmbed } from "discord.js";
 
-import DeltaTime from "../../utils/DeltaTime";
+import DeltaTime from "../../types/DeltaTime";
 
 export default class Stats extends Command {
   private startTime = Date.now();

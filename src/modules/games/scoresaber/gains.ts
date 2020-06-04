@@ -4,7 +4,7 @@ import getUser from "./utils/getUser";
 import fetch from "node-fetch";
 import ScModel, { ISc } from "../../../models/Sc";
 import Discord from "discord.js";
-import DeltaTime, { DeltaTimeResult, TimeScale } from "../../../utils/DeltaTime";
+import DeltaTime, { DeltaTimeResult, TimeScale } from "../../../types/DeltaTime";
 
 export default class Gains implements SubCommand {
   public async run(message: CommandMessage, args: string[]) {

@@ -82,6 +82,7 @@ export default class DeltaTime {
   }
 
   public to(scale: TimeScale): number {
+    // This will give out the entire
     switch (scale) {
       case TimeScale.Year:
         return this.totalms / this.yearInMs;
