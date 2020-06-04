@@ -32,24 +32,14 @@ export default class DeltaTime {
   private readonly minuteInMs = 60000;
   private readonly secondInMs = 1000;
 
-  private static singleTimeUnits: { [multi: string]: string } = {
-    years: "year",
-    months: "month",
-    days: "day",
-    hours: "hour",
-    minutes: "minute",
-    seconds: "second",
-    instant: "instant",
-  };
-
   private static timescaleLabels: { [key: number]: string } = {
-    7: "years",
-    6: "months",
-    5: "days",
-    4: "hours",
-    3: "minutes",
-    2: "seconds",
-    1: "milliseconds",
+    7: "year",
+    6: "month",
+    5: "day",
+    4: "hour",
+    3: "minute",
+    2: "second",
+    1: "millisecond",
     0: "instant",
   };
 
@@ -75,17 +65,8 @@ export default class DeltaTime {
     this.milliseconds = totalSeconds % this.secondInMs;
   }
 
-  public static timeunitToSingleString(timeUnitString: string) {
-    return this.singleTimeUnits[timeUnitString];
-  }
-
-  public static timescaleToSingleString(scale: TimeScale) {
-    const label = this.timescaleToLabel(scale);
-    return this.singleTimeUnits[label];
-  }
-
-  public static timescaleToLabel(scale: TimeScale) {
-    return this.timescaleLabels[scale];
+  public static timescaleToLabel(scale: TimeScale, plural: boolean = true) {
+    return this.timescaleLabels[scale] + (plural ? "s" : "");
   }
 
   public asObject(): { [key: string]: number } {

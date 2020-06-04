@@ -57,7 +57,7 @@ export default class Gains implements SubCommand {
   private determineDurationOutput(delta: DeltaTimeResult) {
     if (delta.scale != 0)
       return delta.value == 1
-        ? DeltaTime.timescaleToSingleString(delta.scale)
+        ? DeltaTime.timescaleToLabel(delta.scale, false)
         : `${delta.value} ${DeltaTime.timescaleToLabel(delta.scale)}`;
     else return "instant";
   }
