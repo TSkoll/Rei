@@ -5,7 +5,6 @@ export default class Ping extends Command {
   constructor() {
     super({
       help: {
-        name: "ping",
         description:
           "Sends a message on the channel and calculates the latency between the bot and the discord server.",
       },

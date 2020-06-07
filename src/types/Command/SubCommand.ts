@@ -1,23 +1,27 @@
 import { CommandMessage } from "../../extensions/Message";
 import SubCommandOptions from "./SubCommandOptions";
-import HelpText from "../Help/HelpText";
+import ManualHelpText from "../Help/ManualHelpText";
 import Help from "../Help/Help";
 import SubCommandConstructor from "./SubCommandConstructor";
 
 export default abstract class SubCommand extends SubCommandOptions {
-  public helpText?: HelpText;
-  public help: Help;
+  public helpText?: ManualHelpText;
+  public help?: Help;
 
   constructor(ctor: SubCommandConstructor) {
     super(ctor.options);
-    this.help = new Help(ctor.help);
+
+    if (ctor.help) {
+      this.helpText = ctor.help;
+      this.help = new Help(this, ctor.help);
+    }
   }
 
   abstract run(message: CommandMessage, args: string[]): Promise<void>;
 }
 
 export interface SubCommandFactory extends SubCommandOptions {
-  helpText?: HelpText;
+  helpText?: ManualHelpText;
 
   new (ctor: SubCommandConstructor): SubCommand;
 }

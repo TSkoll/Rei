@@ -3,12 +3,16 @@ import { CommandMessage } from "../../../extensions/Message";
 import ScModel from "../../../models/Sc";
 
 export default class Set extends SubCommand {
-  helpText = {
-    name: "set",
-    description: "Links a scoresaber account to the user's discord account.",
-  };
-
-  aliases = ["link"];
+  constructor() {
+    super({
+      options: {
+        aliases: ["link"],
+      },
+      help: {
+        description: "Links a scoresaber account to the user's discord account.",
+      },
+    });
+  }
 
   public async run(message: CommandMessage, args: string[]) {
     const scLink = args[0].replace("https://scoresaber.com/u/", "");

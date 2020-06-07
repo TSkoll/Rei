@@ -12,7 +12,6 @@ export default class Feedback extends Command {
         singleArg: true,
       },
       help: {
-        name: "feedback",
         description: "Sends a message to the developer server! Please use this responsibly.",
       },
     });

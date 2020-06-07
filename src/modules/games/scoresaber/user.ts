@@ -16,13 +16,17 @@ interface mapDifficulty {
 }
 
 export default class User extends SubCommand {
-  helpText = {
-    name: "user",
-    description:
-      "Gets a scoresaber profile statistics. If a profile id or url is provided will get statistics from that user. If the user has linked their profile and no id or url was provided linked user statistics will be presented.",
-  };
-
-  aliases = ["stats"];
+  constructor() {
+    super({
+      options: {
+        aliases: ["stats"],
+      },
+      help: {
+        description:
+          "Gets a scoresaber profile statistics. If a profile id or url is provided will get statistics from that user. If the user has linked their profile and no id or url was provided linked user statistics will be presented.",
+      },
+    });
+  }
 
   public async run(message: CommandMessage, args: string[]) {
     let scid = await getUser(message.author.id, args[0]);

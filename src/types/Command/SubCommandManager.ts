@@ -10,15 +10,17 @@ export default class SubCommandManager {
       let name = Command.constructor.name.toLowerCase();
       this.subCmdMap[name] = Command;
 
-      if (Command.helpText) cmd.help.addSub(name, Command.helpText);
-
-      if (Command.help.helpMap.size > 0) cmd.help.addExtended(Command.help.helpMap);
+      // Help concatenation
+      if (cmd.help && Command.help) {
+        if (Command.helpText) cmd.help.addSub(Command, Command.helpText);
+        if (Command.help.helpMap.size > 0) cmd.help.addExtended(Command.help.helpMap);
+      }
 
       if (Command.aliases) {
         for (let alias of Command.aliases) {
           this.subCmdMap[alias.toLowerCase()] = Command;
 
-          if (Command.helpText) cmd.help.addSub(alias, Command.helpText);
+          if (cmd.help && Command.helpText) cmd.help.addSub(cmd, Command.helpText, alias);
         }
       }
     }

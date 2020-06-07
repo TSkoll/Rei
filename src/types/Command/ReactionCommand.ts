@@ -3,13 +3,15 @@ import CommandOptions from "./CommandOptions";
 import { CommandMessage } from "../../extensions/Message";
 
 import Discord from "discord.js";
+import CommandConstructor from "./CommandConstructor";
+import Help from "../Help/Help";
 
 export default abstract class ReactionCommand extends Command {
   protected imageUrls: string[];
   protected reactionMessage?: string;
 
-  constructor(imageUrls: string[], reactionMessage: string, commandOptions: CommandOptions) {
-    super(commandOptions);
+  constructor(imageUrls: string[], reactionMessage: string, ctor?: CommandConstructor | CommandOptions) {
+    super(ctor);
 
     this.imageUrls = imageUrls;
     this.reactionMessage = reactionMessage;

@@ -1,27 +1,34 @@
+import ManualHelpText from "./ManualHelpText";
+import Command from "../Command/Command";
+import SubCommand from "../Command/SubCommand";
 import HelpText from "./HelpText";
 
 export default class Help {
   public helpMap = new Map<string, HelpText>();
-  private root?: string;
+  private root: string;
 
-  constructor(helpText?: HelpText) {
-    if (helpText) {
-      this.helpMap.set(helpText.name, helpText);
-      this.root = helpText.name;
-    }
+  constructor(cmd: Command | SubCommand, manual: ManualHelpText) {
+    const pathName = cmd.constructor.name.toLowerCase();
+    this.helpMap.set(pathName, this.toHelpText(cmd, manual));
+    this.root = pathName;
   }
 
-  public addSub(name: string, helpText: HelpText) {
-    if (this.root) {
-      this.helpMap.set(`${this.root}/${name}`, helpText);
-    } else throw `Unable to add sub-help objects if root help object does not exist!`;
+  private toHelpText(cmd: Command | SubCommand, manual: ManualHelpText) {
+    return {
+      ...manual,
+      name: cmd.constructor.name.toLowerCase(),
+      aliases: cmd.aliases,
+    };
+  }
+
+  public addSub(cmd: Command | SubCommand, manual: ManualHelpText, name?: string) {
+    const pathName = name || cmd.constructor.name.toLowerCase();
+    this.helpMap.set(`${this.root}/${pathName}`, this.toHelpText(cmd, manual));
   }
 
   public addExtended(helpMap: Map<string, HelpText>) {
-    if (this.root) {
-      helpMap.forEach((v, k) => {
-        this.helpMap.set(`${this.root}/${k}`, v);
-      });
-    } else throw `Unable to add sub-help objects if root help object does not exist!`;
+    helpMap.forEach((v, k) => {
+      this.helpMap.set(`${this.root}/${k}`, v);
+    });
   }
 }

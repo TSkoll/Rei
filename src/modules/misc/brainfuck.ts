@@ -14,7 +14,6 @@ export default class Brainfuck extends Command {
         aliases: ["bf"],
       },
       help: {
-        name: "brainfuck",
         description: "Interpolates brainfuck code syntax. Maximum of 10,000,000 steps.",
       },
     });

@@ -9,7 +9,6 @@ export default class SetPrefix extends Command {
         singleArg: true,
       },
       help: {
-        name: "setprefix",
         description: "Updates the used prefix for the current server.",
       },
     });

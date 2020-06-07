@@ -1,7 +1,7 @@
 import CommandOptions from "./CommandOptions";
-import HelpText from "../Help/HelpText";
+import ManualHelpText from "../Help/ManualHelpText";
 
 export default interface CommandConstructor {
   options?: CommandOptions;
-  help?: HelpText;
+  help?: ManualHelpText;
 }

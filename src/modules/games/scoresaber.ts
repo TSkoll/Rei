@@ -17,9 +17,7 @@ export default class ScoreSaber extends Command {
         aliases: ["sc"],
       },
       help: {
-        name: "scoresaber",
         description: "Commands related to https://scoresaber.com/.",
-        aliases: ["sc"],
       },
     });
   }

@@ -11,7 +11,6 @@ export default class Urban extends Command {
         singleArg: true,
       },
       help: {
-        name: "urban",
         description: "Gets an article from the urban dictionary.",
       },
     });

@@ -9,11 +9,11 @@ import CommandConstructor from "./CommandConstructor";
 const config = require("../../../data/config.json") as Config;
 
 export default abstract class Command extends CommandOptions {
-  public help: Help;
+  public help?: Help;
 
-  constructor(ctor: CommandConstructor | CommandOptions) {
+  constructor(ctor?: CommandConstructor | CommandOptions) {
     super(ctor instanceof CommandOptions ? ctor : ctor ? ctor.options : undefined);
-    this.help = new Help(ctor instanceof CommandOptions ? undefined : ctor ? ctor.help : undefined);
+    if (!(ctor instanceof CommandOptions) && ctor && ctor.help) this.help = new Help(this, ctor.help);
   }
 
   public checkPermissions(message: CommandMessage) {

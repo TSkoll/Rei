@@ -15,7 +15,7 @@ class CommandLoader {
         if (command.indexOf(".js.map") > 0) continue;
 
         const cmdObj = await import(`${process.cwd()}/bin/modules/${module}/${command}`);
-        const cmd = new cmdObj.default(client) as Command;
+        const cmd = new cmdObj.default() as Command;
         const name = cmd.constructor.name.toLowerCase();
 
         commandsRet[name] = cmd;
