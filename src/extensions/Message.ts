@@ -24,6 +24,8 @@ const CMessage = Structures.extend("Message", C => {
 
         await this.run();
       } catch (ex) {
+        if (ex == "This command doesn't exist!") return;
+
         const exPayload = {
           messageContent: this.content,
           prefix,
