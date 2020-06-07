@@ -7,7 +7,7 @@ import Discord, { TextChannel } from "discord.js";
 import generateImage from "./utils/generateImage";
 import assign from "./utils/assign";
 
-export default class Random implements SubCommand {
+export default class Random extends SubCommand {
   aliases = ["something"];
 
   public async run(message: CommandMessage, args: string[]) {

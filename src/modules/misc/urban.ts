@@ -7,7 +7,13 @@ import Discord from "discord.js";
 export default class Urban extends Command {
   constructor() {
     super({
-      singleArg: true,
+      options: {
+        singleArg: true,
+      },
+      help: {
+        name: "urban",
+        description: "Gets an article from the urban dictionary.",
+      },
     });
   }
 

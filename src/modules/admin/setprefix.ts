@@ -4,8 +4,14 @@ import { CommandMessage } from "../../extensions/Message";
 export default class SetPrefix extends Command {
   constructor() {
     super({
-      userPerms: ["MANAGE_GUILD"],
-      singleArg: true,
+      options: {
+        userPerms: ["MANAGE_GUILD"],
+        singleArg: true,
+      },
+      help: {
+        name: "setprefix",
+        description: "Updates the used prefix for the current server.",
+      },
     });
   }
 

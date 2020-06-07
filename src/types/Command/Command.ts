@@ -1,14 +1,19 @@
-import { PermissionResolvable, Guild, GuildMember, Channel, TextChannel } from "discord.js";
+import { GuildMember, Channel, TextChannel } from "discord.js";
 
 import { CommandMessage } from "../../extensions/Message";
 import CommandOptions from "./CommandOptions";
 import Config from "../Config";
+import Help from "../Help/Help";
+import CommandConstructor from "./CommandConstructor";
 
 const config = require("../../../data/config.json") as Config;
 
 export default abstract class Command extends CommandOptions {
-  constructor(options?: CommandOptions) {
-    super(options);
+  public help: Help;
+
+  constructor(ctor: CommandConstructor | CommandOptions) {
+    super(ctor instanceof CommandOptions ? ctor : ctor ? ctor.options : undefined);
+    this.help = new Help(ctor instanceof CommandOptions ? undefined : ctor ? ctor.help : undefined);
   }
 
   public checkPermissions(message: CommandMessage) {

@@ -8,7 +8,13 @@ export default class Feedback extends Command {
 
   constructor() {
     super({
-      singleArg: true,
+      options: {
+        singleArg: true,
+      },
+      help: {
+        name: "feedback",
+        description: "Sends a message to the developer server! Please use this responsibly.",
+      },
     });
   }
 

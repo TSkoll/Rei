@@ -7,7 +7,7 @@ import Discord, { TextChannel } from "discord.js";
 import generateImage from "./utils/generateImage";
 import assign from "./utils/assign";
 
-export default class Avatar implements SubCommand {
+export default class Avatar extends SubCommand {
   public async run(message: CommandMessage, args: string[]) {
     const url = message.author.avatarURL({ format: "png" });
 

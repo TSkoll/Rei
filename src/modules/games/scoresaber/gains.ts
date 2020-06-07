@@ -6,7 +6,13 @@ import ScModel, { ISc } from "../../../models/Sc";
 import Discord from "discord.js";
 import DeltaTime, { DeltaTimeResult, TimeScale } from "../../../types/DeltaTime";
 
-export default class Gains implements SubCommand {
+export default class Gains extends SubCommand {
+  helpText = {
+    name: "gains",
+    description:
+      "Checks and compares the change of the user's rank and pp. Requires that the user has linked their scoresaber account.",
+  };
+
   public async run(message: CommandMessage, args: string[]) {
     let scid = await getUser(message.author.id, undefined);
 

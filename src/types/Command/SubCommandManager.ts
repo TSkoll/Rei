@@ -1,16 +1,25 @@
 import SubCommand from "./SubCommand";
 import { CommandMessage } from "../../extensions/Message";
+import Command from "./Command";
 
 export default class SubCommandManager {
   private subCmdMap: { [name: string]: SubCommand } = {};
 
-  constructor(SubCommands: SubCommand[]) {
+  constructor(cmd: Command | SubCommand, SubCommands: SubCommand[]) {
     for (let Command of SubCommands) {
       let name = Command.constructor.name.toLowerCase();
       this.subCmdMap[name] = Command;
 
+      if (Command.helpText) cmd.help.addSub(name, Command.helpText);
+
+      if (Command.help.helpMap.size > 0) cmd.help.addExtended(Command.help.helpMap);
+
       if (Command.aliases) {
-        for (let alias of Command.aliases) this.subCmdMap[alias.toLowerCase()] = Command;
+        for (let alias of Command.aliases) {
+          this.subCmdMap[alias.toLowerCase()] = Command;
+
+          if (Command.helpText) cmd.help.addSub(alias, Command.helpText);
+        }
       }
     }
   }

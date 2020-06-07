@@ -9,11 +9,18 @@ import User from "./scoresaber/user";
 import Gains from "./scoresaber/gains";
 
 export default class ScoreSaber extends Command {
-  private scm = new SubCommandManager(constructSubCmd([Set, User, Gains]));
+  private scm = new SubCommandManager(this, constructSubCmd([Set, User, Gains]));
 
   constructor() {
     super({
-      aliases: ["sc"],
+      options: {
+        aliases: ["sc"],
+      },
+      help: {
+        name: "scoresaber",
+        description: "Commands related to https://scoresaber.com/.",
+        aliases: ["sc"],
+      },
     });
   }
 
