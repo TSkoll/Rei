@@ -1,4 +1,4 @@
-import ReactionCommand from "../../types/Command/ReactionCommand";
+import ReactionCommand from "../../types/Command/ReactionCommand/ReactionCommand";
 
 export default class Confuse extends ReactionCommand {
   aliases = ["wat"];

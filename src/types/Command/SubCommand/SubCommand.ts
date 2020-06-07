@@ -1,7 +1,7 @@
-import { CommandMessage } from "../../extensions/Message";
+import { CommandMessage } from "../../../extensions/Message";
 import SubCommandOptions from "./SubCommandOptions";
-import ManualHelpText from "../Help/ManualHelpText";
-import Help from "../Help/Help";
+import ManualHelpText from "../../Help/ManualHelpText";
+import Help from "../../Help/Help";
 import SubCommandConstructor from "./SubCommandConstructor";
 
 export default abstract class SubCommand extends SubCommandOptions {

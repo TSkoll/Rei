@@ -1,4 +1,4 @@
-import ReactionCommand from "../../types/Command/ReactionCommand";
+import ReactionCommand from "../../types/Command/ReactionCommand/ReactionCommand";
 
 export default class Eskimo extends ReactionCommand {
   reactionMessage = "%user% eskimo kisses **%target%**";

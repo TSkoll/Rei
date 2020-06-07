@@ -1,7 +1,7 @@
 import Command from "../../types/Command/Command";
 import { CommandMessage } from "../../extensions/Message";
-import SubCommandManager from "../../types/Command/SubCommandManager";
-import { constructSubCmd } from "../../types/Command/SubCommand";
+import SubCommandManager from "../../types/Command/SubCommand/SubCommandManager";
+import { constructSubCmd } from "../../types/Command/SubCommand/SubCommand";
 
 import assign from "./color/utils/assign";
 

@@ -1,4 +1,4 @@
-import SubCommand from "../../../types/Command/SubCommand";
+import SubCommand from "../../../types/Command/SubCommand/SubCommand";
 import { CommandMessage } from "../../../extensions/Message";
 import getUser from "./utils/getUser";
 import fetch from "node-fetch";
@@ -24,6 +24,11 @@ export default class User extends SubCommand {
       help: {
         description:
           "Gets a scoresaber profile statistics. If a profile id or url is provided will get statistics from that user. If the user has linked their profile and no id or url was provided linked user statistics will be presented.",
+        args: {
+          profile: {
+            description: "A scoresaber profile URL or ID.",
+          },
+        },
       },
     });
   }

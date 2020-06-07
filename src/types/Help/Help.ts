@@ -1,11 +1,11 @@
 import ManualHelpText from "./ManualHelpText";
 import Command from "../Command/Command";
-import SubCommand from "../Command/SubCommand";
+import SubCommand from "../Command/SubCommand/SubCommand";
 import HelpText from "./HelpText";
 
 export default class Help {
   public helpMap = new Map<string, HelpText>();
-  private root: string;
+  public readonly root: string;
 
   constructor(cmd: Command | SubCommand, manual: ManualHelpText) {
     const pathName = cmd.constructor.name.toLowerCase();
@@ -30,5 +30,26 @@ export default class Help {
     helpMap.forEach((v, k) => {
       this.helpMap.set(`${this.root}/${k}`, v);
     });
+  }
+
+  public getBranches(path: string): string[] {
+    const ret: string[] = [];
+    const paths = this.helpMap.forEach((v, k) => {
+      if (k.startsWith(path)) {
+        const branch = k
+          .replace(path, "")
+          .substring(1)
+          .substring(0, k.indexOf("/") + 1);
+
+        if (!(v.aliases && v.aliases.includes(branch))) ret.push(branch);
+      }
+    });
+
+    return ret.filter(x => x != "");
+  }
+
+  public getBase(): HelpText {
+    // If this object exists, so does the root object
+    return this.helpMap.get(this.root)!;
   }
 }

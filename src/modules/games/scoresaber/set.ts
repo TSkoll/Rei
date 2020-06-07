@@ -1,4 +1,4 @@
-import SubCommand from "../../../types/Command/SubCommand";
+import SubCommand from "../../../types/Command/SubCommand/SubCommand";
 import { CommandMessage } from "../../../extensions/Message";
 import ScModel from "../../../models/Sc";
 
@@ -10,6 +10,11 @@ export default class Set extends SubCommand {
       },
       help: {
         description: "Links a scoresaber account to the user's discord account.",
+        args: {
+          profile: {
+            description: "A scoresaber profile URL or ID.",
+          },
+        },
       },
     });
   }

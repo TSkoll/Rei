@@ -1,6 +1,6 @@
 import SubCommand from "./SubCommand";
-import { CommandMessage } from "../../extensions/Message";
-import Command from "./Command";
+import { CommandMessage } from "../../../extensions/Message";
+import Command from "../Command";
 
 export default class SubCommandManager {
   private subCmdMap: { [name: string]: SubCommand } = {};
@@ -20,7 +20,7 @@ export default class SubCommandManager {
         for (let alias of Command.aliases) {
           this.subCmdMap[alias.toLowerCase()] = Command;
 
-          if (cmd.help && Command.helpText) cmd.help.addSub(cmd, Command.helpText, alias);
+          if (cmd.help && Command.helpText) cmd.help.addSub(Command, Command.helpText, alias);
         }
       }
     }

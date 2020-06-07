@@ -1,4 +1,4 @@
-import SubCommand from "../../../types/Command/SubCommand";
+import SubCommand from "../../../types/Command/SubCommand/SubCommand";
 import { CommandMessage } from "../../../extensions/Message";
 
 import Vibrant from "node-vibrant";

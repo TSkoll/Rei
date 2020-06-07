@@ -1,4 +1,4 @@
-import ManualHelpText from "../Help/ManualHelpText";
+import ManualHelpText from "../../Help/ManualHelpText";
 import SubCommandOptions from "./SubCommandOptions";
 
 export default interface SubCommandConstructor {
