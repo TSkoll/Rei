@@ -2,6 +2,8 @@ import Command from "../../types/Command/Command";
 import { CommandMessage } from "../../extensions/Message";
 import { MessageEmbed } from "discord.js";
 
+import fetch from "node-fetch";
+
 export default class Help extends Command {
   constructor() {
     super({
@@ -12,8 +14,7 @@ export default class Help extends Command {
   }
 
   public async run(message: CommandMessage, args: string[]) {
-    if (args.length == 0)
-      return await message.replyBasicInfo("This part of the command has not yet been implemented(tm)");
+    if (args.length == 0) return await message.author.send(new MessageEmbed().setImage(await this.getRandomCat()));
 
     const cmdHandler = message.reiClient.commandHandler;
     const baseCmd = args[0].toLowerCase();
@@ -60,5 +61,9 @@ export default class Help extends Command {
 
       await message.replyEmbed(embed);
     } else throw "That command does have help information attached to it!";
+  }
+
+  private async getRandomCat(): Promise<string> {
+    return (await fetch("https://api.thecatapi.com/v1/images/search").then(resp => resp.json()))[0].url;
   }
 }
