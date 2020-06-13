@@ -13,6 +13,7 @@ export const scSchema = new Schema(
     id: {
       type: String,
       required: true,
+      index: true,
     },
     sc: {
       type: String,

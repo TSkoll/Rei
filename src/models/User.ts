@@ -10,6 +10,7 @@ export const userShema = new Schema(
     id: {
       type: String,
       required: true,
+      index: true,
     },
     defaultWeather: {
       type: String,

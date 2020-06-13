@@ -1,4 +1,5 @@
 import LogDocument from "../models/Log";
+import { v4 as uuidv4 } from "uuid";
 
 export default class Logger {
   constructor() {}
@@ -6,6 +7,7 @@ export default class Logger {
   public async info(content: string, additional?: Object) {
     this.log("INFO", content, additional);
     new LogDocument({
+      id: uuidv4(),
       loglevel: "INFO",
       content,
       additional,
@@ -15,6 +17,7 @@ export default class Logger {
   public async warning(content: string, additional?: Object) {
     this.log("WARNING", content, additional);
     new LogDocument({
+      id: uuidv4(),
       loglevel: "WARNING",
       content,
       additional,
@@ -24,6 +27,7 @@ export default class Logger {
   public async error(content: string, additional?: Object) {
     this.log("ERROR", content, additional);
     new LogDocument({
+      id: uuidv4(),
       loglevel: "ERROR",
       content,
       additional,

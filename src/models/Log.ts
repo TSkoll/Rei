@@ -1,6 +1,7 @@
 import { Document, Schema, model } from "mongoose";
 
 export interface ILog extends Document {
+  id: string;
   loglevel: string;
   content: string;
   additional: Object;
@@ -9,8 +10,10 @@ export interface ILog extends Document {
 export const logSchema = new Schema(
   {
     loglevel: {
+      id: String,
       type: String,
       required: true,
+      index: true,
     },
     content: {
       type: String,

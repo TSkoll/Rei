@@ -10,6 +10,7 @@ export const guildSchema = new Schema(
     guild: {
       type: String,
       required: true,
+      index: true,
     },
     prefix: {
       type: String,
