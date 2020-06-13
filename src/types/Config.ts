@@ -10,5 +10,6 @@ export default interface Config {
   };
   integrations: {
     saucenaoKey?: string;
+    openweathermapKey?: string;
   };
 }

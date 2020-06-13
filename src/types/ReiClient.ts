@@ -3,12 +3,14 @@ import { Connection } from "mongoose";
 import CommandHandler from "../core/CommandHandler";
 import PrefixHandler from "../core/PrefixHandler";
 import Logger from "../core/Logger";
+import Config from "./Config";
 
 export default class ReiClient extends Client {
   public commandHandler: CommandHandler;
   public prefixHandler: PrefixHandler;
   public db: Connection;
   public logger: Logger;
+  public config: Config;
 
   public commandsRun: number = 0;
   public messagesReceived: number = 0;
@@ -18,6 +20,7 @@ export default class ReiClient extends Client {
     prefixHandler: PrefixHandler,
     db: Connection,
     logger: Logger,
+    config: Config,
     options?: ClientOptions
   ) {
     super(options);
@@ -26,5 +29,6 @@ export default class ReiClient extends Client {
     this.prefixHandler = prefixHandler;
     this.db = db;
     this.logger = logger;
+    this.config = config;
   }
 }

@@ -20,7 +20,7 @@ export default class Color extends Command {
       },
     });
 
-    this.scm.default = this.default;
+    this.scm.default = this.default.bind(this);
   }
 
   public async run(message: CommandMessage, args: string[]) {

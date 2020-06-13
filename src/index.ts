@@ -31,7 +31,7 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
     const prefixHandler = new PrefixHandler(db, config.defaultPrefix);
 
     // Init ReiClient
-    const client = new ReiClient(commandHandler, prefixHandler, db, logger);
+    const client = new ReiClient(commandHandler, prefixHandler, db, logger, config);
     await commandHandler.init(client);
 
     const messageHandler = new MessageHandler(client, db);

@@ -3,9 +3,7 @@ import { CommandMessage } from "../../extensions/Message";
 
 import fetch from "node-fetch";
 import { MessageEmbed } from "discord.js";
-
 import Config from "../../types/Config";
-const config = require("../../../data/config.json") as Config;
 
 export default class Source extends Command {
   constructor() {
@@ -24,7 +22,7 @@ export default class Source extends Command {
         const img = message.attachments.first();
 
         if (img && img.height) {
-          const sauce = await this.getSauce(img.url);
+          const sauce = await this.getSauce(img.url, message.reiClient.config);
           const sorted = this.sortSauce(sauce);
 
           if (sorted.length == 0) throw "No matches were found for the image!";
@@ -36,7 +34,7 @@ export default class Source extends Command {
           const imageURL = (e.thumbnail && e.thumbnail.url) || e.url || (e.image && e.image.url);
 
           if (imageURL) {
-            const rawSauce = await this.getSauce(imageURL);
+            const rawSauce = await this.getSauce(imageURL, message.reiClient.config);
             const sortedSauce = this.sortSauce(rawSauce);
 
             if (sortedSauce.length == 0) throw "No matches were found for the image!";
@@ -82,7 +80,7 @@ export default class Source extends Command {
     return ret;
   }
 
-  private async getSauce(url: string) {
+  private async getSauce(url: string, config: Config) {
     const params = new URLSearchParams();
     params.append("output_type", "2");
     params.append("api_key", config.integrations.saucenaoKey!);
