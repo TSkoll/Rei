@@ -94,6 +94,8 @@ export default class DeltaTime {
       case TimeScale.Minute:
         return this.totalms / this.minuteInMs;
       case TimeScale.Second:
+        return this.totalms / this.secondInMs;
+      case TimeScale.Millisecond:
         return this.totalms;
       case TimeScale.Instant:
         return 0;
