@@ -5,6 +5,8 @@ import PrefixHandler from "../core/PrefixHandler";
 import Logger from "../core/Logger";
 import Config from "./Config";
 
+import io from "@pm2/io";
+
 export default class ReiClient extends Client {
   public commandHandler: CommandHandler;
   public prefixHandler: PrefixHandler;
@@ -14,6 +16,20 @@ export default class ReiClient extends Client {
 
   public commandsRun: number = 0;
   public messagesReceived: number = 0;
+
+  private commandsRunMetric = io.metric({
+    name: "Commands run",
+    value: () => {
+      return this.commandsRun;
+    },
+  });
+
+  private messagesReceivedMetric = io.metric({
+    name: "Messages received",
+    value: () => {
+      return this.messagesReceived;
+    },
+  });
 
   constructor(
     commandHandler: CommandHandler,
