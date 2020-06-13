@@ -19,7 +19,9 @@ export default class PrefixHandler {
   }
 
   public async getPrefix(message: Message) {
-    const guild = message.guild!.id;
+    if (!message.guild) return this.defaultPrefix;
+
+    const guild = message.guild.id;
     const guildInfo = await GuildDocument.findOne({ guild });
 
     return (guildInfo && guildInfo.prefix) || this.defaultPrefix;
