@@ -1,6 +1,7 @@
 import Command from "../types/Command/Command";
 import fs from "../utils/filesystemHelper";
 import { Client } from "discord.js";
+import Logger from "./Logger";
 
 class CommandLoader {
   static async load(client: Client): Promise<{ [name: string]: Command }> {
@@ -17,6 +18,9 @@ class CommandLoader {
         const cmdObj = await import(`${process.cwd()}/bin/modules/${module}/${command}`);
         const cmd = new cmdObj.default() as Command;
         const name = cmd.constructor.name.toLowerCase();
+
+        if (!cmd.help && !cmd.ownerOnly)
+          await Logger.warning(`Public command ${name} doesn't have help documentation attached to it!`);
 
         commandsRet[name] = cmd;
 

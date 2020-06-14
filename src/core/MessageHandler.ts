@@ -1,6 +1,7 @@
 import { Connection } from "mongoose";
 import ReiClient from "../types/ReiClient";
 import { CommandMessage } from "../extensions/Message";
+import Logger from "./Logger";
 
 export default class MessageHandler {
   private client: ReiClient;
@@ -23,7 +24,7 @@ export default class MessageHandler {
           await commandMessage.intialize(prefix);
         }
       } catch (err) {
-        this.client.logger.error(`Error from root: ${err}`);
+        Logger.error(`Error from root: ${err}`);
       }
     });
   }

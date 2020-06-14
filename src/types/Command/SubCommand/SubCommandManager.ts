@@ -1,6 +1,7 @@
 import SubCommand from "./SubCommand";
 import { CommandMessage } from "../../../extensions/Message";
 import Command from "../Command";
+import Logger from "../../../core/Logger";
 
 export default class SubCommandManager {
   private subCmdMap: { [name: string]: SubCommand } = {};
@@ -8,6 +9,10 @@ export default class SubCommandManager {
   constructor(cmd: Command | SubCommand, SubCommands: SubCommand[]) {
     for (let Command of SubCommands) {
       let name = Command.constructor.name.toLowerCase();
+
+      // TODO: This will not ignore owneronly currently, SubCommand lacks implementation
+      if (!cmd.help) Logger.warning(`Subcommand ${name} doesn't have help attached to it!`);
+
       this.subCmdMap[name] = Command;
 
       // Help concatenation

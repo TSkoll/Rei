@@ -1,6 +1,7 @@
 import { Structures, MessageEmbed } from "discord.js";
 import Command from "../types/Command/Command";
 import ReiClient from "../types/ReiClient";
+import Logger from "../core/Logger";
 
 const CMessage = Structures.extend("Message", C => {
   class CommandMessage extends C {
@@ -31,7 +32,7 @@ const CMessage = Structures.extend("Message", C => {
           prefix,
           parsed,
         };
-        this.reiClient.logger.error(ex, exPayload);
+        Logger.error(ex, exPayload);
 
         await this.replyBasicError(ex);
       }

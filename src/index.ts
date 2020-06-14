@@ -25,20 +25,18 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
     if (err) throw err;
 
     const db = mongoose.connection;
-
-    const logger = new Logger();
     const commandHandler = new CommandHandler();
     const prefixHandler = new PrefixHandler(db, config.defaultPrefix);
 
     // Init ReiClient
-    const client = new ReiClient(commandHandler, prefixHandler, db, logger, config);
+    const client = new ReiClient(commandHandler, prefixHandler, db, config);
     await commandHandler.init(client);
 
     const messageHandler = new MessageHandler(client, db);
     messageHandler.initialize();
 
     client.on("ready", () => {
-      logger.info(`Logged in as ${client.user!.username} [${client.user!.id}]`);
+      Logger.info(`Logged in as ${client.user!.username} [${client.user!.id}]`);
       if (process.send) process.send("ready");
     });
 
