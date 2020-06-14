@@ -19,8 +19,7 @@ class CommandLoader {
         const cmd = new cmdObj.default() as Command;
         const name = cmd.constructor.name.toLowerCase();
 
-        if (!cmd.help && !cmd.ownerOnly)
-          await Logger.warning(`Public command ${name} doesn't have help documentation attached to it!`);
+        if (!cmd.help) await Logger.warning(`Command ${name} doesn't have help documentation attached to it!`);
 
         commandsRet[name] = cmd;
 
