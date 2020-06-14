@@ -33,20 +33,26 @@ export default class Logger {
   }
 
   private static log(level: string, message: string, additional?: Object) {
-    if (additional) console.log(`[${level}] ${this.generateTimeStamp()} ${message}`, additional);
-    else console.log(`[${level}] ${this.generateTimeStamp()} ${message}`);
+    if (additional) console.log(`${this.padLevel(level)} ${this.generateTimeStamp()} ${message}`, additional);
+    else console.log(`${this.padLevel(level)} ${this.generateTimeStamp()} ${message}`);
   }
 
   // TODO: Improve to be an actual timestamp
   // Fine for now
   private static generateTimeStamp() {
     const t = new Date();
-    return `[${this.normalize(t.getUTCDate())}/${this.normalize(t.getUTCMonth() + 1)}/${this.normalize(
+    return `[${this.normalizeNum(t.getUTCDate())}/${this.normalizeNum(t.getUTCMonth() + 1)}/${this.normalizeNum(
       t.getFullYear()
-    )}:${this.normalize(t.getUTCHours())}:${this.normalize(t.getUTCMinutes())}:${this.normalize(t.getUTCSeconds())}]`;
+    )}:${this.normalizeNum(t.getUTCHours())}:${this.normalizeNum(t.getUTCMinutes())}:${this.normalizeNum(
+      t.getUTCSeconds()
+    )}]`;
   }
 
-  private static normalize(num: number) {
+  private static padLevel(level: string) {
+    return `[${level}]`.padStart(9);
+  }
+
+  private static normalizeNum(num: number) {
     return num.toString().padStart(2, "0");
   }
 }
