@@ -8,7 +8,12 @@ export default class Help extends Command {
   constructor() {
     super({
       help: {
-        description: "Helps you use the bot, duh.",
+        description: "DMs user an information dump or presents information about a specific command.",
+        args: {
+          command: {
+            description: "Specific command (or subcommand), used to present information about the command itself.",
+          },
+        },
       },
     });
   }

@@ -1,7 +1,6 @@
 import ReactionCommand from "../../types/Command/ReactionCommand/ReactionCommand";
 
 export default class Nya extends ReactionCommand {
-  reactionMessage = "**%user%** nyaas at **%target%**";
   imageUrls = [
     "https://i.imgur.com/9pbq9GW.gif",
     "https://i.imgur.com/Bd2PgUp.gif",

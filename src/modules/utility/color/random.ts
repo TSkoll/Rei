@@ -8,7 +8,16 @@ import generateImage from "./utils/generateImage";
 import assign from "./utils/assign";
 
 export default class Random extends SubCommand {
-  aliases = ["something"];
+  constructor() {
+    super({
+      options: {
+        aliases: ["something"],
+      },
+      help: {
+        description: "Brings up a menu suggesting random colors.",
+      },
+    });
+  }
 
   public async run(message: CommandMessage, args: string[]) {
     const colors = randomcolor({ count: 6 });

@@ -12,6 +12,11 @@ export default class Urban extends Command {
       },
       help: {
         description: "Gets an article from the urban dictionary.",
+        args: {
+          query: {
+            description: "A term that will be searched.",
+          },
+        },
       },
     });
   }

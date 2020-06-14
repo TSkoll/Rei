@@ -10,6 +10,11 @@ export default class SetPrefix extends Command {
       },
       help: {
         description: "Updates the used prefix for the current server.",
+        args: {
+          prefix: {
+            description: "Prefix that'll overwrite the previous one.",
+          },
+        },
       },
     });
   }

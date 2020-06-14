@@ -13,6 +13,11 @@ export default class Feedback extends Command {
       },
       help: {
         description: "Sends a message to the developer server! Please use this responsibly.",
+        args: {
+          message: {
+            description: "Message that is sent.",
+          },
+        },
       },
     });
   }

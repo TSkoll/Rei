@@ -15,6 +15,15 @@ export default class Brainfuck extends Command {
       },
       help: {
         description: "Interpolates brainfuck code syntax. Maximum of 10,000,000 steps.",
+        args: {
+          code: {
+            description: "Brainfuck code that'll be interpreted",
+          },
+          arguments: {
+            description:
+              'Arguments passed to the brainfuck function. Arguments containing spaces must be contained "like so".',
+          },
+        },
       },
     });
   }

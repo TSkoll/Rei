@@ -1,7 +1,6 @@
 import ReactionCommand from "../../types/Command/ReactionCommand/ReactionCommand";
 
 export default class Stare extends ReactionCommand {
-  reactionMessage = "👀 **%target%**";
   imageUrls = [
     "https://i.imgur.com/6r9SmUG.gif",
     "https://i.imgur.com/OH19C2Z.gif",

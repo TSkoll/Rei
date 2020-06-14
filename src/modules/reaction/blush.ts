@@ -1,7 +1,6 @@
 import ReactionCommand from "../../types/Command/ReactionCommand/ReactionCommand";
 
 export default class Blush extends ReactionCommand {
-  reactionMessage = "Aww you shouldn't have **%target%**!";
   imageUrls = [
     "https://i.imgur.com/h5HYmF1.gif",
     "https://i.imgur.com/KYSU36T.gif",

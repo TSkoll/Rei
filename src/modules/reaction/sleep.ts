@@ -1,7 +1,6 @@
 import ReactionCommand from "../../types/Command/ReactionCommand/ReactionCommand";
 
 export default class Sleep extends ReactionCommand {
-  reactionMessage = "**%user%** puts **%target%** to sleep!";
   imageUrls = [
     "https://i.imgur.com/jLHk2UK.gif",
     "https://i.imgur.com/wXCnHbg.gif",

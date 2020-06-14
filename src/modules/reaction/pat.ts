@@ -1,7 +1,6 @@
 import ReactionCommand from "../../types/Command/ReactionCommand/ReactionCommand";
 
 export default class Pat extends ReactionCommand {
-  reactionMessage = "**%user%** pats **%target%**!";
   imageUrls = [
     "https://i.imgur.com/FoKYpLO.gif",
     "https://i.imgur.com/cDEudw8.gif",

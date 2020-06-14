@@ -8,6 +8,14 @@ import generateImage from "./utils/generateImage";
 import assign from "./utils/assign";
 
 export default class Avatar extends SubCommand {
+  constructor() {
+    super({
+      help: {
+        description: "Brings up a menu that suggests colors based on your current avatar.",
+      },
+    });
+  }
+
   public async run(message: CommandMessage, args: string[]) {
     const url = message.author.avatarURL({ format: "png" });
 

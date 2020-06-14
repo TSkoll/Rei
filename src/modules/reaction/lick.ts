@@ -1,7 +1,6 @@
 import ReactionCommand from "../../types/Command/ReactionCommand/ReactionCommand";
 
 export default class Lick extends ReactionCommand {
-  reactionMessage = "**%user%** licks **%target%**";
   imageUrls = [
     "https://i.imgur.com/jgwM4Ji.gif",
     "https://i.imgur.com/USpf8qs.gif",

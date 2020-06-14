@@ -1,7 +1,6 @@
 import ReactionCommand from "../../types/Command/ReactionCommand/ReactionCommand";
 
 export default class Hug extends ReactionCommand {
-  reactionMessage = "**%user%** hugs **%target%**";
   imageUrls = [
     "https://i.imgur.com/16daUkb.gif",
     "https://i.imgur.com/HMJzcgl.gif",

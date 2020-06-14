@@ -1,7 +1,6 @@
 import ReactionCommand from "../../types/Command/ReactionCommand/ReactionCommand";
 
 export default class Smile extends ReactionCommand {
-  reactionMessage = "**%user%** smiles at **%target%**";
   imageUrls = [
     "https://i.imgur.com/mZSuX9D.gif",
     "https://i.imgur.com/gpBPE9a.gif",

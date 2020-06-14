@@ -18,6 +18,14 @@ export default class Color extends Command {
         disallowDM: true,
         aliases: ["colorme"],
       },
+      help: {
+        description: "Commands related to managing your username color on the current server.",
+        args: {
+          hex: {
+            description: "Hex color code. Pick anything you'd like from https://htmlcolorcodes.com.",
+          },
+        },
+      },
     });
 
     this.scm.default = this.default.bind(this);
