@@ -2,7 +2,7 @@ name: Master CD
 
 on:
   push:
-    branches: [master]
+    branches: [senpai]
 
 jobs:
   build:
