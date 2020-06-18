@@ -59,10 +59,10 @@ export default class User extends SubCommand {
           "Top ranks",
           userData[1].scores
             .map(
-              (s: mapDifficulty, i: number) =>
-                `**${i + 1}.** ${s.songAuthorName} - ${s.name} **[${mapDifficulty(s.diff)}]** by **${
+              (s: any, i: number) =>
+                `**${i + 1}.** ${s.songAuthorName} - ${s.songName} **[${mapDifficulty(s.difficultyRaw)}]** by **${
                   s.levelAuthorName
-                }**\n${((s.score / s.maxScoreEx) * 100).toFixed(2)}% - ${s.pp}pp`
+                }**\n${((s.score / s.maxScore) * 100).toFixed(2)}% - ${s.pp}pp`
             )
             .slice(0, 3)
             .join("\n\n")
