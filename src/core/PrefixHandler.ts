@@ -11,7 +11,7 @@ export default class PrefixHandler {
     this.defaultPrefix = defaultPrefix;
   }
 
-  public async setPrefix(message: Message, newPrefix: string | null) {
+  public async setPrefix(message: Message, newPrefix: string | undefined) {
     const guild = message.guild!.id;
     const payload = { prefix: newPrefix };
 
