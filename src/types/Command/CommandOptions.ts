@@ -10,6 +10,7 @@ export default abstract class CommandOptions {
   public nsfw?: boolean = false;
   public aliases?: string[] = undefined;
   public ratelimit?: number = 0;
+  public hidden?: boolean = false;
 
   constructor(options?: CommandOptions) {
     if (options) {
@@ -22,6 +23,7 @@ export default abstract class CommandOptions {
       this.nsfw = options.nsfw;
       this.aliases = options.aliases;
       this.ratelimit = options.ratelimit;
+      this.hidden = options.hidden;
     }
   }
 }
