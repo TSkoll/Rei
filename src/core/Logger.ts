@@ -1,5 +1,6 @@
 import LogDocument from "../models/Log";
 import { v4 as uuidv4 } from "uuid";
+import consoleColors from "../utils/consoleColors";
 
 export default class Logger {
   public static async info(content: string, additional?: Object) {
@@ -33,8 +34,19 @@ export default class Logger {
   }
 
   private static log(level: string, message: string, additional?: Object) {
-    if (additional) console.log(`${this.padLevel(level)} ${this.generateTimeStamp()} ${message}`, additional);
-    else console.log(`${this.padLevel(level)} ${this.generateTimeStamp()} ${message}`);
+    if (additional)
+      console.log(
+        `${this.logLevelToColor(level)}${this.padLevel(level)} ${this.generateTimeStamp()}${
+          consoleColors.fg.White
+        } ${message}${consoleColors.Reset}`,
+        additional
+      );
+    else
+      console.log(
+        `${this.logLevelToColor(level)}${this.padLevel(level)} ${this.generateTimeStamp()}${
+          consoleColors.fg.White
+        } ${message}${consoleColors.Reset}`
+      );
   }
 
   // TODO: Improve to be an actual timestamp
@@ -54,5 +66,18 @@ export default class Logger {
 
   private static normalizeNum(num: number) {
     return num.toString().padStart(2, "0");
+  }
+
+  private static logLevelToColor(level: string): string {
+    switch (level) {
+      case "INFO":
+        return consoleColors.fg.Cyan;
+      case "WARNING":
+        return consoleColors.fg.Yellow;
+      case "ERROR":
+        return consoleColors.fg.Red;
+      default:
+        throw "Unknown log level.";
+    }
   }
 }
