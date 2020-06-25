@@ -5,7 +5,9 @@ import Discord from "discord.js";
 export default class Close extends Command {
   constructor() {
     super({
-      ownerOnly: true,
+      options: {
+        ownerOnly: true,
+      },
     });
   }
 

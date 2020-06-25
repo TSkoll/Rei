@@ -8,13 +8,11 @@ import Help from "../../Help/Help";
 
 export default abstract class ReactionCommand extends Command {
   protected imageUrls: string[];
-  protected reactionMessage?: string;
 
-  constructor(imageUrls: string[], reactionMessage: string, ctor?: CommandConstructor | CommandOptions) {
-    super(ctor);
+  constructor(imageUrls: string[], ctor?: CommandOptions) {
+    super({ options: ctor });
 
     this.imageUrls = imageUrls;
-    this.reactionMessage = reactionMessage;
   }
 
   public async run(message: CommandMessage, args: string[]) {
@@ -22,11 +20,6 @@ export default abstract class ReactionCommand extends Command {
     const mention = message.mentions.members!.first();
 
     let embed = new Discord.MessageEmbed().setColor("RANDOM").setImage(reaction);
-
-    if (mention && this.reactionMessage)
-      embed = embed.setDescription(
-        this.reactionMessage.replace("%target%", mention.user.username).replace("%user%", message.author.username)
-      );
 
     await message.replyEmbed(embed);
   }

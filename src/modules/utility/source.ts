@@ -8,7 +8,9 @@ import Config from "../../types/Config";
 export default class Source extends Command {
   constructor() {
     super({
-      aliases: ["sauce"],
+      options: {
+        aliases: ["sauce"],
+      },
     });
   }
 

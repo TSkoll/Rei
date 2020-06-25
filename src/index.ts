@@ -30,7 +30,7 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
 
     // Init ReiClient
     const client = new ReiClient(commandHandler, prefixHandler, db, config);
-    await commandHandler.init(client);
+    await commandHandler.init();
 
     const messageHandler = new MessageHandler(client, db);
     messageHandler.initialize();

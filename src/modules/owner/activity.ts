@@ -5,7 +5,9 @@ import { ActivityOptions } from "discord.js";
 export default class Activity extends Command {
   constructor() {
     super({
-      ownerOnly: true,
+      options: {
+        ownerOnly: true,
+      },
     });
   }
 

@@ -4,8 +4,10 @@ import { CommandMessage } from "../../extensions/Message";
 export default class Echo extends Command {
   constructor() {
     super({
-      ownerOnly: true,
-      singleArg: true,
+      options: {
+        ownerOnly: true,
+        singleArg: true,
+      },
     });
   }
 

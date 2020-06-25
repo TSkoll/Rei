@@ -3,14 +3,12 @@ import ReiClient from "../types/ReiClient";
 import CommandLoader from "./CommandLoader";
 
 export default class CommandHandler {
-  private client?: ReiClient;
   private commands?: { [name: string]: { command: Command; parent?: string } };
 
-  public async init(client: ReiClient) {
-    const commands = await CommandLoader.load(client);
+  public async init() {
+    const commands = await CommandLoader.load();
 
     this.commands = commands;
-    this.client = client;
   }
 
   public getCommand(name: string): Command {
@@ -24,6 +22,6 @@ export default class CommandHandler {
 
   public getCommandNames(): string[] {
     if (!this.commands) throw "This commandhandler has not been initialized!";
-    return Object.keys(this.commands).filter(x => !this.commands![x].parent || !this.commands![x].command.hidden);
+    return Object.keys(this.commands).filter(x => !(this.commands![x].parent || this.commands![x].command.isHidden()));
   }
 }

@@ -5,7 +5,9 @@ import { TextChannel } from "discord.js";
 export default class Send extends Command {
   constructor() {
     super({
-      ownerOnly: true,
+      options: {
+        ownerOnly: true,
+      },
     });
   }
 
