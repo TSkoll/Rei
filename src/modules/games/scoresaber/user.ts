@@ -48,7 +48,7 @@ export default class User extends SubCommand {
       new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setAuthor(
-          userData[0].playerInfo.name,
+          userData[0].playerInfo.playerName,
           "https://new.scoresaber.com" + userData[0].playerInfo.avatar,
           "https://scoresaber.com/u/" + userData[0].playerInfo.playerid
         )

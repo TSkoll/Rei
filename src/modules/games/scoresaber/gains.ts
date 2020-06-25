@@ -38,7 +38,7 @@ export default class Gains extends SubCommand {
     message.replyEmbed(
       new Discord.MessageEmbed()
         .setAuthor(
-          user.playerInfo.name,
+          user.playerInfo.playerName,
           "https://new.scoresaber.com" + user.playerInfo.avatar,
           "https://scoresaber.com/u/" + user.playerInfo.playerid
         )
