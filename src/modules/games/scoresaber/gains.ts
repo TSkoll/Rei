@@ -40,7 +40,7 @@ export default class Gains extends SubCommand {
         .setAuthor(
           user.playerInfo.playerName,
           "https://new.scoresaber.com" + user.playerInfo.avatar,
-          "https://scoresaber.com/u/" + user.playerInfo.playerid
+          "https://scoresaber.com/u/" + user.playerInfo.playerId
         )
         .setColor(ranks.color)
         .setDescription(

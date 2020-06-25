@@ -50,7 +50,7 @@ export default class User extends SubCommand {
         .setAuthor(
           userData[0].playerInfo.playerName,
           "https://new.scoresaber.com" + userData[0].playerInfo.avatar,
-          "https://scoresaber.com/u/" + userData[0].playerInfo.playerid
+          "https://scoresaber.com/u/" + userData[0].playerInfo.playerId
         )
         .addField("Performance Points", userData[0].playerInfo.pp + "pp", true)
         .addField("Global Rank", "#" + userData[0].playerInfo.rank, true)
