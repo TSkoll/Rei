@@ -16,10 +16,11 @@ class CommandLoader {
         if (command.indexOf(".js.map") > 0) continue;
 
         const cmdObj = await import(`${process.cwd()}/bin/modules/${module}/${command}`);
-        const cmd = new cmdObj.default();
+        const cmd = new cmdObj.default() as Command;
         const name = cmd.constructor.name.toLowerCase();
 
-        if (!cmd.help) await Logger.warning(`Command ${name} doesn't have help documentation attached to it!`);
+        if (!cmd.help && !cmd.isHidden())
+          await Logger.warning(`Command ${name} doesn't have help documentation attached to it!`);
 
         commandsRet[name] = { command: cmd };
 
