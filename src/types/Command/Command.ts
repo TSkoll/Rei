@@ -5,7 +5,6 @@ import CommandOptions from "./CommandOptions";
 import Config from "../Config";
 import Help from "../Help/Help";
 import CommandConstructor from "./CommandConstructor";
-import Logger from "../../core/Logger";
 
 const config = require("../../../data/config.json") as Config;
 
