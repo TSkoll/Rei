@@ -53,6 +53,11 @@ export default class Gains extends SubCommand {
     );
   }
 
+  private prettyPrintpp(pp: number) {
+    // Round to two digits, if necessary
+    const neatlyRoundedpp = Math.round((pp + Number.EPSILON) * 100) / 100;
+  }
+
   private durationSinceString(now: number, last?: number) {
     if (!last) return "";
     else {
