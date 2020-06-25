@@ -4,7 +4,7 @@ import CommandLoader from "./CommandLoader";
 
 export default class CommandHandler {
   private client?: ReiClient;
-  private commands?: { [name: string]: Command };
+  private commands?: { [name: string]: { command: Command; parent?: string } };
 
   public async init(client: ReiClient) {
     const commands = await CommandLoader.load(client);
@@ -14,9 +14,16 @@ export default class CommandHandler {
   }
 
   public getCommand(name: string): Command {
-    const command = this.commands![name];
+    if (!this.commands) throw "This commandhandler has not been initialized!";
 
-    if (command) return command;
+    const cmd = this.commands[name];
+
+    if (cmd) return cmd.command;
     else throw "This command doesn't exist!";
+  }
+
+  public getCommandNames(): string[] {
+    if (!this.commands) throw "This commandhandler has not been initialized!";
+    return Object.keys(this.commands).filter(x => !this.commands![x].parent);
   }
 }

@@ -4,8 +4,8 @@ import { Client } from "discord.js";
 import Logger from "./Logger";
 
 class CommandLoader {
-  static async load(client: Client): Promise<{ [name: string]: Command }> {
-    let commandsRet: { [name: string]: Command } = {};
+  static async load(client: Client): Promise<{ [name: string]: { command: Command; parent?: string } }> {
+    let commandsRet: { [name: string]: { command: Command; parent?: string } } = {};
 
     const modules = await fs.getFolders(`${process.cwd()}/bin/modules`);
 
@@ -21,10 +21,10 @@ class CommandLoader {
 
         if (!cmd.help) await Logger.warning(`Command ${name} doesn't have help documentation attached to it!`);
 
-        commandsRet[name] = cmd;
+        commandsRet[name] = { command: cmd };
 
         if (cmd.aliases) {
-          for (let alias of cmd.aliases) commandsRet[alias.toLowerCase()] = cmd;
+          for (let alias of cmd.aliases) commandsRet[alias.toLowerCase()] = { command: cmd, parent: name };
         }
       }
     }
