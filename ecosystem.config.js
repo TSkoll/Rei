@@ -14,7 +14,7 @@ module.exports = {
       user: process.env.user,
       host: process.env.host,
       key: "./server.key",
-      ref: "origin/master",
+      ref: "origin/senpai",
       repo: "https://github.com/TSkoll/rei-ts.git",
       path: "/home/ubuntu/rei-ts",
       "pre-deploy": "node -v && npm -v",
