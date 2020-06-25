@@ -3,6 +3,7 @@ import { CommandMessage } from "../../extensions/Message";
 import { MessageEmbed } from "discord.js";
 
 import fetch from "node-fetch";
+import ReiClient from "../../types/ReiClient";
 
 export default class Help extends Command {
   constructor() {
@@ -19,7 +20,11 @@ export default class Help extends Command {
   }
 
   public async run(message: CommandMessage, args: string[]) {
-    if (args.length == 0) return await message.author.send(new MessageEmbed().setImage(await this.getRandomCat()));
+    if (args.length == 0) {
+      await message.author.send(this.generalBlurb(message.reiClient));
+      await message.replyBasicInfo("DM sent!");
+      return;
+    }
 
     const cmdHandler = message.reiClient.commandHandler;
     const baseCmd = args[0].toLowerCase();
@@ -68,7 +73,19 @@ export default class Help extends Command {
     } else throw "That command does have help information attached to it!";
   }
 
-  private async getRandomCat(): Promise<string> {
-    return (await fetch("https://api.thecatapi.com/v1/images/search").then(resp => resp.json()))[0].url;
+  private generalBlurb(reiClient: ReiClient): string {
+    const defaultPrefix = reiClient.config.defaultPrefix;
+    const cmdNames = reiClient.commandHandler.getCommandNames();
+
+    const start =
+      "Hey there, I'm Rei!\nI'm here to enhance your server!\n\nInvite me to your discord server: <https://discordapp.com/oauth2/authorize?client_id=278819964851322880&scope=bot&permissions=2146958591>";
+
+    const generalHelp = `Got ideas or suggenstions? Use \`${defaultPrefix}feedback (suggestion)\` to let the developers know!\nNeed help or have an issue? Let us know over at <https://github.com/TSkoll/Rei>`;
+
+    const commandsList = `Commands (**default prefix: "${defaultPrefix}"**):\n${cmdNames.join(
+      "\n"
+    )}\n\nFor more information, please use \`${defaultPrefix}help (command)\``;
+
+    return `${start}\n\n${generalHelp}\n\n${commandsList}`;
   }
 }
