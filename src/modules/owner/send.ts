@@ -7,6 +7,7 @@ export default class Send extends Command {
     super({
       options: {
         ownerOnly: true,
+        hidden: true,
       },
     });
   }

@@ -7,6 +7,7 @@ export default class Activity extends Command {
     super({
       options: {
         ownerOnly: true,
+        hidden: true,
       },
     });
   }

@@ -7,6 +7,7 @@ export default class Echo extends Command {
       options: {
         ownerOnly: true,
         singleArg: true,
+        hidden: true,
       },
     });
   }
