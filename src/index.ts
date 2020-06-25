@@ -10,6 +10,7 @@ import "./extensions/Message";
 
 import Config from "./types/Config";
 const config = require("../data/config.json") as Config;
+const curpackage = require("../package.json");
 
 const mongooseConn = `mongodb://${
   config.database.username ? `${config.database.username}:${config.database.password}@` : ""
@@ -29,7 +30,9 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
     const prefixHandler = new PrefixHandler(db, config.defaultPrefix);
 
     // Init ReiClient
-    const client = new ReiClient(commandHandler, prefixHandler, db, config);
+    const client = new ReiClient(commandHandler, prefixHandler, db, config, {
+      presence: { activity: { name: `Running version ${curpackage.version}!` } },
+    });
     await commandHandler.init();
 
     const messageHandler = new MessageHandler(client, db);
