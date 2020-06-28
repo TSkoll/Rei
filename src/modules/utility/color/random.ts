@@ -46,6 +46,8 @@ export default class Random extends SubCommand {
         } else {
           await message.replyBasicError("That's not a valid choice, is it");
         }
+      } else {
+        return messageCollector.stop();
       }
     });
 
