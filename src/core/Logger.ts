@@ -34,37 +34,39 @@ export default class Logger {
   }
 
   private static log(level: string, message: string, additional?: Object) {
-    if (additional)
-      console.log(
-        `${this.logLevelToColor(level)}${this.padLevel(level)} ${this.generateTimeStamp()}${
-          consoleColors.fg.White
-        } ${message}${consoleColors.Reset}`,
-        additional
-      );
-    else
-      console.log(
-        `${this.logLevelToColor(level)}${this.padLevel(level)} ${this.generateTimeStamp()}${
-          consoleColors.fg.White
-        } ${message}${consoleColors.Reset}`
-      );
+    const logColor = this.logLevelToColor(level);
+    const paddedLevel = this.padLevel(level);
+    const timeStamp = this.generateTimeStamp();
+
+    const white = consoleColors.fg.White;
+    const reset = consoleColors.Reset;
+
+    if (additional) {
+      console.log(`${logColor}${paddedLevel} ${timeStamp}${white} ${message}${reset}`, additional);
+    } else {
+      console.log(`${logColor}${paddedLevel} ${timeStamp}${white} ${message}${reset}`);
+    }
   }
 
-  // TODO: Improve to be an actual timestamp
-  // Fine for now
   private static generateTimeStamp() {
     const t = new Date();
-    return `[${this.normalizeNum(t.getUTCDate())}/${this.normalizeNum(t.getUTCMonth() + 1)}/${this.normalizeNum(
-      t.getFullYear()
-    )}:${this.normalizeNum(t.getUTCHours())}:${this.normalizeNum(t.getUTCMinutes())}:${this.normalizeNum(
-      t.getUTCSeconds()
-    )}]`;
+
+    const date = this.normalizeNumber(t.getUTCDate());
+    const month = this.normalizeNumber(t.getUTCMonth()) + 1;
+    const year = t.getUTCFullYear();
+
+    const hours = this.normalizeNumber(t.getUTCHours());
+    const minutes = this.normalizeNumber(t.getUTCMinutes());
+    const seconds = this.normalizeNumber(t.getUTCSeconds());
+
+    return `[${date}/${month}/${year}:${hours}:${minutes}:${seconds}]`;
   }
 
   private static padLevel(level: string) {
     return `[${level}]`.padStart(9);
   }
 
-  private static normalizeNum(num: number) {
+  private static normalizeNumber(num: number) {
     return num.toString().padStart(2, "0");
   }
 
