@@ -36,7 +36,7 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
     await commandHandler.init();
 
     const messageHandler = new MessageHandler(client, db);
-    messageHandler.initialize();
+    messageHandler.init();
 
     client.on("ready", () => {
       Logger.info(`Logged in as ${client.user!.username} [${client.user!.id}]`);

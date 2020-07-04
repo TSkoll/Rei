@@ -12,7 +12,7 @@ export default class MessageHandler {
     this.db = db;
   }
 
-  public initialize() {
+  public init() {
     this.client.on("message", async message => {
       this.client.messagesReceived++;
 
