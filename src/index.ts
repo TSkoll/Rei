@@ -35,7 +35,7 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
     });
     await commandHandler.init();
 
-    const messageHandler = new MessageHandler(client, db);
+    const messageHandler = new MessageHandler(client);
     messageHandler.init();
 
     client.on("ready", () => {

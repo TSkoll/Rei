@@ -5,11 +5,9 @@ import Logger from "./Logger";
 
 export default class MessageHandler {
   private client: ReiClient;
-  private db: Connection;
 
-  constructor(client: ReiClient, db: Connection) {
+  constructor(client: ReiClient) {
     this.client = client;
-    this.db = db;
   }
 
   public init() {
