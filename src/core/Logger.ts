@@ -52,7 +52,7 @@ export default class Logger {
     const t = new Date();
 
     const date = this.normalizeNumber(t.getUTCDate());
-    const month = this.normalizeNumber(t.getUTCMonth()) + 1;
+    const month = this.normalizeNumber(t.getUTCMonth() + 1);
     const year = t.getUTCFullYear();
 
     const hours = this.normalizeNumber(t.getUTCHours());
