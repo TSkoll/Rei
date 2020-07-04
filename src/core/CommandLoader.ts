@@ -1,10 +1,10 @@
 import Command from "../types/Command/Command";
 import fs from "../utils/filesystemHelper";
-import { Client } from "discord.js";
 import Logger from "./Logger";
+import ReiClient from "../types/ReiClient";
 
 class CommandLoader {
-  static async load(): Promise<{ [name: string]: { command: Command; parent?: string } }> {
+  static async load(client: ReiClient): Promise<{ [name: string]: { command: Command; parent?: string } }> {
     let commandsRet: { [name: string]: { command: Command; parent?: string } } = {};
 
     const modules = await fs.getFolders(`${process.cwd()}/bin/modules`);
@@ -27,6 +27,8 @@ class CommandLoader {
         if (cmd.aliases) {
           for (let alias of cmd.aliases) commandsRet[alias.toLowerCase()] = { command: cmd, parent: name };
         }
+
+        if (cmd.afterInit) await cmd.afterInit(client);
       }
     }
 

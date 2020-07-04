@@ -5,8 +5,8 @@ import CommandLoader from "./CommandLoader";
 export default class CommandHandler {
   private commands?: { [name: string]: { command: Command; parent?: string } };
 
-  public async init() {
-    const commands = await CommandLoader.load();
+  public async init(client: ReiClient) {
+    const commands = await CommandLoader.load(client);
 
     this.commands = commands;
   }

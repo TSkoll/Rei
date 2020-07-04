@@ -5,6 +5,7 @@ import CommandOptions from "./CommandOptions";
 import Config from "../Config";
 import Help from "../Help/Help";
 import CommandConstructor from "./CommandConstructor";
+import ReiClient from "../ReiClient";
 
 const config = require("../../../data/config.json") as Config;
 
@@ -61,5 +62,5 @@ export default abstract class Command extends CommandOptions {
   // so execution can be stopped easily
   public abstract async run(message: CommandMessage, args: string[] | string): Promise<any>;
 
-  public async afterInit?(): Promise<any>;
+  public async afterInit?(client: ReiClient): Promise<any>;
 }
