@@ -5,10 +5,11 @@ import fetch from "node-fetch";
 import ScModel, { ISc } from "../../../models/Sc";
 import Discord from "discord.js";
 import DeltaTime, { DeltaTimeResult, TimeScale } from "../../../types/DeltaTime";
+import Command from "../../../types/Command/Command";
 
 export default class Gains extends SubCommand {
-  constructor() {
-    super({
+  constructor(parent: Command | SubCommand) {
+    super(parent, {
       help: {
         description:
           "Checks and compares the change of the user's rank and pp. Requires that the user has linked their scoresaber account.",

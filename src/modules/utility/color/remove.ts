@@ -1,9 +1,10 @@
 import SubCommand from "../../../types/Command/SubCommand/SubCommand";
 import { CommandMessage } from "../../../extensions/Message";
+import Command from "../../../types/Command/Command";
 
 export default class Remove extends SubCommand {
-  constructor() {
-    super({
+  constructor(parent: Command | SubCommand) {
+    super(parent, {
       options: {
         aliases: ["clear"],
       },

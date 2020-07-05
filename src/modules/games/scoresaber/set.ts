@@ -4,10 +4,11 @@ import ScModel from "../../../models/Sc";
 
 import url from "url";
 import fetch from "node-fetch";
+import Command from "../../../types/Command/Command";
 
 export default class Set extends SubCommand {
-  constructor() {
-    super({
+  constructor(parent: Command | SubCommand) {
+    super(parent, {
       options: {
         aliases: ["link"],
       },

@@ -6,10 +6,11 @@ import Discord, { TextChannel } from "discord.js";
 
 import generateImage from "./utils/generateImage";
 import assign from "./utils/assign";
+import Command from "../../../types/Command/Command";
 
 export default class Random extends SubCommand {
-  constructor() {
-    super({
+  constructor(parent: Command | SubCommand) {
+    super(parent, {
       options: {
         aliases: ["something"],
       },

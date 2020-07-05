@@ -11,7 +11,7 @@ import fetch from "node-fetch";
 import { MessageEmbed } from "discord.js";
 
 export default class Weather extends Command {
-  private scm = new SubCommandManager(this, constructSubCmd([Set]));
+  private scm = new SubCommandManager(constructSubCmd(this, [Set]));
 
   constructor() {
     super({

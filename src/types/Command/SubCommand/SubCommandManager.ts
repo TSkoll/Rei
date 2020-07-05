@@ -6,28 +6,13 @@ import Logger from "../../../core/Logger";
 export default class SubCommandManager {
   private subCmdMap: { [name: string]: SubCommand } = {};
 
-  constructor(cmd: Command | SubCommand, SubCommands: SubCommand[]) {
+  constructor(SubCommands: SubCommand[]) {
     for (let Command of SubCommands) {
       let name = Command.constructor.name.toLowerCase();
 
-      // TODO: This will not ignore owneronly currently, SubCommand lacks implementation
-      if (!cmd.help) Logger.warning(`Subcommand ${name} doesn't have help attached to it!`);
-
       this.subCmdMap[name] = Command;
 
-      // Help concatenation
-      if (cmd.help && Command.help) {
-        if (Command.helpText) cmd.help.addSub(Command, Command.helpText);
-        if (Command.help.helpMap.size > 0) cmd.help.addExtended(Command.help.helpMap);
-      }
-
-      if (Command.aliases) {
-        for (let alias of Command.aliases) {
-          this.subCmdMap[alias.toLowerCase()] = Command;
-
-          if (cmd.help && Command.helpText) cmd.help.addSub(Command, Command.helpText, alias);
-        }
-      }
+      if (Command.aliases) for (let alias of Command.aliases) this.subCmdMap[alias.toLowerCase()] = Command;
     }
   }
 

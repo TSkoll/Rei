@@ -10,7 +10,7 @@ import Remove from "./color/remove";
 import Random from "./color/random";
 
 export default class Color extends Command {
-  private scm = new SubCommandManager(this, constructSubCmd([Avatar, Remove, Random]));
+  private scm = new SubCommandManager(constructSubCmd(this, [Avatar, Remove, Random]));
 
   constructor() {
     super({

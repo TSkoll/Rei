@@ -4,6 +4,7 @@ import getUser from "./utils/getUser";
 import fetch from "node-fetch";
 import Discord from "discord.js";
 import mapDifficulty from "./utils/difficultyMap";
+import Command from "../../../types/Command/Command";
 
 interface mapDifficulty {
   songAuthorName: string;
@@ -16,8 +17,8 @@ interface mapDifficulty {
 }
 
 export default class User extends SubCommand {
-  constructor() {
-    super({
+  constructor(parent: Command | SubCommand) {
+    super(parent, {
       options: {
         aliases: ["stats"],
       },
