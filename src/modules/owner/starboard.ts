@@ -27,7 +27,7 @@ export default class Starboard extends Command {
     client.on("messageReactionAdd", async (reaction, user) => {
       const channel = reaction.message.channel;
       if (channel.type == "text" && channel.id == "724715692804407346" && reaction.emoji.identifier == "%E2%AD%90") {
-        const sendChannel = (await client.channels.fetch("728915959024320513")) as TextChannel;
+        const sendChannel = (await client.channels.fetch("728915959024320513", true)) as TextChannel;
         if (sendChannel && reaction.message.embeds[0]) await sendChannel.send(reaction.message.embeds[0]);
       }
     });

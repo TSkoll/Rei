@@ -60,7 +60,7 @@ export default abstract class Command extends CommandOptions {
 
   // Never capture the response of run, but allow returning from command
   // so execution can be stopped easily
-  public abstract async run(message: CommandMessage, args: string[] | string): Promise<any>;
+  public abstract async run(message: CommandMessage, args: string[] | string): Promise<void>;
 
-  public async afterInit?(client: ReiClient): Promise<any>;
+  public async afterInit?(client: ReiClient): Promise<void>;
 }

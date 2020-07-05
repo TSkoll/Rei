@@ -12,7 +12,7 @@ interface mapDifficulty {
   levelAuthorName: string;
   score: number;
   maxScoreEx: number;
-  pp: any;
+  pp: number;
 }
 
 export default class User extends SubCommand {
