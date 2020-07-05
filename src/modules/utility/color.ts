@@ -11,6 +11,7 @@ import Random from "./color/random";
 
 export default class Color extends Command {
   private scm = new SubCommandManager(constructSubCmd(this, [Avatar, Remove, Random]));
+  private menusOpen: string[] = [];
 
   constructor() {
     super({
@@ -32,7 +33,18 @@ export default class Color extends Command {
   }
 
   public async run(message: CommandMessage, args: string[]) {
+    if (this.menusOpen.includes(message.author.id))
+      throw "Exit out of the current color menu before trying to assign a new one!";
+
     await this.scm.runSubCommand(message, args);
+  }
+
+  public openMenu(userId: string) {
+    this.menusOpen.push(userId);
+  }
+
+  public closeMenu(userId: string) {
+    this.menusOpen.splice(this.menusOpen.indexOf(userId), 1);
   }
 
   private async default(message: CommandMessage, args: string[]) {

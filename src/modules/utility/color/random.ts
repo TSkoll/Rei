@@ -1,14 +1,17 @@
 import SubCommand from "../../../types/Command/SubCommand/SubCommand";
 import { CommandMessage } from "../../../extensions/Message";
+import Command from "../../../types/Command/Command";
+import Color from "../color";
 
 import randomcolor from "randomcolor";
 import Discord, { TextChannel } from "discord.js";
 
 import generateImage from "./utils/generateImage";
 import assign from "./utils/assign";
-import Command from "../../../types/Command/Command";
 
 export default class Random extends SubCommand {
+  private color: Color;
+
   constructor(parent: Command | SubCommand) {
     super(parent, {
       options: {
@@ -18,6 +21,8 @@ export default class Random extends SubCommand {
         description: "Brings up a menu suggesting random colors.",
       },
     });
+
+    this.color = parent as Color;
   }
 
   public async run(message: CommandMessage, args: string[]) {
@@ -34,6 +39,7 @@ export default class Random extends SubCommand {
       { time: 300000 }
     );
 
+    this.color.openMenu(message.author.id);
     messageCollector.on("collect", async (msg: Discord.Message) => {
       if (msg.content.toLowerCase() == "exit") return messageCollector.stop();
 
@@ -47,12 +53,11 @@ export default class Random extends SubCommand {
         } else {
           await message.replyBasicError("That's not a valid choice, is it");
         }
-      } else {
-        return messageCollector.stop();
       }
     });
 
     messageCollector.on("end", async () => {
+      this.color.closeMenu(message.author.id);
       if (choiceMessage.deletable) await choiceMessage.delete();
     });
   }
