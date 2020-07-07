@@ -1,9 +1,12 @@
 module.exports = {
   apps: [
     {
-      name: "Emi",
+      name: "Rei",
       script: "./bin/index.js",
-      watch: "./src/",
+      error_file: "err.log",
+      out_file: "out.log",
+      log_file: "all.log",
+      time: false, // Rei log output already has date and time included
       listen_timeout: 5000,
       exp_backoff_restart_delay: 500,
     },
