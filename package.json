@@ -20,27 +20,27 @@
   "homepage": "https://github.com/TSkoll/rei-ts#readme",
   "dependencies": {
     "@pm2/io": "^4.3.5",
-    "@types/mongodb": "^3.5.22",
-    "@types/mongoose": "^5.7.26",
+    "@types/mongodb": "^3.5.25",
+    "@types/mongoose": "^5.7.32",
     "@types/node-fetch": "^2.5.7",
     "@types/randomcolor": "^0.5.5",
     "@types/uuid": "^8.0.0",
-    "@types/ws": "^7.2.5",
+    "@types/ws": "^7.2.6",
     "brainfuck-node": "^1.0.2",
     "canvas": "^2.6.1",
     "discord.js": "^12.2.0",
     "mongodb": "^3.5.9",
-    "mongoose": "^5.9.19",
+    "mongoose": "^5.9.25",
     "node-fetch": "^2.6.0",
     "node-vibrant": "^3.1.5",
     "randomcolor": "^0.5.4",
-    "uuid": "^8.1.0"
+    "uuid": "^8.2.0"
   },
   "devDependencies": {
     "husky": "^4.2.5",
     "prettier": "2.0.4",
     "pretty-quick": "^2.0.1",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.7"
   },
   "husky": {
     "hooks": {
