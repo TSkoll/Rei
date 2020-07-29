@@ -19,6 +19,7 @@ const CMessage = Structures.extend("Message", C => {
       const parsed = this.parse(this.content, this.prefix);
 
       try {
+        Logger.info(`Attempting to run command "${parsed.command}" with argString "${parsed.argString}"`);
         this.command = this.reiClient.commandHandler.getCommand(parsed.command);
         this.args = parsed.args;
         this.argsString = parsed.argString;
@@ -48,6 +49,7 @@ const CMessage = Structures.extend("Message", C => {
 
           this.reiClient.commandsRun++;
         } catch (err) {
+          // No logging here due to this mainly catching user-related exceptions
           await this.replyBasicError(err);
         }
       } else throw "A commandMessage was not initialized properly!";
