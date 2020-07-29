@@ -19,7 +19,11 @@ const CMessage = Structures.extend("Message", C => {
       const parsed = this.parse(this.content, this.prefix);
 
       try {
-        Logger.info(`Attempting to run command "${parsed.command}" with argString "${parsed.argString}"`);
+        Logger.info(
+          `Attempting to run command "${parsed.command}" with argString "${parsed.argString}"${
+            this.guild ? `on guild ${this.guild.id}` : ""
+          }`
+        );
         this.command = this.reiClient.commandHandler.getCommand(parsed.command);
         this.args = parsed.args;
         this.argsString = parsed.argString;
