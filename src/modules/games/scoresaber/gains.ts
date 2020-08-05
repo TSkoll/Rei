@@ -64,7 +64,7 @@ export default class Gains extends SubCommand {
     else {
       const delta = now - last;
 
-      const time = new DeltaTime(delta).toMaxRounded(TimeScale.Day);
+      const time = new DeltaTime(delta).toMaxRounded(TimeScale.Day, 2);
       return `in the last ${this.determineDurationOutput(time)}`;
     }
   }

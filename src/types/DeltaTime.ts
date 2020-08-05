@@ -16,15 +16,22 @@ export interface DeltaTimeResult {
 }
 
 export default class DeltaTime {
-  public years: number;
-  public months: number;
-  public days: number;
-  public hours: number;
-  public minutes: number;
-  public seconds: number;
-  public milliseconds: number;
+  public readonly years: number;
+  public readonly months: number;
+  public readonly days: number;
+  public readonly hours: number;
+  public readonly minutes: number;
+  public readonly seconds: number;
+  public readonly milliseconds: number;
 
-  private readonly totalms: number;
+  public readonly totalYears: number;
+  public readonly totalMonths: number;
+  public readonly totalDays: number;
+  public readonly totalHours: number;
+  public readonly totalMinutes: number;
+  public readonly totalSeconds: number;
+  public readonly totalMilliseconds: number;
+
   private readonly yearInMs = 31556926000;
   private readonly monthInMs = 2628000000;
   private readonly dayInMs = 86400000;
@@ -44,7 +51,13 @@ export default class DeltaTime {
   };
 
   constructor(ms: number) {
-    this.totalms = ms;
+    this.totalYears = ms / this.yearInMs;
+    this.totalMonths = ms / this.monthInMs;
+    this.totalDays = ms / this.dayInMs;
+    this.totalHours = ms / this.hourInMs;
+    this.totalMinutes = ms / this.minuteInMs;
+    this.totalSeconds = ms / this.secondInMs;
+    this.totalMilliseconds = ms;
 
     this.years = Math.floor(ms / this.yearInMs);
     const totalMonths = ms % this.yearInMs;
@@ -84,19 +97,19 @@ export default class DeltaTime {
   public to(scale: TimeScale): number {
     switch (scale) {
       case TimeScale.Year:
-        return this.totalms / this.yearInMs;
+        return this.totalMilliseconds / this.yearInMs;
       case TimeScale.Month:
-        return this.totalms / this.monthInMs;
+        return this.totalMilliseconds / this.monthInMs;
       case TimeScale.Day:
-        return this.totalms / this.dayInMs;
+        return this.totalMilliseconds / this.dayInMs;
       case TimeScale.Hour:
-        return this.totalms / this.hourInMs;
+        return this.totalMilliseconds / this.hourInMs;
       case TimeScale.Minute:
-        return this.totalms / this.minuteInMs;
+        return this.totalMilliseconds / this.minuteInMs;
       case TimeScale.Second:
-        return this.totalms / this.secondInMs;
+        return this.totalMilliseconds / this.secondInMs;
       case TimeScale.Millisecond:
-        return this.totalms;
+        return this.totalMilliseconds;
       case TimeScale.Instant:
         return 0;
       default:
@@ -104,8 +117,8 @@ export default class DeltaTime {
     }
   }
 
-  public toMax(scale: TimeScale): DeltaTimeResult {
-    const highestScale = this.findHighestTimeScale();
+  public toMax(scale: TimeScale, breakpoint?: number): DeltaTimeResult {
+    const highestScale = this.findHighestTimeScale(breakpoint);
 
     if (highestScale <= scale) return { value: this.to(highestScale), scale: highestScale };
     else return { value: this.to(scale), scale };
@@ -120,22 +133,22 @@ export default class DeltaTime {
     return Math.floor(this.to(scale));
   }
 
-  public toMaxRounded(scale: TimeScale): DeltaTimeResult {
-    return this.roundDeltaTimeResult(this.toMax(scale));
+  public toMaxRounded(scale: TimeScale, breakpoint?: number): DeltaTimeResult {
+    return this.roundDeltaTimeResult(this.toMax(scale, breakpoint));
   }
 
   public toHighestRounded(): DeltaTimeResult {
     return this.roundDeltaTimeResult(this.toHighest());
   }
 
-  private findHighestTimeScale(): TimeScale {
-    if (this.years > 1) return TimeScale.Year;
-    else if (this.months > 1) return TimeScale.Month;
-    else if (this.days > 1) return TimeScale.Day;
-    else if (this.hours > 1) return TimeScale.Hour;
-    else if (this.minutes > 1) return TimeScale.Minute;
-    else if (this.seconds > 1) return TimeScale.Second;
-    else if (this.milliseconds > 1) return TimeScale.Millisecond;
+  private findHighestTimeScale(breakpoint: number = 1): TimeScale {
+    if (this.totalYears > breakpoint) return TimeScale.Year;
+    else if (this.totalMonths > breakpoint) return TimeScale.Month;
+    else if (this.totalDays > breakpoint) return TimeScale.Day;
+    else if (this.totalHours > breakpoint) return TimeScale.Hour;
+    else if (this.totalMinutes > breakpoint) return TimeScale.Minute;
+    else if (this.totalSeconds > breakpoint) return TimeScale.Second;
+    else if (this.totalMilliseconds > 1) return TimeScale.Millisecond;
     else return TimeScale.Unknown;
   }
 
