@@ -5,7 +5,9 @@ import ReiClient from "../types/ReiClient";
 
 class CommandLoader {
   static async load(client: ReiClient): Promise<{ [name: string]: { command: Command; parent?: string } }> {
-    let commandsRet: { [name: string]: { command: Command; parent?: string } } = {};
+    let commandsRet: {
+      [name: string]: { command: Command; parent?: string };
+    } = {};
 
     const modules = await fs.getFolders(`${process.cwd()}/bin/modules`);
 
