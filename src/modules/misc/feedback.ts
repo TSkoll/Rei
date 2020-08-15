@@ -8,6 +8,9 @@ export default class Feedback extends Command {
 
   constructor() {
     super({
+      types: {
+        feedback: "singleString",
+      },
       options: {
         singleArg: true,
       },
@@ -22,12 +25,12 @@ export default class Feedback extends Command {
     });
   }
 
-  async run(message: CommandMessage, args: string) {
+  async run(message: CommandMessage, { feedback }: { feedback: string }) {
     const client = message.client;
     const feedbackChannel = (await client.channels.fetch(this.feedbackChannelId)) as TextChannel;
 
     await feedbackChannel.send(
-      `${message.author.username}#${message.author.discriminator} [${message.author.id}]\n\`\`\`${args}\`\`\``
+      `${message.author.username}#${message.author.discriminator} [${message.author.id}]\n\`\`\`${feedback}\`\`\``
     );
     await message.replyBasicSuccess("Feedback left!");
   }

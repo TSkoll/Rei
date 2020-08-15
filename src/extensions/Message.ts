@@ -2,13 +2,16 @@ import { Structures, MessageEmbed } from "discord.js";
 import Command from "../types/Command/Command";
 import ReiClient from "../types/ReiClient";
 import Logger from "../core/Logger";
+import { ParseType } from "../types/Command/Argument/ArgumentInstructions";
+import { integer } from "../types/Command/Mappers/BaseMappers";
+import ArgumentTypeParser from "../types/Command/Argument/ArgumentTypeParser";
 
 const CMessage = Structures.extend("Message", C => {
   class CommandMessage extends C {
     isCommand: boolean = false;
     prefix?: string;
     command?: Command;
-    args?: string[];
+    args?: object;
     argsString?: string;
     reiClient: ReiClient = this.client as ReiClient;
 
@@ -25,8 +28,9 @@ const CMessage = Structures.extend("Message", C => {
           }`
         );
         this.command = this.reiClient.commandHandler.getCommand(parsed.command);
-        this.args = parsed.args;
-        this.argsString = parsed.argString;
+
+        if (this.command.types) this.args = this.parseArgTypes(parsed.args, this.command.types);
+        else this.args = undefined;
 
         await this.run();
       } catch (ex) {
@@ -48,8 +52,7 @@ const CMessage = Structures.extend("Message", C => {
         try {
           this.command.checkPermissions(this);
 
-          if (!this.command.singleArg) await this.command.run(this, this.args);
-          else await this.command.run(this, this.argsString!);
+          await this.command.run(this, this.args);
 
           this.reiClient.commandsRun++;
         } catch (err) {
@@ -88,6 +91,25 @@ const CMessage = Structures.extend("Message", C => {
         args,
         argString,
       };
+    }
+
+    private parseArgTypes(args: string[], instructions: { [name: string]: ParseType }): object {
+      const ret: { [name: string]: any } = {};
+      const instKeys = Object.keys(instructions);
+
+      if (args.length !== instKeys.length) throw "Argument count doesn't match!";
+
+      for (let i = 0; i < args.length; i++) {
+        const arg = args[i];
+        const name = instKeys[i];
+
+        const type = instructions[name];
+        const value = ArgumentTypeParser.parse(arg, this, type);
+
+        ret[name] = value;
+      }
+
+      return ret;
     }
   }
 

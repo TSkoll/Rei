@@ -6,15 +6,18 @@ import Config from "../Config";
 import Help from "../Help/Help";
 import CommandConstructor from "./CommandConstructor";
 import ReiClient from "../ReiClient";
+import { ParseType } from "./Argument/ArgumentInstructions";
 
 const config = require("../../../data/config.json") as Config;
 
 export default abstract class Command extends CommandOptions {
   public help?: Help;
+  public types?: { [name: string]: ParseType };
 
   constructor(ctor?: CommandConstructor) {
     super(ctor && ctor.options ? ctor.options : undefined);
     if (ctor && ctor.help) this.help = new Help(this, ctor.help);
+    if (ctor && ctor.types) this.types = ctor.types;
   }
 
   public isHidden() {
@@ -60,7 +63,7 @@ export default abstract class Command extends CommandOptions {
 
   // Never capture the response of run, but allow returning from command
   // so execution can be stopped easily
-  public abstract async run(message: CommandMessage, args: string[] | string): Promise<void>;
+  public abstract async run(message: CommandMessage, args: object): Promise<void>;
 
   public async afterInit?(client: ReiClient): Promise<void>;
 }

@@ -7,6 +7,9 @@ import Discord from "discord.js";
 export default class Urban extends Command {
   constructor() {
     super({
+      types: {
+        query: "singleString",
+      },
       options: {
         singleArg: true,
       },
@@ -21,17 +24,17 @@ export default class Urban extends Command {
     });
   }
 
-  async run(message: CommandMessage, args: string) {
-    if (args.length == 0) throw "Not enough arguments!";
+  async run(message: CommandMessage, { query }: { query: string }) {
+    if (query.length == 0) throw "Not enough arguments!";
 
-    const resp = await fetch(`http://api.urbandictionary.com/v0/define?term=${args}`).then(resp => resp.json());
+    const resp = await fetch(`http://api.urbandictionary.com/v0/define?term=${query}`).then(resp => resp.json());
     const data = resp.list;
 
     if (data.length == 0) throw "Urban Dictionary didn't find anything matching this query!";
 
     data.sort((a: any, b: any) => b.thumbs_up - a.thumbs_up);
 
-    const top = data.find((x: any) => x.word.toLowerCase() == args.toLowerCase()) || data[0];
+    const top = data.find((x: any) => x.word.toLowerCase() == query.toLowerCase()) || data[0];
 
     await message.replyEmbed(
       new Discord.MessageEmbed()

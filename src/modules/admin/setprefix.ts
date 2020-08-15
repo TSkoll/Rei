@@ -4,6 +4,9 @@ import { CommandMessage } from "../../extensions/Message";
 export default class SetPrefix extends Command {
   constructor() {
     super({
+      types: {
+        prefix: "singleString",
+      },
       options: {
         userPerms: ["MANAGE_GUILD"],
         singleArg: true,
@@ -19,9 +22,8 @@ export default class SetPrefix extends Command {
     });
   }
 
-  public async run(message: CommandMessage, args: string) {
+  public async run(message: CommandMessage, { prefix }: { prefix: string }) {
     const client = message.reiClient;
-    const prefix = args;
 
     await client.prefixHandler.setPrefix(message, prefix);
     await message.replyBasicSuccess("Prefix updated!");

@@ -4,6 +4,9 @@ import { CommandMessage } from "../../extensions/Message";
 export default class Echo extends Command {
   constructor() {
     super({
+      types: {
+        echo: "string",
+      },
       options: {
         ownerOnly: true,
         singleArg: true,
@@ -12,7 +15,7 @@ export default class Echo extends Command {
     });
   }
 
-  public async run(message: CommandMessage, args: string) {
-    await message.replyBasicSuccess(args);
+  public async run(message: CommandMessage, { echo }: { echo: string }) {
+    await message.replyBasicSuccess(echo);
   }
 }
