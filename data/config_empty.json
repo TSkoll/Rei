@@ -1,0 +1,13 @@
+{
+  "token": "",
+  "defaultPrefix": ".",
+  "ownerId": "",
+  "database": {
+    "host": "",
+    "collection": ""
+  },
+  "integrations": {
+    "saucenaoKey": "",
+    "openweathermapKey": ""
+  }
+}
