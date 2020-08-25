@@ -53,7 +53,7 @@ export default class Help extends Command {
       const readableTitle = `${rest.length != 0 ? `${root}/` : ""}${mid.length > 0 ? ` ${mid.join("/")}` : ""}${
         helpText.name
       }`;
-      const usageText = `Usage: ${message.prefix}${readablePath}${
+      const usageText = `Usage: ${message.serverPrefix}${readablePath}${
         branchesAndArgs.length > 0 ? ` [${branchesAndArgs.join("|")}]` : ""
       }`;
 

@@ -16,11 +16,15 @@ export default class MessageHandler {
 
       try {
         const prefix = await this.client.prefixHandler.getPrefix(message);
+        const mention = `<@!${this.client.user?.id ?? 0}> `;
+        let usedPrefix;
 
-        if (message.content.startsWith(prefix)) {
-          const commandMessage = message as CommandMessage;
-          await commandMessage.intialize(prefix);
-        }
+        if (message.content.startsWith(prefix)) usedPrefix = prefix;
+        else if (message.content.startsWith(mention)) usedPrefix = mention;
+        else return;
+
+        const commandMessage = message as CommandMessage;
+        await commandMessage.intialize(usedPrefix, prefix);
       } catch (err) {
         Logger.error(`Error from root: ${err}`);
       }

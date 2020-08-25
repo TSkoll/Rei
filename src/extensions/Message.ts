@@ -7,14 +7,16 @@ const CMessage = Structures.extend("Message", C => {
   class CommandMessage extends C {
     isCommand: boolean = false;
     prefix?: string;
+    serverPrefix?: string;
     command?: Command;
     args?: string[];
     argsString?: string;
     reiClient: ReiClient = this.client as ReiClient;
 
-    public async intialize(prefix: string) {
+    public async intialize(prefix: string, serverPrefix: string) {
       this.isCommand = true;
       this.prefix = prefix;
+      this.serverPrefix = serverPrefix;
 
       const parsed = this.parse(this.content, this.prefix);
 

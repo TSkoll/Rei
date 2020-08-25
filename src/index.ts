@@ -30,9 +30,7 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
     const prefixHandler = new PrefixHandler(db, config.defaultPrefix);
 
     // Init ReiClient
-    const client = new ReiClient(commandHandler, prefixHandler, db, config, {
-      presence: { activity: { name: `Running version ${curpackage.version}!` } },
-    });
+    const client = new ReiClient(commandHandler, prefixHandler, db, config);
     await commandHandler.init(client);
 
     const messageHandler = new MessageHandler(client);
