@@ -38,6 +38,7 @@ export default class Set extends SubCommand {
       pp: scUser.playerInfo.pp,
       rank: scUser.playerInfo.rank,
       gainsLastChecked: Date.now(),
+      avgAccuracy: scUser.scoreStats.averageRankedAccuracy,
     };
 
     await ScModel.findOneAndUpdate({ id: user }, payload, { upsert: true });

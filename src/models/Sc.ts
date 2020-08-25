@@ -6,6 +6,7 @@ export interface ISc extends Document {
   pp: number;
   rank: number;
   gainsLastChecked: number;
+  avgAccuracy: number;
 }
 
 export const scSchema = new Schema(
@@ -28,6 +29,10 @@ export const scSchema = new Schema(
       required: false,
     },
     gainsLastChecked: {
+      type: Number,
+      required: false,
+    },
+    avgAccuracy: {
       type: Number,
       required: false,
     },

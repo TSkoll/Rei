@@ -34,6 +34,7 @@ export default class Gains extends SubCommand {
       pp: user.playerInfo.pp,
       rank: user.playerInfo.rank,
       gainsLastChecked: timeStamp,
+      avgAccuracy: user.scoreStats.averageRankedAccuracy,
     });
 
     message.replyEmbed(
