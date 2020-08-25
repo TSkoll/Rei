@@ -46,7 +46,7 @@ export default class Gains extends SubCommand {
         )
         .setColor(ranks.color)
         .setDescription(
-          `You **${ppGain >= 0 ? "gained" : "lost"} ${parseFloat(ppGain.toFixed(3))}pp** ${this.durationSinceString(
+          `You **${ppGain >= 0 ? "gained" : "lost"} ${this.prettyPrintpp(ppGain)}pp** ${this.durationSinceString(
             timeStamp,
             previous!.gainsLastChecked
           )}${ranks.inMessage}`
@@ -57,7 +57,7 @@ export default class Gains extends SubCommand {
 
   private prettyPrintpp(pp: number) {
     // Round to two digits, if necessary
-    const neatlyRoundedpp = Math.round((pp + Number.EPSILON) * 100) / 100;
+    return Math.round((pp + Number.EPSILON) * 100) / 100;
   }
 
   private durationSinceString(now: number, last?: number) {
