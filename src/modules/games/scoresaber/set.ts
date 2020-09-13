@@ -5,6 +5,7 @@ import ScModel from "../../../models/Sc";
 import url from "url";
 import fetch from "node-fetch";
 import Command from "../../../types/Command/Command";
+import { ScoresaberUserFull } from "../../../types/Requests/Scoresaber/ScoresaberUserFull";
 
 export default class Set extends SubCommand {
   constructor(parent: Command | SubCommand) {
@@ -29,7 +30,9 @@ export default class Set extends SubCommand {
 
     scLink = scLink.substring(scLink.lastIndexOf("/") + 1);
 
-    const scUser = await fetch(`https://new.scoresaber.com/api/player/${scLink}/full`).then(resp => resp.json());
+    const scUser = (await fetch(`https://new.scoresaber.com/api/player/${scLink}/full`).then(resp =>
+      resp.json()
+    )) as ScoresaberUserFull;
     if (!scUser.playerInfo) throw "I was unable to find you on scoresaber!";
 
     const user = message.author.id;

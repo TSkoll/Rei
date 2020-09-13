@@ -6,6 +6,7 @@ import ScModel, { ISc } from "../../../models/Sc";
 import Discord from "discord.js";
 import DeltaTime, { DeltaTimeResult, TimeScale } from "../../../types/DeltaTime";
 import Command from "../../../types/Command/Command";
+import { ScoresaberUserFull } from "../../../types/Requests/Scoresaber/ScoresaberUserFull";
 
 export default class Gains extends SubCommand {
   constructor(parent: Command | SubCommand) {
@@ -20,7 +21,9 @@ export default class Gains extends SubCommand {
   public async run(message: CommandMessage, args: string[]) {
     let scid = await getUser(message.author.id, undefined);
 
-    const user = await fetch(`https://new.scoresaber.com/api/player/${scid}/full`).then(resp => resp.json());
+    const user = (await fetch(`https://new.scoresaber.com/api/player/${scid}/full`).then(resp =>
+      resp.json()
+    )) as ScoresaberUserFull;
 
     if (!user.playerInfo) throw "This player could not be found!";
 
