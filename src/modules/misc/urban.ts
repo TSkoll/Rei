@@ -37,7 +37,7 @@ export default class Urban extends Command {
       new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setAuthor(top.word, undefined, top.permalink)
-        .addField("Definition", top.definition)
+        .setDescription(top.definition)
         .addField("Example", top.example || "No example")
         .setFooter(`Author: ${top.author} | ${top.thumbs_up}👍 ${top.thumbs_down}👎`)
     );
