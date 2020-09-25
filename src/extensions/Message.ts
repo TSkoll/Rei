@@ -22,7 +22,7 @@ const CMessage = Structures.extend("Message", C => {
 
       try {
         Logger.info(
-          `Attempting to run command "${parsed.command}" with argString "${parsed.argString}"${
+          `Processing command "${parsed.command}" with argString "${parsed.argString}"${
             this.guild ? ` on guild ${this.guild.id}` : ""
           }`
         );
