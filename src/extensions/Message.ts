@@ -62,15 +62,15 @@ const CMessage = Structures.extend("Message", C => {
       } else throw "A commandMessage was not initialized properly!";
     }
 
-    public async replyBasicSuccess(content: string) {
+    public async replyBasicSuccess(content: any) {
       return await this.channel.send(new MessageEmbed().setColor("GREEN").setDescription(content));
     }
 
-    public async replyBasicError(content: string) {
+    public async replyBasicError(content: any) {
       return await this.channel.send(new MessageEmbed().setColor("RED").setDescription(content));
     }
 
-    public async replyBasicInfo(content: string) {
+    public async replyBasicInfo(content: any) {
       return await this.channel.send(new MessageEmbed().setColor("BLUE").setDescription(content));
     }
 
