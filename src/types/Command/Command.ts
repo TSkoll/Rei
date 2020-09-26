@@ -1,9 +1,9 @@
 import { Channel, GuildMember, TextChannel } from "discord.js";
 import { CommandMessage } from "../../extensions/Message";
 import Config from "../Config";
-import Help from "../Help/Help";
+import Help from "../help/Help";
 import ReiClient from "../ReiClient";
-import { ParseType } from "./Argument/ArgumentInstructions";
+import { ParseType } from "./argument/ArgumentInstructions";
 import CommandConstructor from "./CommandConstructor";
 import CommandOptions from "./CommandOptions";
 

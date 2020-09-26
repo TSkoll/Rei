@@ -1,5 +1,5 @@
-import ManualHelpText from "../Help/ManualHelpText";
-import { ParseType } from "./Argument/ArgumentInstructions";
+import ManualHelpText from "../help/ManualHelpText";
+import { ParseType } from "./argument/ArgumentInstructions";
 import CommandOptions from "./CommandOptions";
 
 export default interface CommandConstructor {

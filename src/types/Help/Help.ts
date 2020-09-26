@@ -1,5 +1,5 @@
-import Command from "../Command/Command";
-import SubCommand from "../Command/SubCommand/SubCommand";
+import Command from "../command/Command";
+import SubCommand from "../command/subcommand/SubCommand";
 import HelpText from "./HelpText";
 import ManualHelpText from "./ManualHelpText";
 

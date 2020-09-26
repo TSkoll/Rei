@@ -1,6 +1,6 @@
 import { CommandMessage } from "../../../extensions/Message";
-import Help from "../../Help/Help";
-import ManualHelpText from "../../Help/ManualHelpText";
+import Help from "../../help/Help";
+import ManualHelpText from "../../help/ManualHelpText";
 import Command from "../Command";
 import SubCommandConstructor from "./SubCommandConstructor";
 import SubCommandOptions from "./SubCommandOptions";

@@ -1,4 +1,4 @@
-import Command from "../types/Command/Command";
+import Command from "../types/command/Command";
 import ReiClient from "../types/ReiClient";
 import fs from "../utils/filesystemHelper";
 import Logger from "./Logger";

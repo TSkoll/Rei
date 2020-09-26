@@ -1,5 +1,5 @@
-import { supported as BaseSupportedParsers } from "../Mappers/BaseMappers";
-import { supported as DiscordSupportedParsers } from "../Mappers/DiscordMappers";
+import { supported as BaseSupportedParsers } from "../mappers/BaseMappers";
+import { supported as DiscordSupportedParsers } from "../mappers/DiscordMappers";
 
 // "Custom" string passthrough types
 type StringTypes = "string" | "singleString";

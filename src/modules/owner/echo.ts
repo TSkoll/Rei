@@ -1,5 +1,5 @@
 import { CommandMessage } from "../../extensions/Message";
-import Command from "../../types/Command/Command";
+import Command from "../../types/command/Command";
 
 export default class Echo extends Command {
   constructor() {

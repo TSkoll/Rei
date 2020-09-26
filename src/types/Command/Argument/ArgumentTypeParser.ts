@@ -1,6 +1,6 @@
 import { CommandMessage } from "../../../extensions/Message";
-import { float, integer } from "../Mappers/BaseMappers";
-import { guild, guildMember } from "../Mappers/DiscordMappers";
+import { float, integer } from "../mappers/BaseMappers";
+import { guild, guildMember } from "../mappers/DiscordMappers";
 import { ParseType } from "./ArgumentInstructions";
 
 export default class ArgumentTypeParser {
