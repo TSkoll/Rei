@@ -1,5 +1,5 @@
-import LogDocument from "../models/Log";
 import { v4 as uuidv4 } from "uuid";
+import LogDocument from "../models/Log";
 import consoleColors from "../utils/consoleColors";
 
 export default class Logger {

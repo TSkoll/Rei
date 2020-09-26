@@ -1,10 +1,9 @@
-import { Client, ClientOptions, DiscordAPIError } from "discord.js";
+import io from "@pm2/io";
+import { Client, ClientOptions } from "discord.js";
 import { Connection } from "mongoose";
 import CommandHandler from "../core/CommandHandler";
 import PrefixHandler from "../core/PrefixHandler";
 import Config from "./Config";
-
-import io from "@pm2/io";
 
 export default class ReiClient extends Client {
   public commandHandler: CommandHandler;

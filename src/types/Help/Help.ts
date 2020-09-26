@@ -1,7 +1,7 @@
-import ManualHelpText from "./ManualHelpText";
 import Command from "../Command/Command";
 import SubCommand from "../Command/SubCommand/SubCommand";
 import HelpText from "./HelpText";
+import ManualHelpText from "./ManualHelpText";
 
 export default class Help {
   public helpMap = new Map<string, HelpText>();

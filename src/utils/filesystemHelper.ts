@@ -1,8 +1,7 @@
 import Path from "path";
-
 import readDir from "./filesystemPromises/ReadDirPromise";
-import stats from "./filesystemPromises/StatsPromise";
 import readFile from "./filesystemPromises/ReadFilePromise";
+import stats from "./filesystemPromises/StatsPromise";
 
 export default class FilesystemHelper {
   static async getFolders(folderPath: string): Promise<string[]> {

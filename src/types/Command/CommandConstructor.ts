@@ -1,6 +1,6 @@
-import CommandOptions from "./CommandOptions";
 import ManualHelpText from "../Help/ManualHelpText";
-import ArgumentInstructions, { ParseType } from "./Argument/ArgumentInstructions";
+import { ParseType } from "./Argument/ArgumentInstructions";
+import CommandOptions from "./CommandOptions";
 
 export default interface CommandConstructor {
   types?: { [name: string]: ParseType };

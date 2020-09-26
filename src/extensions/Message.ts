@@ -1,10 +1,9 @@
-import { Structures, MessageEmbed } from "discord.js";
-import Command from "../types/Command/Command";
-import ReiClient from "../types/ReiClient";
+import { MessageEmbed, Structures } from "discord.js";
 import Logger from "../core/Logger";
 import { ParseType } from "../types/Command/Argument/ArgumentInstructions";
-import { integer } from "../types/Command/Mappers/BaseMappers";
 import ArgumentTypeParser from "../types/Command/Argument/ArgumentTypeParser";
+import Command from "../types/Command/Command";
+import ReiClient from "../types/ReiClient";
 
 const CMessage = Structures.extend("Message", C => {
   class CommandMessage extends C {

@@ -1,14 +1,12 @@
 import mongoose, { ConnectionOptions } from "mongoose";
-
-import ReiClient from "./types/ReiClient";
 import CommandHandler from "./core/CommandHandler";
-import PrefixHandler from "./core/PrefixHandler";
-import MessageHandler from "./core/MessageHandler";
 import Logger from "./core/Logger";
-
+import MessageHandler from "./core/MessageHandler";
+import PrefixHandler from "./core/PrefixHandler";
 import "./extensions/Message";
-
 import Config from "./types/Config";
+import ReiClient from "./types/ReiClient";
+
 const config = require("../data/config.json") as Config;
 const curpackage = require("../package.json");
 

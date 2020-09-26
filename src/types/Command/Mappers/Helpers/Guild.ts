@@ -1,5 +1,5 @@
-import { CommandMessage } from "../../../../extensions/Message";
 import { Guild } from "discord.js";
+import { CommandMessage } from "../../../../extensions/Message";
 import MappingError from "./MappingError";
 
 export function guildMapper(input: string, message: CommandMessage): Guild {

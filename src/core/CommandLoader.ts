@@ -1,7 +1,7 @@
 import Command from "../types/Command/Command";
+import ReiClient from "../types/ReiClient";
 import fs from "../utils/filesystemHelper";
 import Logger from "./Logger";
-import ReiClient from "../types/ReiClient";
 
 class CommandLoader {
   static async load(client: ReiClient): Promise<{ [name: string]: { command: Command; parent?: string } }> {

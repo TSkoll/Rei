@@ -1,7 +1,7 @@
-import { ParseType } from "./ArgumentInstructions";
-import { integer, float } from "../Mappers/BaseMappers";
-import { guildMember, guild } from "../Mappers/DiscordMappers";
 import { CommandMessage } from "../../../extensions/Message";
+import { float, integer } from "../Mappers/BaseMappers";
+import { guild, guildMember } from "../Mappers/DiscordMappers";
+import { ParseType } from "./ArgumentInstructions";
 
 export default class ArgumentTypeParser {
   static parse(input: string, message: CommandMessage, type: ParseType) {

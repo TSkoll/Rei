@@ -1,7 +1,6 @@
+import { GuildMember, TextChannel } from "discord.js";
 import { CommandMessage } from "../../../../extensions/Message";
 import MappingError from "./MappingError";
-import { GuildMember, TextChannel } from "discord.js";
-import { xyzToCIELab } from "node-vibrant/lib/util";
 
 export function guildMemberMapper(input: string, message: CommandMessage): GuildMember {
   // TODO: this should handle pings too

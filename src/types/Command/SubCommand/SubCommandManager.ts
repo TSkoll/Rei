@@ -1,7 +1,5 @@
-import SubCommand from "./SubCommand";
 import { CommandMessage } from "../../../extensions/Message";
-import Command from "../Command";
-import Logger from "../../../core/Logger";
+import SubCommand from "./SubCommand";
 
 export default class SubCommandManager {
   private subCmdMap: { [name: string]: SubCommand } = {};

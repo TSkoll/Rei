@@ -1,4 +1,4 @@
-import { Document, Schema, model } from "mongoose";
+import { Document, model, Schema } from "mongoose";
 
 export interface ILog extends Document {
   id: string;

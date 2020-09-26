@@ -1,12 +1,11 @@
-import { GuildMember, Channel, TextChannel } from "discord.js";
-
+import { Channel, GuildMember, TextChannel } from "discord.js";
 import { CommandMessage } from "../../extensions/Message";
-import CommandOptions from "./CommandOptions";
 import Config from "../Config";
 import Help from "../Help/Help";
-import CommandConstructor from "./CommandConstructor";
 import ReiClient from "../ReiClient";
 import { ParseType } from "./Argument/ArgumentInstructions";
+import CommandConstructor from "./CommandConstructor";
+import CommandOptions from "./CommandOptions";
 
 const config = require("../../../data/config.json") as Config;
 

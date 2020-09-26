@@ -1,5 +1,5 @@
-import Command from "../../types/Command/Command";
 import { CommandMessage } from "../../extensions/Message";
+import Command from "../../types/Command/Command";
 
 export default class Asnumber extends Command {
   constructor() {

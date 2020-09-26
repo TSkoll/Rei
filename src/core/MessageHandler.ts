@@ -1,6 +1,5 @@
-import { Connection } from "mongoose";
-import ReiClient from "../types/ReiClient";
 import { CommandMessage } from "../extensions/Message";
+import ReiClient from "../types/ReiClient";
 import Logger from "./Logger";
 
 export default class MessageHandler {
