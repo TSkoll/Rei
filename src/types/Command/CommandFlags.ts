@@ -23,7 +23,7 @@ export default class Flags extends ExecutionFlags {
     }
   }
 
-  public checkFlags(message: CommandMessage) {
+  public check(message: CommandMessage) {
     if (this.ownerOnly && !this.checkOwner(message.author.id)) throw "You're not my master!";
 
     if (this.disallowDM && this.checkIfInDMChannel(message.channel)) throw "I can't perform this command in DMs!";
