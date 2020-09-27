@@ -1,7 +1,7 @@
 import { CommandMessage } from "../../extensions/Message";
-import Command from "../../types/command/Command";
+import BasicCommand from "../../types/command/impl/BasicCommand";
 
-export default class Asnumber extends Command {
+export default class Asnumber extends BasicCommand {
   constructor() {
     super({
       types: {

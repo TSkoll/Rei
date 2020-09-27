@@ -1,8 +1,8 @@
 import { Guild, GuildMember } from "discord.js";
 import { CommandMessage } from "../../../extensions/Message";
-import { guildMapper } from "./Helpers/Guild";
-import { guildMemberMapper } from "./Helpers/GuildMember";
 import { mapToDiscordType } from "./Mapper";
+import { guildMapper } from "./typemappers/Guild";
+import { guildMemberMapper } from "./typemappers/GuildMember";
 
 export type supported = "guild" | "guildMember";
 export const guild = (input: string, message: CommandMessage): Guild => mapToDiscordType(guildMapper, input, message);

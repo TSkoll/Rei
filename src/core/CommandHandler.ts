@@ -22,6 +22,8 @@ export default class CommandHandler {
 
   public getCommandNames(): string[] {
     if (!this.commands) throw "This commandhandler has not been initialized!";
-    return Object.keys(this.commands).filter(x => !(this.commands![x].parent || this.commands![x].command.isHidden()));
+    return [];
+    // TODO: fix
+    //return Object.keys(this.commands).filter(x => !(this.commands![x].parent || this.commands![x].command.isHidden()));
   }
 }

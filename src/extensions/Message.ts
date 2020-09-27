@@ -28,8 +28,9 @@ const CMessage = Structures.extend("Message", C => {
         );
         this.command = this.reiClient.commandHandler.getCommand(parsed.command);
 
-        if (this.command.types) this.args = this.parseArgTypes(parsed.args, this.command.types);
-        else this.args = undefined;
+        // todo: reimplement
+        // if (this.command.types) this.args = this.parseArgTypes(parsed.args, this.command.types);
+        // else this.args = undefined;
 
         await this.run();
       } catch (ex) {
@@ -49,7 +50,7 @@ const CMessage = Structures.extend("Message", C => {
     public async run() {
       if (this.command && this.args) {
         try {
-          this.command.checkPermissions(this);
+          this.command.pre(this);
 
           await this.command.run(this, this.args);
 

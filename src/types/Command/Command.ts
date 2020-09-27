@@ -16,5 +16,5 @@ export default abstract class Command {
 
   public abstract async run(message: CommandMessage, args: object): Promise<void>;
 
-  public abstract async afterInit?(client: ReiClient): Promise<void>;
+  public async afterInit?(client: ReiClient): Promise<void>;
 }
