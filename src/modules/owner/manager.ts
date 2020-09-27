@@ -1,7 +1,7 @@
 import { CommandMessage } from "../../extensions/Message";
-import BasicCommand from "../../types/command/impl/BasicCommand";
+import HostCommand from "../../types/command/impl/HostCommand";
 
-export default class Echo extends BasicCommand {
+export default class Manager extends HostCommand {
   constructor() {
     super({
       types: {

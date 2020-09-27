@@ -3,6 +3,7 @@ import Logger from "../core/Logger";
 import { ParseType } from "../types/command/argument/ArgumentInstructions";
 import ArgumentTypeParser from "../types/command/argument/ArgumentTypeParser";
 import Command from "../types/command/Command";
+import HostCommand from "../types/command/impl/HostCommand";
 import ReiClient from "../types/ReiClient";
 
 const CMessage = Structures.extend("Message", C => {
@@ -28,7 +29,8 @@ const CMessage = Structures.extend("Message", C => {
         );
         this.command = this.reiClient.commandHandler.getCommand(parsed.command);
 
-        // todo: reimplement
+        if (this.command instanceof HostCommand) throw "This command is not yet supported!";
+
         if (this.command.types) this.args = this.parseArgTypes(parsed.args, this.command.types);
         else this.args = undefined;
 

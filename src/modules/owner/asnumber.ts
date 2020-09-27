@@ -5,7 +5,7 @@ export default class Asnumber extends BasicCommand {
   constructor() {
     super({
       types: {
-        echo: "integer",
+        echo: Number,
       },
       options: {
         ownerOnly: true,
