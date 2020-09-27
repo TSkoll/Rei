@@ -29,7 +29,12 @@ const CMessage = Structures.extend("Message", C => {
         );
         this.command = this.reiClient.commandHandler.getCommand(parsed.command);
 
-        if (this.command instanceof HostCommand) throw "This command is not yet supported!";
+        if (this.command instanceof HostCommand) {
+          // Todo: This should be cleaned
+          const managerRet = this.command.manager!.findCommand(parsed.args);
+          this.command = managerRet.command;
+          parsed.args = managerRet.args;
+        }
 
         if (this.command.types) this.args = this.parseArgTypes(parsed.args, this.command.types);
         else this.args = undefined;
