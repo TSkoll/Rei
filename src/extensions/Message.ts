@@ -29,8 +29,8 @@ const CMessage = Structures.extend("Message", C => {
         this.command = this.reiClient.commandHandler.getCommand(parsed.command);
 
         // todo: reimplement
-        // if (this.command.types) this.args = this.parseArgTypes(parsed.args, this.command.types);
-        // else this.args = undefined;
+        if (this.command.types) this.args = this.parseArgTypes(parsed.args, this.command.types);
+        else this.args = undefined;
 
         await this.run();
       } catch (ex) {

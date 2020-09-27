@@ -1,13 +1,17 @@
 import { CommandMessage } from "../../extensions/Message";
 import ReiClient from "../ReiClient";
+import { ParseType } from "./argument/ArgumentInstructions";
 import CommandConstructor from "./CommandConstructor";
 import Flags from "./CommandFlags";
 
 export default abstract class Command {
   private flags: Flags;
 
+  public types: { [name: string]: ParseType };
+
   constructor(options?: CommandConstructor) {
     this.flags = new Flags(options?.flags ?? undefined);
+    this.types = options?.types ?? {};
   }
 
   public async pre(message: CommandMessage) {
