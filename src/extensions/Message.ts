@@ -29,14 +29,14 @@ const CMessage = Structures.extend("Message", C => {
         );
         this.command = this.reiClient.commandHandler.getCommand(parsed.command);
 
+        let stringArgs = parsed.args;
         if (this.command instanceof HostCommand) {
-          // Todo: This should be cleaned
           const managerRet = this.command.manager!.findCommand(parsed.args);
           this.command = managerRet.command;
-          parsed.args = managerRet.args;
+          stringArgs = managerRet.args;
         }
 
-        if (this.command.types) this.args = this.parseArgTypes(parsed.args, this.command.types);
+        if (this.command.types) this.args = this.parseArgTypes(stringArgs, this.command.types);
         else this.args = undefined;
 
         await this.run();

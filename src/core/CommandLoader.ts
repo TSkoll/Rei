@@ -27,9 +27,9 @@ class CommandLoader {
         commandsRet[name] = { command: cmd };
 
         // TODO: reimplement
-        // if (cmd.aliases) {
-        //  for (let alias of cmd.aliases) commandsRet[alias.toLowerCase()] = { command: cmd, parent: name };
-        // }
+        if (cmd.flags.aliases) {
+          for (let alias of cmd.flags.aliases) commandsRet[alias.toLowerCase()] = { command: cmd, parent: name };
+        }
 
         if (cmd.afterInit) await cmd.afterInit(client);
       }
