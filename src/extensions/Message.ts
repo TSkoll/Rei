@@ -12,7 +12,6 @@ const CMessage = Structures.extend("Message", C => {
     prefix?: string;
     command?: Command;
     args?: object;
-    argsString?: string;
     reiClient: ReiClient = this.client as ReiClient;
 
     public async intialize(prefix: string) {
