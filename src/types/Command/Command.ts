@@ -14,8 +14,8 @@ export default abstract class Command {
     this.flags = new Flags(options?.flags ?? undefined);
     if (options?.args) {
       const types: { [key: string]: ParseType } = {};
-      Object.keys(options.args).map(x => {
-        types[x] = options.args![x].type;
+      Object.keys(options.args).map(arg => {
+        types[arg] = options.args![arg].type;
       });
       this.types = types;
     } else this.types = {};
