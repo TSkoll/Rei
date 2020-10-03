@@ -1,6 +1,7 @@
 import Command from "../types/command/Command";
 import ReiClient from "../types/ReiClient";
 import fs from "../utils/filesystemHelper";
+import Logger from "./Logger";
 
 class CommandLoader {
   static async load(client: ReiClient): Promise<{ [name: string]: { command: Command; parent?: string } }> {
@@ -20,13 +21,10 @@ class CommandLoader {
         const cmd = new cmdObj.default() as Command;
         const name = cmd.constructor.name.toLowerCase();
 
-        // Todo: reimplement
-        // if (!cmd.help && !cmd.isHidden())
-        //  await Logger.warning(`Command ${name} doesn't have help documentation attached to it!`);
+        if (!cmd.flags.hidden) await Logger.warning(`Command ${name} doesn't have help documentation attached to it!`);
 
         commandsRet[name] = { command: cmd };
 
-        // TODO: reimplement
         if (cmd.flags.aliases) {
           for (let alias of cmd.flags.aliases) commandsRet[alias.toLowerCase()] = { command: cmd, parent: name };
         }
