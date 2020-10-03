@@ -11,7 +11,7 @@ export function guildMemberMapper(input: string, message: CommandMessage): Guild
     .filter(
       member =>
         member.user.username.toLowerCase().includes(input) ||
-        (member.nickname && member.nickname.toLowerCase().includes(input)) ||
+        member.nickname?.toLowerCase().includes(input) ||
         member.user.tag.toLowerCase() === input ||
         member.id === input
     )

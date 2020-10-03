@@ -24,6 +24,6 @@ export default class PrefixHandler {
     const guild = message.guild.id;
     const guildInfo = await GuildDocument.findOne({ guild });
 
-    return (guildInfo && guildInfo.prefix) || this.defaultPrefix;
+    return guildInfo?.prefix || this.defaultPrefix;
   }
 }
