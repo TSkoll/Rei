@@ -1,8 +1,8 @@
-import { ParseType } from "./argument/ArgumentInstructions";
+import CommandArgs from "./CommandArgs";
 import ExecutionFlags from "./flags/ExecutionFlags";
 
 export default interface CommandConstructor {
-  types?: { [name: string]: ParseType };
-  options?: Object;
+  description?: string;
+  args?: { [name: string]: CommandArgs };
   flags?: ExecutionFlags;
 }

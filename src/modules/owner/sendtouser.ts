@@ -5,11 +5,18 @@ import BasicCommand from "../../types/command/impl/BasicCommand";
 export default class SendTo extends BasicCommand {
   constructor() {
     super({
-      types: {
-        user: GuildMember,
-        messageToSend: String,
+      description: "Sends [messageToSend] to the specified [user].",
+      args: {
+        user: {
+          description: "User that is on the server where this command is invoked on.",
+          type: GuildMember,
+        },
+        messageToSend: {
+          description: "Content of the message.",
+          type: String,
+        },
       },
-      options: {
+      flags: {
         ownerOnly: true,
         singleArg: true,
         hidden: true,

@@ -12,7 +12,13 @@ export default abstract class Command {
 
   constructor(options?: CommandConstructor) {
     this.flags = new Flags(options?.flags ?? undefined);
-    this.types = options?.types ?? {};
+    if (options?.args) {
+      const types: { [key: string]: ParseType } = {};
+      Object.keys(options.args).map(x => {
+        types[x] = options.args![x].type;
+      });
+      this.types = types;
+    } else this.types = {};
   }
 
   public async pre(message: CommandMessage) {
