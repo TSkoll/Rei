@@ -3,9 +3,17 @@ import { CommandMessage } from "../../../../extensions/Message";
 import MappingError from "./MappingError";
 
 export function guildMemberMapper(input: string, message: CommandMessage): GuildMember {
-  // TODO: this should handle pings too
   const channel = message.channel as TextChannel;
   input = input.toLowerCase();
+
+  // Allowed formats:
+  //  - <@123>
+  //  - <@!123>
+  if (/<@(!?)\d+>/.test(input)) {
+    const member = memberFromMention(input, message);
+    if (!member) throw new MappingError("Input could not be mapped to a guild member.");
+    return member;
+  }
 
   const matchingMembers = channel.members
     .filter(
@@ -21,4 +29,16 @@ export function guildMemberMapper(input: string, message: CommandMessage): Guild
 
   if (foundMember) return foundMember;
   else throw new MappingError("Input could not be mapped to a guild member.");
+}
+
+function memberFromMention(input: string, message: CommandMessage) {
+  if (input.startsWith("<@") && input.endsWith(">")) {
+    input = input.slice(2, -1);
+
+    if (input.startsWith("!")) {
+      input = input.slice(1);
+    }
+
+    return (message.channel as TextChannel).members.get(input);
+  }
 }
