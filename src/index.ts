@@ -46,7 +46,7 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
     client.login(config.token);
   } catch (err) {
     // Leads into cleaner error output on a catastrophic error
-    console.error(err.stack);
+    console.error(err);
     process.exit(1);
   }
 });
