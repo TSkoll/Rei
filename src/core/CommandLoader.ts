@@ -9,15 +9,15 @@ class CommandLoader {
       [name: string]: { command: Command; parent?: string };
     } = {};
 
-    const modules = await fs.getFolders(`${process.cwd()}/bin/modules`);
+    const modules = await fs.getFolders(`${process.cwd()}/bin/commands`);
 
     for (let module of modules) {
-      const commands = await fs.getFiles(`${process.cwd()}/bin/modules/${module}`);
+      const commands = await fs.getFiles(`${process.cwd()}/bin/commands/${module}`);
 
       for (let command of commands) {
         if (command.indexOf(".js.map") > 0) continue;
 
-        const cmdObj = await import(`${process.cwd()}/bin/modules/${module}/${command}`);
+        const cmdObj = await import(`${process.cwd()}/bin/commands/${module}/${command}`);
         const cmd = new cmdObj.default() as Command;
         const name = cmd.constructor.name.toLowerCase();
 
