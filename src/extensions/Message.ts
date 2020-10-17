@@ -30,9 +30,12 @@ const CMessage = Structures.extend("Message", C => {
 
         let stringArgs = parsed.args;
         if (this.command instanceof HostCommand) {
-          const managerRet = this.command.manager!.findCommand(parsed.args);
-          this.command = managerRet.command;
-          stringArgs = managerRet.args;
+          const managerRet = this.command.manager?.findCommand(parsed.args);
+
+          if (managerRet) {
+            this.command = managerRet.command;
+            stringArgs = managerRet.args;
+          }
         }
 
         if (this.command.types) this.args = this.parseArgTypes(stringArgs, this.command.types);

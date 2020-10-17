@@ -14,18 +14,20 @@ export default class SubCommandManager {
     }
   }
 
-  public getCommand(name: string): Command {
+  public getCommand(name: string): Command | null {
     const cmd = this.subCmdMap[name];
-    if (!cmd) throw "Subcommand could not be found!";
+    if (!cmd) return null;
     return cmd;
   }
 
-  public findCommand(args: string[]): { command: Command; args: string[]; path: string[] } {
+  public findCommand(args: string[]): { command: Command; args: string[]; path: string[] } | null {
     let path = [];
     let curRet: Command | null = null;
     for (const arg of args) {
       if (!curRet) {
         curRet = this.getCommand(arg);
+        if (!curRet) break;
+
         path.push(arg);
         continue;
       }
@@ -38,7 +40,7 @@ export default class SubCommandManager {
       }
     }
 
-    if (curRet == null) throw "No command could be found!";
-    return { command: curRet, args: args.slice(path.length), path };
+    if (curRet == null) return null;
+    else return { command: curRet, args: args.slice(path.length), path };
   }
 }
