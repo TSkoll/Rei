@@ -27,7 +27,7 @@ export default class Avatar extends SubCommand {
 
     if (!url) throw "You don't seem to have an avatar!";
 
-    const vBuilder = new Vibrant.Builder(url);
+    const vBuilder = Vibrant.from(url);
 
     const swatches = await vBuilder.getSwatches();
     const keys = Object.keys(swatches);
