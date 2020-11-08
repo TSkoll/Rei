@@ -105,15 +105,24 @@ const CMessage = Structures.extend("Message", C => {
     private parseArgTypes(args: string[], instructions: { [name: string]: ParseType }): object {
       const ret: { [name: string]: any } = {};
       const instKeys = Object.keys(instructions);
+      const endlessArg = instructions[instKeys[instKeys.length - 1]] == "RestString";
 
-      if (args.length !== instKeys.length) throw "Argument count doesn't match!";
+      if (!endlessArg && args.length !== instKeys.length) throw "Argument count doesn't match!";
 
-      for (let i = 0; i < args.length; i++) {
+      for (let i = 0; i < instKeys.length; i++) {
         const arg = args[i];
         const name = instKeys[i];
 
         const type = instructions[name];
-        const value = ArgumentTypeParser.parse(arg, this, type);
+
+        let value = null;
+        if (type != "RestString") value = ArgumentTypeParser.parse(arg, this, type);
+        else {
+          if (i != instKeys.length - 1) throw "RestString can only be the last argument in a command!";
+
+          const rest = args.slice(i).join(" ");
+          value = rest;
+        }
 
         ret[name] = value;
       }
