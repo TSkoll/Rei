@@ -3,15 +3,18 @@ import ReiClient from "../ReiClient";
 import { ParseType } from "./argument/ArgumentInstructions";
 import CommandConstructor from "./CommandConstructor";
 import Flags from "./CommandFlags";
+import Help from "./CommandHelp";
 
 export default abstract class Command {
   public flags: Flags;
 
   public types: { [name: string]: ParseType };
   public parent?: Command; // If parent exists, the command is considered to be a subcommand
+  public help: Help;
 
   constructor(options?: CommandConstructor) {
     this.flags = new Flags(options?.flags ?? undefined);
+    this.help = new Help(options?.description, options?.args);
     if (options?.args) {
       const types: { [key: string]: ParseType } = {};
       Object.keys(options.args).map(arg => {
@@ -25,7 +28,7 @@ export default abstract class Command {
     this.flags.check(message);
   }
 
-  public abstract async run(message: CommandMessage, args: object): Promise<void>;
+  public abstract async run(message: CommandMessage, args: object): Promise<any>;
 
-  public async afterInit?(client: ReiClient): Promise<void>;
+  public async afterInit?(client: ReiClient): Promise<any>;
 }
