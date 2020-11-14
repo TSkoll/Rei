@@ -11,6 +11,9 @@ import { ScoresaberUserFull } from "../../../types/Requests/Scoresaber/Scoresabe
 export default class Gains extends SubCommand {
   constructor(parent: Command | SubCommand) {
     super(parent, {
+      options: {
+        aliases: ["losses"],
+      },
       help: {
         description:
           "Checks and compares the change of the user's rank and pp. Requires that the user has linked their scoresaber account.",
