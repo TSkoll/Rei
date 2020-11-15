@@ -43,4 +43,8 @@ export default class SubCommandManager {
     if (curRet == null) return null;
     else return { command: curRet, args: args.slice(path.length), path };
   }
+
+  public getCommandNames() {
+    return Object.keys(this.subCmdMap).filter(x => this.subCmdMap[x].flags.aliases?.includes(x) ?? true);
+  }
 }

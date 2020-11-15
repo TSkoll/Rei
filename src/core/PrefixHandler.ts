@@ -3,8 +3,8 @@ import { Connection } from "mongoose";
 import GuildDocument from "../models/Guild";
 
 export default class PrefixHandler {
-  db: Connection;
-  defaultPrefix: string;
+  private readonly db: Connection;
+  public readonly defaultPrefix: string;
 
   constructor(db: Connection, defaultPrefix: string) {
     this.db = db;
