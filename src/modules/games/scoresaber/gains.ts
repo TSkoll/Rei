@@ -12,7 +12,7 @@ export default class Gains extends SubCommand {
   constructor(parent: Command | SubCommand) {
     super(parent, {
       options: {
-        aliases: ["losses"], ["sustain"],
+        aliases: ["losses", "sustain"],
       },
       help: {
         description:
