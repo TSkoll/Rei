@@ -1,18 +1,7 @@
 import { Structures, MessageEmbed } from "discord.js";
-import { Uwuifier } from "uwuifier";
 import Command from "../types/Command/Command";
 import ReiClient from "../types/ReiClient";
 import Logger from "../core/Logger";
-
-const uwuifier = new Uwuifier({
-  /*spaces: {
-    faces: 0.1,
-    actions: 0.0005,
-    stutters: 0.1,
-  },*/
-  words: 0.25,
-  exclamations: 1,
-});
 
 const CMessage = Structures.extend("Message", C => {
   class CommandMessage extends C {
@@ -73,50 +62,19 @@ const CMessage = Structures.extend("Message", C => {
     }
 
     public async replyBasicSuccess(content: string) {
-      return await this.channel.send(
-        new MessageEmbed().setColor("GREEN").setDescription(uwuifier.uwuifySentence(content))
-      );
+      return await this.channel.send(new MessageEmbed().setColor("GREEN").setDescription(content));
     }
 
     public async replyBasicError(content: string) {
-      return await this.channel.send(
-        new MessageEmbed().setColor("RED").setDescription(uwuifier.uwuifySentence(content))
-      );
+      return await this.channel.send(new MessageEmbed().setColor("RED").setDescription(content));
     }
 
     public async replyBasicInfo(content: string) {
-      return await this.channel.send(
-        new MessageEmbed().setColor("BLUE").setDescription(uwuifier.uwuifySentence(content))
-      );
+      return await this.channel.send(new MessageEmbed().setColor("BLUE").setDescription(content));
     }
 
     public async replyEmbed(content: MessageEmbed) {
-      const uwud = new MessageEmbed();
-      if (content.description) uwud.setDescription(uwuifier.uwuifySentence(content.description));
-      if (content.footer?.text)
-        uwud.setFooter(
-          uwuifier.uwuifySentence(content.footer.text),
-          content.footer.iconURL || content.footer.proxyIconURL
-        );
-      if (content.fields)
-        uwud.addFields(
-          content.fields.map(field => {
-            return {
-              name: uwuifier.uwuifySentence(field.name),
-              inline: field.inline,
-              value: uwuifier.uwuifySentence(field.value),
-            };
-          })
-        );
-      if (content.color) uwud.setColor(content.color);
-      if (content.author)
-        uwud.setAuthor(content.author.name, content.author.iconURL, content.author.url || content.author.proxyIconURL);
-      if (content.image) uwud.setImage(content.image.url);
-      if (content.thumbnail) uwud.setThumbnail(content.thumbnail.url);
-      if (content.url) uwud.setURL(content.url);
-      if (content.timestamp) uwud.setTimestamp(content.timestamp);
-
-      return await this.channel.send(uwud);
+      return await this.channel.send(content);
     }
 
     private parse(content: string, prefix: string) {
