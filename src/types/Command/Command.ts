@@ -14,7 +14,7 @@ export default abstract class Command {
 
   constructor(options?: CommandConstructor) {
     this.flags = new Flags(options?.flags ?? undefined);
-    this.help = new Help(options?.description, options?.args);
+    this.help = new Help(options?.description, options?.args, options?.examples);
     if (options?.args) {
       const types: { [key: string]: ParseType } = {};
       Object.keys(options.args).map(arg => {

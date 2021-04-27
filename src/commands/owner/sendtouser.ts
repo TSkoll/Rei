@@ -21,6 +21,7 @@ export default class SendTo extends BasicCommand {
         singleArg: true,
         hidden: true,
       },
+      examples: ["@Skoll 'Heya!'"],
     });
   }
 

@@ -7,9 +7,11 @@ export default class Help {
       description?: string;
     };
   };
+  public readonly examples?: String[];
 
-  constructor(description?: string, args?: { [key: string]: CommandArgs }) {
+  constructor(description?: string, args?: { [key: string]: CommandArgs }, examples?: String[]) {
     if (description) this.description = description;
+    this.examples = examples;
     if (args) {
       this.args = {};
       Object.keys(args).map(arg => {

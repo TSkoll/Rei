@@ -43,12 +43,14 @@ export default class Help extends BasicCommand {
 
   private constructHelpEmbed(command: Command, client: ReiClient) {
     const commandPath = this.getReadablePath([], command);
+    const commandString = commandPath.join(" ");
+
     const args = Object.keys(command.help.args ?? []);
     const subCommands = command instanceof HostCommand ? command.manager?.getCommandNames() : undefined;
 
     let embed = new MessageEmbed()
       .setColor("BLUE")
-      .setTitle(commandPath.join(" "))
+      .setTitle(commandString)
       .setDescription(command?.help.description ?? "This command doesn't seem to have a description")
       .setFooter(
         this.constructUsageString(command.constructor.name, client.prefixHandler.defaultPrefix, args, subCommands)
@@ -60,9 +62,16 @@ export default class Help extends BasicCommand {
     if (command.help.args)
       embed.addField(
         "Arguments",
-        args.map(arg => `**${arg}** => ${command.help.args![arg].description ?? ""}`),
+        args.map(arg => `**${arg}** => ${command.help.args![arg].description ?? "No description for this argument."}`),
         false
       );
+    if (command.help.examples) {
+      embed.addField(
+        "Examples",
+        command.help.examples.map(example => `${client.prefixHandler.defaultPrefix}${commandString} ${example}`),
+        false
+      );
+    }
 
     return embed;
   }
