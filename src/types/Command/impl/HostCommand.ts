@@ -10,7 +10,7 @@ export default abstract class HostCommand extends Command {
     super(options);
   }
 
-  public async run(message: CommandMessage, args: object): Promise<void> {
+  public async run(message: CommandMessage, ...args: unknown[]): Promise<void> {
     throw "Subcommand not found!";
   }
 }

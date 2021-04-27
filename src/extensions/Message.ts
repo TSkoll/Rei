@@ -11,7 +11,7 @@ const CMessage = Structures.extend("Message", C => {
     isCommand: boolean = false;
     prefix?: string;
     command?: Command;
-    args?: object;
+    args?: unknown[];
     reiClient: ReiClient = this.client as ReiClient;
 
     public async intialize(prefix: string) {
@@ -61,7 +61,7 @@ const CMessage = Structures.extend("Message", C => {
         try {
           this.command.pre(this);
 
-          await this.command.run(this, this.args);
+          await this.command.run(this, ...this.args);
 
           this.reiClient.commandsRun++;
         } catch (err) {
@@ -102,8 +102,8 @@ const CMessage = Structures.extend("Message", C => {
       };
     }
 
-    private parseArgTypes(args: string[], instructions: { [name: string]: ParseType }): object {
-      const ret: { [name: string]: any } = {};
+    private parseArgTypes(args: string[], instructions: { [name: string]: ParseType }): unknown[] {
+      const ret: unknown[] = [];
       const instKeys = Object.keys(instructions);
       const endlessArg = instructions[instKeys[instKeys.length - 1]] == "RestString";
 
@@ -124,7 +124,7 @@ const CMessage = Structures.extend("Message", C => {
           value = rest;
         }
 
-        ret[name] = value;
+        ret.push(value);
       }
 
       return ret;

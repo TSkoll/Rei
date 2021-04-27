@@ -28,7 +28,7 @@ export default abstract class Command {
     this.flags.check(message);
   }
 
-  public abstract async run(message: CommandMessage, args: object): Promise<any>;
+  public abstract async run(message: CommandMessage, ...args: unknown[]): Promise<any>;
 
   public async afterInit?(client: ReiClient): Promise<any>;
 }

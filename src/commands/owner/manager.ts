@@ -23,7 +23,7 @@ export default class Manager extends HostCommand {
     });
   }
 
-  public async run(message: CommandMessage, { def }: { def: string }) {
+  public async run(message: CommandMessage, def: string) {
     await message.replyBasicInfo(def);
   }
 }

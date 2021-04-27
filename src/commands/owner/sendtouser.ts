@@ -25,7 +25,7 @@ export default class SendTo extends BasicCommand {
     });
   }
 
-  public async run(message: CommandMessage, { user, messageToSend }: { user: GuildMember; messageToSend: string }) {
+  public async run(message: CommandMessage, user: GuildMember, messageToSend: string) {
     await user.send(messageToSend);
     await message.replyBasicSuccess("Message sent!");
   }
