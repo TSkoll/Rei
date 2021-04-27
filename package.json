@@ -19,28 +19,27 @@
   },
   "homepage": "https://github.com/TSkoll/rei-ts#readme",
   "dependencies": {
-    "@pm2/io": "^4.3.5",
-    "@types/mongodb": "^3.5.25",
-    "@types/mongoose": "^5.7.32",
-    "@types/node-fetch": "^2.5.7",
+    "@pm2/io": "^5.0.0",
+    "@types/mongodb": "^3.6.12",
+    "@types/node-fetch": "^2.5.10",
     "@types/randomcolor": "^0.5.5",
-    "@types/uuid": "^8.0.0",
-    "@types/ws": "^7.2.7",
+    "@types/uuid": "^8.3.0",
+    "@types/ws": "^7.4.2",
     "brainfuck-node": "^1.0.2",
-    "canvas": "^2.6.1",
-    "discord.js": "^12.2.0",
-    "mongodb": "^3.5.9",
-    "mongoose": "^5.9.25",
-    "node-fetch": "^2.6.0",
-    "node-vibrant": "^3.1.5",
-    "randomcolor": "^0.5.4",
-    "uuid": "^8.2.0"
+    "canvas": "^2.7.0",
+    "discord.js": "^12.5.3",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.5",
+    "node-fetch": "^2.6.1",
+    "node-vibrant": "^3.2.1-alpha.1",
+    "randomcolor": "^0.6.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "husky": "^4.2.5",
-    "prettier": "2.0.4",
-    "pretty-quick": "^2.0.1",
-    "typescript": "^4.0.3"
+    "husky": "^6.0.0",
+    "prettier": "2.2.1",
+    "pretty-quick": "^3.1.0",
+    "typescript": "^4.2.4"
   },
   "husky": {
     "hooks": {
