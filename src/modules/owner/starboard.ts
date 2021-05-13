@@ -6,9 +6,8 @@ import { TextChannel } from "discord.js";
 
 export default class Starboard extends Command {
   private starEmoji: string = "%E2%AD%90";
-  private starboardGuild: string = "724661988768350239";
-  private lookupChannel: string = "724715692804407346";
-  private postChannel: string = "728915959024320513";
+  private lookupChannel: string = "363319662135476226";
+  private postChannel: string = "415490940535570443";
 
   constructor() {
     super({
@@ -56,7 +55,8 @@ export default class Starboard extends Command {
          by: user.username,
        });
 
-       if (reaction.emoji.identifier == this.starEmoji) {
+       const firstReaction = (reaction.count && reaction.count < 2);
+       if (reaction.emoji.identifier == this.starEmoji && firstReaction) {
          const sendChannel = (await client.channels.fetch(this.postChannel, true)) as TextChannel;
          if (sendChannel && reaction.message.embeds[0]) {
            await sendChannel.send(reaction.message.embeds[0]);
@@ -64,6 +64,6 @@ export default class Starboard extends Command {
          }
        }
      }
-   })
+   });
   }
 }
