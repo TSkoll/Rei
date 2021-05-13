@@ -6,8 +6,8 @@ import { TextChannel } from "discord.js";
 
 export default class Starboard extends Command {
   private starEmoji: string = "%E2%AD%90";
-  private lookupChannel: string = "363319662135476226";
-  private postChannel: string = "415490940535570443";
+  private lookupChannel: string = "724715692804407346";
+  private postChannel: string = "728915959024320513";
 
   constructor() {
     super({
