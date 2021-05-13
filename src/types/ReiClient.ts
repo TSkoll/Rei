@@ -14,6 +14,7 @@ export default class ReiClient extends Client {
 
   public commandsRun: number = 0;
   public messagesReceived: number = 0;
+  public starboardReactions: number = 0;
 
   private commandsRunMetric = io.metric({
     name: "Commands run",
@@ -27,6 +28,13 @@ export default class ReiClient extends Client {
     value: () => {
       return this.messagesReceived;
     },
+  });
+
+  private starboardReactionsMetric = io.metric({
+    name: "Starboard reactions handled",
+    value: () => {
+      return this.starboardReactions;
+    }
   });
 
   constructor(

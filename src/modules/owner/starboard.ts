@@ -5,6 +5,10 @@ import Logger from "../../core/Logger";
 import { TextChannel } from "discord.js";
 
 export default class Starboard extends Command {
+  private starEmoji: string = "%E2%AD%90";
+  private lookupChannel: string = "724715692804407346";
+  private postChannel: string = "728915959024320513";
+
   constructor() {
     super({
       options: {
@@ -26,9 +30,20 @@ export default class Starboard extends Command {
     */
     client.on("messageReactionAdd", async (reaction, user) => {
       const channel = reaction.message.channel;
-      if (channel.type == "text" && channel.id == "724715692804407346" && reaction.emoji.identifier == "%E2%AD%90") {
-        const sendChannel = (await client.channels.fetch("728915959024320513", true)) as TextChannel;
-        if (sendChannel && reaction.message.embeds[0]) await sendChannel.send(reaction.message.embeds[0]);
+      if (channel instanceof TextChannel && channel.id == this.lookupChannel) {
+        Logger.info("Reaction on a starboard channel", {
+          identifier: reaction.emoji.identifier,
+          name: reaction.emoji.name,
+          by: user.username,
+        });
+
+        if (reaction.emoji.identifier == this.starEmoji) {
+          const sendChannel = (await client.channels.fetch(this.postChannel, true)) as TextChannel;
+          if (sendChannel && reaction.message.embeds[0]) {
+            await sendChannel.send(reaction.message.embeds[0]);
+            client.starboardReactions++;
+          }
+        }
       }
     });
   }
