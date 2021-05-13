@@ -34,7 +34,8 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
       messageCacheMaxSize: 2500,
       messageCacheLifetime: 86400,
       messageSweepInterval: 600,
-      messageEditHistoryMaxSize: 1
+      messageEditHistoryMaxSize: 1,
+      partials: ["REACTION", "MESSAGE"],
     });
     await commandHandler.init(client);
 

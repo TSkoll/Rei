@@ -14,6 +14,15 @@ export default class MessageHandler {
     this.client.on("message", async message => {
       this.client.messagesReceived++;
 
+      if (message.partial) {
+        try {
+          await message.fetch();
+        } catch (error) {
+          Logger.error("An error occured while fetching a partial message", error);
+          return;
+        }
+      }
+
       try {
         const prefix = await this.client.prefixHandler.getPrefix(message);
         const mention = `<@!${this.client.user?.id ?? 0}> `;

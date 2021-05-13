@@ -24,33 +24,46 @@ export default class Starboard extends Command {
   }
 
   public async afterInit(client: ReiClient) {
-    // The "messageReactionAdd" event is only triggered
-    // on cached message for cached guild members
-    const guild = await client.guilds.fetch(this.starboardGuild, true);
-    await guild.members.fetch();
-
     /*
       This is a hacky solution to add reaction handling support to a command
       if a new need for reactions appear, this functionality should be generalized
       to a ReactionHandler and have commands subscribe to that.
     */
-    client.on("messageReactionAdd", async (reaction, user) => {
-      const channel = reaction.message.channel;
-      if (channel instanceof TextChannel && channel.id == this.lookupChannel) {
-        Logger.info("Reaction on a starboard channel", {
-          identifier: reaction.emoji.identifier,
-          name: reaction.emoji.name,
-          by: user.username,
-        });
+   client.on("messageReactionAdd", async (reaction, user) => {
+     if (reaction.partial) {
+       try {
+         await reaction.fetch();
+       } catch (error) {
+         Logger.error("An error occured while fetching a partial reaction", error);
+         return;
+       }
+     }
 
-        if (reaction.emoji.identifier == this.starEmoji) {
-          const sendChannel = (await client.channels.fetch(this.postChannel, true)) as TextChannel;
-          if (sendChannel && reaction.message.embeds[0]) {
-            await sendChannel.send(reaction.message.embeds[0]);
-            client.starboardReactions++;
-          }
-        }
-      }
-    });
+     if (reaction.message.partial) {
+       try {
+         await reaction.message.fetch();
+       } catch (error) {
+         Logger.error("An error occured while fetching a partial starboard message", error);
+         return;
+       }
+     }
+
+     const channel = reaction.message.channel;
+     if (channel instanceof TextChannel && channel.id == this.lookupChannel) {
+       Logger.info("Reaction on a starboard channel", {
+         identifier: reaction.emoji.identifier,
+         name: reaction.emoji.name,
+         by: user.username,
+       });
+
+       if (reaction.emoji.identifier == this.starEmoji) {
+         const sendChannel = (await client.channels.fetch(this.postChannel, true)) as TextChannel;
+         if (sendChannel && reaction.message.embeds[0]) {
+           await sendChannel.send(reaction.message.embeds[0]);
+           client.starboardReactions++;
+         }
+       }
+     }
+   })
   }
 }
