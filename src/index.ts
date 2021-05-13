@@ -30,7 +30,12 @@ mongoose.connect(mongooseConn, mongooseConnOpt, async err => {
     const prefixHandler = new PrefixHandler(db, config.defaultPrefix);
 
     // Init ReiClient
-    const client = new ReiClient(commandHandler, prefixHandler, db, config);
+    const client = new ReiClient(commandHandler, prefixHandler, db, config, {
+      messageCacheMaxSize: 2500,
+      messageCacheLifetime: 86400,
+      messageSweepInterval: 600,
+      messageEditHistoryMaxSize: 1
+    });
     await commandHandler.init(client);
 
     const messageHandler = new MessageHandler(client);
