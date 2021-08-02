@@ -67,7 +67,7 @@ export default class Weather extends Command {
         .setThumbnail(`http://openweathermap.org/img/w/${weather.icon}.png`)
         .setDescription(`Weather: ${weather.description}`)
         .addField(
-          "Tempretature",
+          "Temperature",
           `**Real**: ${resp.main.temp.toFixed(1)}°C\n**Feels like**: ${resp.main.feels_like.toFixed(1)}°C`,
           true
         )
