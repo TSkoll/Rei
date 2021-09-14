@@ -61,9 +61,9 @@ export default class Starboard extends Command {
         if (reaction.emoji.identifier == this.starEmoji && firstReaction) {
           const sendChannel = (await client.channels.fetch(this.postChannel, true)) as TextChannel;
           if (sendChannel && reaction.message.embeds[0]) {
-            await sendChannel.send(reaction.message.embeds[0]);
+            const resp = await sendChannel.send(reaction.message.embeds[0]);
             client.starboardReactions++;
-            await postToPubSub(reaction.message.embeds[0], user.id);
+            await postToPubSub(reaction.message.embeds[0], user.id, resp.createdTimestamp);
           }
         }
       }
@@ -71,12 +71,13 @@ export default class Starboard extends Command {
   }
 }
 
-async function postToPubSub(embed: MessageEmbed, by: string) {
+async function postToPubSub(embed: MessageEmbed, by: string, at: number) {
   const content = {
     name: embed.author?.name ?? "unknown",
     url: embed.image?.url ?? null,
     starredBy: by,
     directLink: embed.author?.url ?? null,
+    starredAt: at,
   };
 
   const buffer = Buffer.from(JSON.stringify(content));
