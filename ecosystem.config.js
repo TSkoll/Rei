@@ -23,6 +23,9 @@ module.exports = {
       "pre-deploy": "node -v && npm -v",
       "post-deploy":
         "mkdir -p ./data && cp /home/ubuntu/config.json ./data/config.json && npm run clean && npm run build && pm2 reload ecosystem.config.js --env production",
+      env: {
+        GOOGLE_APPLICATION_CREDENTIALS: "/home/ubuntu/hentsu-gcloud-sa.json",
+      },
     },
   },
 };

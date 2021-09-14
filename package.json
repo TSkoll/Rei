@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/TSkoll/rei-ts#readme",
   "dependencies": {
+    "@google-cloud/pubsub": "^2.17.0",
     "@pm2/io": "^4.3.5",
     "@types/mongodb": "^3.5.31",
     "@types/mongoose": "^5.7.36",
